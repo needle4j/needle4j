@@ -6,3 +6,5 @@ target
 *.iml
 /test-output
 .DS_Store
+*~
+.faces-config.xml.jsfdia

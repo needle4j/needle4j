@@ -7,8 +7,8 @@
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-		<class>de.akquinet.jbosscc.needle.db.Person</class>
-		<class>de.akquinet.jbosscc.needle.db.Address</class>
+		<class>org.needle4j.db.Person</class>
+		<class>org.needle4j.db.Address</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
@@ -26,8 +26,8 @@
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-		<class>de.akquinet.jbosscc.needle.db.Person</class>
-		<class>de.akquinet.jbosscc.needle.db.Address</class>
+		<class>org.needle4j.db.Person</class>
+		<class>org.needle4j.db.Address</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
