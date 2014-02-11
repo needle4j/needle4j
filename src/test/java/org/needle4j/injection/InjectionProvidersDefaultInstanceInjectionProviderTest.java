@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.MyConcreteComponent;
 import org.needle4j.junit.NeedleRule;
 
@@ -15,7 +14,6 @@ import org.needle4j.junit.NeedleRule;
  * moved from original package to avoid
  */
 public class InjectionProvidersDefaultInstanceInjectionProviderTest {
-    
 
     private final MyConcreteComponent instance = new MyConcreteComponent();
 
@@ -25,11 +23,9 @@ public class InjectionProvidersDefaultInstanceInjectionProviderTest {
     @Inject
     private MyConcreteComponent injectedInstance;
 
-
     @Test
     public void shouldInjectInstanceA() {
         assertThat(injectedInstance, is(instance));
     }
-
 
 }

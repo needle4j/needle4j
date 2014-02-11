@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.MyComponent;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.junit.NeedleRule;
@@ -19,7 +18,7 @@ public class InheritanceConstructorInjectionTest {
 
     @ObjectUnderTest
     private ConstructorInjectionDerivedComponent derivedComponent;
-    
+
     @Inject
     private MyComponent component;
 
@@ -30,7 +29,5 @@ public class InheritanceConstructorInjectionTest {
         assertSame(derivedComponent.getMyComponentFromBase(), derivedComponent.getMyComponent());
         assertSame(component, derivedComponent.getMyComponent());
     }
-    
-    
 
 }

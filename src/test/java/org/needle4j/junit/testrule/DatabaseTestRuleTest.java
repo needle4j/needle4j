@@ -6,12 +6,12 @@ import org.junit.Rule;
 import org.junit.Test;
 
 public class DatabaseTestRuleTest {
-    
+
     @Rule
     public DatabaseTestRule databaseTestRule = new DatabaseTestRule();
-    
+
     @Test
-    public void testEntityManager(){
+    public void testEntityManager() {
         assertNotNull(databaseTestRule.getEntityManager());
     }
 }

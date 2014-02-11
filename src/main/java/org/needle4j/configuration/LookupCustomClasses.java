@@ -7,10 +7,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.needle4j.reflection.ReflectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.needle4j.reflection.ReflectionUtil;
 
 /**
  * Function to lookup classes. Expects FQN classnames separated by colon.

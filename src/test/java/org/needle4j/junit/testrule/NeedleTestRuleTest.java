@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.easymock.EasyMock;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.annotation.ObjectUnderTest;
 
 public class NeedleTestRuleTest {

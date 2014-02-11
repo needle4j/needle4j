@@ -17,7 +17,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.junit.Test;
-
 import org.needle4j.MyComponentBean;
 import org.needle4j.db.Address;
 import org.needle4j.injection.InjectionTargetInformation;
@@ -52,7 +51,8 @@ public class ReflectionUtilTest {
 
     @Test
     public void testAllAnnotatedFields() throws Exception {
-        final Map<Class<? extends Annotation>, List<Field>> allAnnotatedFields = ReflectionUtil.getAllAnnotatedFields(MyComponentBean.class);
+        final Map<Class<? extends Annotation>, List<Field>> allAnnotatedFields = ReflectionUtil
+                .getAllAnnotatedFields(MyComponentBean.class);
         assertEquals(4, allAnnotatedFields.size());
 
         final List<Field> list = allAnnotatedFields.get(Resource.class);
@@ -62,7 +62,7 @@ public class ReflectionUtilTest {
 
     @Test
     public void testInvokeMethod() throws Exception {
-        final String invokeMethod = (String)ReflectionUtil.invokeMethod(this, "test");
+        final String invokeMethod = (String) ReflectionUtil.invokeMethod(this, "test");
         assertEquals("Hello World", invokeMethod);
     }
 
@@ -169,8 +169,8 @@ public class ReflectionUtilTest {
                 floatValue, charValue, booleanValue, longValue, byteValue, shortValue, doubleValue);
         assertEquals(true, resultPrimatives);
 
-        final Object resultObjects = ReflectionUtil.invokeMethod(derivedClass, "testInvokeWithObjects", intValue, floatValue,
-                charValue, booleanValue, longValue, byteValue, shortValue, doubleValue);
+        final Object resultObjects = ReflectionUtil.invokeMethod(derivedClass, "testInvokeWithObjects", intValue,
+                floatValue, charValue, booleanValue, longValue, byteValue, shortValue, doubleValue);
         assertEquals(true, resultObjects);
     }
 
@@ -191,8 +191,8 @@ public class ReflectionUtilTest {
                 floatValue, charValue, booleanValue, longValue, byteValue, shortValue, doubleValue);
         assertEquals(true, resultPrimatives);
 
-        final Object resultObjects = ReflectionUtil.invokeMethod(derivedClass, "testInvokeWithObjects", intValue, floatValue,
-                charValue, booleanValue, longValue, byteValue, shortValue, doubleValue);
+        final Object resultObjects = ReflectionUtil.invokeMethod(derivedClass, "testInvokeWithObjects", intValue,
+                floatValue, charValue, booleanValue, longValue, byteValue, shortValue, doubleValue);
         assertEquals(true, resultObjects);
     }
 

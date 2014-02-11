@@ -3,14 +3,13 @@ package org.needle4j.injection;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.needle4j.NeedleContext;
 import org.needle4j.annotation.InjectInto;
 import org.needle4j.annotation.InjectIntoMany;
 import org.needle4j.processor.NeedleProcessor;
 import org.needle4j.reflection.ReflectionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class InjectionAnnotationProcessor implements NeedleProcessor {
 

@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import org.easymock.EasyMock;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.MyComponent;
 import org.needle4j.MyComponentBean;
 import org.needle4j.MyEjbComponent;
@@ -27,7 +26,7 @@ public class EasyMockProviderTest {
     private MyComponent component;
 
     @Inject
-    private EasyMockProvider mockProvider; 
+    private EasyMockProvider mockProvider;
 
     @Test
     public void testNiceMock() throws Exception {

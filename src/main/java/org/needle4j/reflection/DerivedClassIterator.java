@@ -1,6 +1,5 @@
 package org.needle4j.reflection;
 
-
 abstract class DerivedClassIterator {
     private final Class<?> clazz;
 

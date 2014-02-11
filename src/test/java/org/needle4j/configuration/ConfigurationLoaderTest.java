@@ -1,13 +1,13 @@
 package org.needle4j.configuration;
 
-import static org.needle4j.configuration.ConfigurationProperties.HIBERNATE_CFG_FILENAME_KEY;
-import static org.needle4j.configuration.ConfigurationProperties.JDBC_URL_KEY;
-import static org.needle4j.configuration.ConfigurationProperties.PERSISTENCEUNIT_NAME_KEY;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.needle4j.configuration.ConfigurationProperties.HIBERNATE_CFG_FILENAME_KEY;
+import static org.needle4j.configuration.ConfigurationProperties.JDBC_URL_KEY;
+import static org.needle4j.configuration.ConfigurationProperties.PERSISTENCEUNIT_NAME_KEY;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;

@@ -1,6 +1,7 @@
 package org.needle4j.processor;
 
 import static org.needle4j.common.Preconditions.checkArgument;
+
 import org.needle4j.injection.InjectionConfiguration;
 
 public abstract class AbstractNeedleProcessor implements NeedleProcessor {
@@ -11,6 +12,5 @@ public abstract class AbstractNeedleProcessor implements NeedleProcessor {
         checkArgument(configuration != null, "configuration must not be null");
         this.configuration = configuration;
     }
-
 
 }

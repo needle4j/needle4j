@@ -10,35 +10,35 @@ import javax.persistence.Persistence;
  */
 class PersistenceUnitConfiguration implements PersistenceConfiguration {
 
-	private final EntityManagerFactory factory;
-	private final EntityManager entityManager;
+    private final EntityManagerFactory factory;
+    private final EntityManager entityManager;
 
-	/**
-	 * Creates an {@link EntityManagerFactory} and {@link EntityManager} for the
-	 * named persistence unit.
-	 *
-	 * @param persistenceUnitName
-	 *            the name of the persistence unit
-	 */
-	public PersistenceUnitConfiguration(String persistenceUnitName) {
-		factory = Persistence.createEntityManagerFactory(persistenceUnitName);
-		entityManager = EntityManagerProxyFactory.createProxy(factory.createEntityManager());
-	}
+    /**
+     * Creates an {@link EntityManagerFactory} and {@link EntityManager} for the
+     * named persistence unit.
+     * 
+     * @param persistenceUnitName
+     *            the name of the persistence unit
+     */
+    public PersistenceUnitConfiguration(String persistenceUnitName) {
+        factory = Persistence.createEntityManagerFactory(persistenceUnitName);
+        entityManager = EntityManagerProxyFactory.createProxy(factory.createEntityManager());
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public EntityManagerFactory getEntityManagerFactory() {
-		return factory;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EntityManagerFactory getEntityManagerFactory() {
+        return factory;
+    }
 
 }

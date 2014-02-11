@@ -32,13 +32,12 @@ public class NeedleContext {
 
     @SuppressWarnings("unchecked")
     public <X> X getInjectedObject(final Object key) {
-        return (X)injectedObjectMap.get(key);
+        return (X) injectedObjectMap.get(key);
     }
 
     public Collection<Object> getInjectedObjects() {
         return injectedObjectMap.values();
     }
-    
 
     public void addInjectedObject(final Object key, final Object instance) {
         injectedObjectMap.put(key, instance);
@@ -47,12 +46,13 @@ public class NeedleContext {
     public Object getObjectUnderTest(final String id) {
         return objectUnderTestMap.get(id);
     }
-    
+
     public ObjectUnderTest getObjectUnderTestAnnotation(final String id) {
         return objectUnderTestAnnotationMap.get(id);
     }
 
-    public void addObjectUnderTest(final String id, final Object instance, final ObjectUnderTest objectUnderTestAnnotation) {
+    public void addObjectUnderTest(final String id, final Object instance,
+            final ObjectUnderTest objectUnderTestAnnotation) {
         objectUnderTestMap.put(id, instance);
         objectUnderTestAnnotationMap.put(id, objectUnderTestAnnotation);
     }
@@ -60,7 +60,7 @@ public class NeedleContext {
     public Collection<Object> getObjectsUnderTest() {
         return objectUnderTestMap.values();
     }
-    
+
     public Set<String> getObjectsUnderTestIds() {
         return objectUnderTestMap.keySet();
     }

@@ -8,7 +8,6 @@ import javax.persistence.EntityManagerFactory;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.annotation.InjectIntoMany;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.junit.DatabaseRule;

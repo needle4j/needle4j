@@ -1,14 +1,13 @@
 package org.needle4j.configuration;
 
-import static org.needle4j.junit.NeedleBuilders.needleRule;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.needle4j.junit.NeedleBuilders.needleRule;
 
 import javax.inject.Inject;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.MyComponent;
 import org.needle4j.injection.CustomMyComponentInjectionProviderInstancesSupplier;
 import org.needle4j.junit.NeedleRule;

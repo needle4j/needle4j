@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.rules.MethodRule;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.needle4j.injection.InjectionConfiguration;
 import org.needle4j.injection.InjectionProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NeedleRuleBuilder extends AbstractNeedleRuleBuilder<NeedleRuleBuilder, NeedleRule> {
 
@@ -22,7 +21,8 @@ public class NeedleRuleBuilder extends AbstractNeedleRuleBuilder<NeedleRuleBuild
     }
 
     @Override
-    protected NeedleRule build(final InjectionConfiguration injectionConfiguration, final InjectionProvider<?>... injectionProvider) {
+    protected NeedleRule build(final InjectionConfiguration injectionConfiguration,
+            final InjectionProvider<?>... injectionProvider) {
         final NeedleRule needleRule = new NeedleRule(injectionConfiguration, injectionProvider);
 
         for (final MethodRule rule : methodRuleChain) {

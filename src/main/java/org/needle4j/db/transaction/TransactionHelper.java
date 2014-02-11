@@ -72,16 +72,17 @@ public class TransactionHelper {
      */
     public final <T> List<T> loadAllObjects(final Class<T> clazz) throws Exception {
         final Entity entityAnnotation = clazz.getAnnotation(Entity.class);
-        if(entityAnnotation == null){
+        if (entityAnnotation == null) {
             throw new IllegalArgumentException("Unknown entity: " + clazz.getName());
         }
-        
+
         return executeInTransaction(new Runnable<List<T>>() {
             @Override
             @SuppressWarnings("unchecked")
             public List<T> run(final EntityManager entityManager) {
 
-                final String fromEntity = entityAnnotation.name().isEmpty() ? clazz.getSimpleName() : entityAnnotation.name();
+                final String fromEntity = entityAnnotation.name().isEmpty() ? clazz.getSimpleName() : entityAnnotation
+                        .name();
                 final String alias = fromEntity.toLowerCase();
 
                 return entityManager.createQuery("SELECT " + alias + " FROM " + fromEntity + " " + alias)

@@ -7,7 +7,6 @@ import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import org.junit.Test;
-
 import org.needle4j.db.operation.hsql.HSQLDeleteOperation;
 import org.needle4j.injection.CustomInjectionAnnotation1;
 import org.needle4j.injection.CustomInjectionAnnotation2;
@@ -34,7 +33,7 @@ public class PropertyBasedConfigurationFactoryTest {
         assertTrue(customInjectionAnnotations.contains(CustomInjectionAnnotation1.class));
         assertTrue(customInjectionAnnotations.contains(CustomInjectionAnnotation2.class));
     }
-    
+
     @Test
     public void testJdbcUrl() throws Exception {
         assertEquals("jdbc:hsqldb:mem:memoryDB", needleConfiguration.getJdbcUrl());

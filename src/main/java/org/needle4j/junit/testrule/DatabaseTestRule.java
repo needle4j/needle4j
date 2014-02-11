@@ -3,7 +3,6 @@ package org.needle4j.junit.testrule;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
-
 import org.needle4j.configuration.NeedleConfiguration;
 import org.needle4j.db.DatabaseTestcase;
 import org.needle4j.db.operation.DBOperation;
@@ -38,11 +37,10 @@ public class DatabaseTestRule extends DatabaseTestcase implements TestRule {
     public DatabaseTestRule(final String persistenceUnitName) {
         super(persistenceUnitName);
     }
-    
+
     DatabaseTestRule(final NeedleConfiguration configuration) {
         super(configuration);
     }
-    
 
     @Override
     public Statement apply(final Statement base, final Description description) {

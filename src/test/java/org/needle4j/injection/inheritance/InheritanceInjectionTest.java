@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.MyComponent;
 import org.needle4j.annotation.InjectIntoMany;
 import org.needle4j.annotation.ObjectUnderTest;

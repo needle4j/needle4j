@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.annotation.Mock;
 
 public class NeedleRuleChainTest {

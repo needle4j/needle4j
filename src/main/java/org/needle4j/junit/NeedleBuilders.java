@@ -20,10 +20,10 @@ public final class NeedleBuilders {
         return new NeedleRuleBuilder();
     }
 
-  /**
-   *
-   * @return new builder with Mockito mock provider pre configured.
-   */
+    /**
+     * 
+     * @return new builder with Mockito mock provider pre configured.
+     */
     public static NeedleRuleBuilder needleMockitoRule() {
         return new NeedleRuleBuilder().withMockProvider(MockitoProvider.class);
     }
@@ -44,8 +44,10 @@ public final class NeedleBuilders {
     public static NeedleTestRuleBuilder needleTestRule(final Object testInstance) {
         return new NeedleTestRuleBuilder(testInstance);
     }
+
     /**
-     * @return a new builder for {@link NeedleTestRule} with Mockito Provider preconfigured.
+     * @return a new builder for {@link NeedleTestRule} with Mockito Provider
+     *         preconfigured.
      */
     public static NeedleTestRuleBuilder needleMockitoTestRule(final Object testInstance) {
         return new NeedleTestRuleBuilder(testInstance).withMockProvider(MockitoProvider.class);

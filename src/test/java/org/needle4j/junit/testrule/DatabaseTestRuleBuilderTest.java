@@ -3,7 +3,6 @@ package org.needle4j.junit.testrule;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runners.model.Statement;
-
 import org.needle4j.junit.NeedleBuilders;
 
 public class DatabaseTestRuleBuilderTest {

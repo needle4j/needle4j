@@ -5,14 +5,13 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import org.needle4j.MyComponentBean;
 import org.needle4j.MyEjbComponent;
 import org.needle4j.MyEjbComponentBean;
 import org.needle4j.annotation.InjectIntoMany;
 import org.needle4j.annotation.ObjectUnderTest;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class NeedleTestNGTest extends AbstractNeedleTestcase {
 

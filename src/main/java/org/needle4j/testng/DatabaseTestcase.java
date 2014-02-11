@@ -1,75 +1,76 @@
 package org.needle4j.testng;
 
+import org.needle4j.db.operation.DBOperation;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
-import org.needle4j.db.operation.DBOperation;
 
 /**
  * @see org.needle4j.db.DatabaseTestcase
  */
 public class DatabaseTestcase extends org.needle4j.db.DatabaseTestcase {
 
-	/**
-	 * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase()
-	 */
-	public DatabaseTestcase() {
-		super();
-	}
+    /**
+     * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase()
+     */
+    public DatabaseTestcase() {
+        super();
+    }
 
-	/**
-	 * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(Class...)
-	 */
-	@Deprecated
-	public DatabaseTestcase(final Class<?>... clazzes) {
-		super(clazzes);
-	}
+    /**
+     * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(Class...)
+     */
+    @Deprecated
+    public DatabaseTestcase(final Class<?>... clazzes) {
+        super(clazzes);
+    }
 
-	/**
-	 * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(DBOperation, Class...)
-	 */
-	@Deprecated
-	public DatabaseTestcase(final DBOperation dbOperation, final Class<?>... clazzes) {
-		super(dbOperation, clazzes);
-	}
+    /**
+     * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(DBOperation,
+     *      Class...)
+     */
+    @Deprecated
+    public DatabaseTestcase(final DBOperation dbOperation, final Class<?>... clazzes) {
+        super(dbOperation, clazzes);
+    }
 
-	/**
-	 * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(DBOperation)
-	 */
-	public DatabaseTestcase(final DBOperation dbOperation) {
-		super(dbOperation);
-	}
+    /**
+     * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(DBOperation)
+     */
+    public DatabaseTestcase(final DBOperation dbOperation) {
+        super(dbOperation);
+    }
 
-	/**
-	 * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(String, DBOperation)
-	 */
-	public DatabaseTestcase(final String persistenceUnitName, final DBOperation dbOperation) {
-		super(persistenceUnitName, dbOperation);
-	}
+    /**
+     * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(String,
+     *      DBOperation)
+     */
+    public DatabaseTestcase(final String persistenceUnitName, final DBOperation dbOperation) {
+        super(persistenceUnitName, dbOperation);
+    }
 
-	/**
-	 * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(String)
-	 */
-	public DatabaseTestcase(final String persistenceUnitName) {
-		super(persistenceUnitName);
-	}
+    /**
+     * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(String)
+     */
+    public DatabaseTestcase(final String persistenceUnitName) {
+        super(persistenceUnitName);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@AfterMethod
-	public void after() throws Exception {
-		super.after();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @AfterMethod
+    public void after() throws Exception {
+        super.after();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@BeforeMethod
-	public void before() throws Exception {
-		super.before();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @BeforeMethod
+    public void before() throws Exception {
+        super.before();
+    }
 
 }

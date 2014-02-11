@@ -8,7 +8,7 @@ public class DerivedComponent extends BaseComponent {
 
     @Inject
     private MyComponent componentFieldInjectionDerived;
-    
+
     private MyComponent componentSetterInjectionDerived;
 
     @Override
@@ -19,18 +19,17 @@ public class DerivedComponent extends BaseComponent {
     public MyComponent getComponentFromBaseByFieldInjection() {
         return super.getComponentByFieldInjection();
     }
-    
-    
+
     @Inject
-    public void setComponentBySetter(final MyComponent component){
+    public void setComponentBySetter(final MyComponent component) {
         componentSetterInjectionDerived = component;
     }
-    
-    public MyComponent getComponentBySetter(){
+
+    public MyComponent getComponentBySetter() {
         return componentSetterInjectionDerived;
     }
-    
-    public MyComponent getComponentFromBaseBySetter(){
+
+    public MyComponent getComponentFromBaseBySetter() {
         return super.getComponentBySetter();
     }
 }

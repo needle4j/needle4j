@@ -4,12 +4,12 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 /**
- * Interface to abstract the creation of spy() instances, if the used framework allows to do so.
+ * Interface to abstract the creation of spy() instances, if the used framework
+ * allows to do so.
  * 
  * @author Jan Galinski, Holisticon AG
  */
 public interface SpyProvider {
-
 
     /**
      * Just return the given instance. Use this as default provider when the
@@ -40,7 +40,8 @@ public interface SpyProvider {
     <T> T createSpyComponent(T instance);
 
     /**
-     * @return the Annotation used to trigger the spy creation. (@Spy for Mockito)
+     * @return the Annotation used to trigger the spy creation. (@Spy for
+     *         Mockito)
      */
     Class<? extends Annotation> getSpyAnnotation();
 

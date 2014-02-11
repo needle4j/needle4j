@@ -7,23 +7,23 @@ import org.needle4j.injection.CurrentUser;
 
 public class UserDao {
 
-	private final User user;
+    private final User user;
 
-	private final User currentUser;
+    private final User currentUser;
 
-	@Inject
-	public UserDao(User user, @CurrentUser User currentUser) {
-		super();
-		this.user = user;
-		this.currentUser = currentUser;
-	}
+    @Inject
+    public UserDao(User user, @CurrentUser User currentUser) {
+        super();
+        this.user = user;
+        this.currentUser = currentUser;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public User getCurrentUser() {
-		return currentUser;
-	}
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
 }

@@ -8,9 +8,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.needle4j.annotation.InjectInto;
 import org.needle4j.annotation.InjectIntoMany;
 import org.needle4j.annotation.ObjectUnderTest;
@@ -21,6 +18,8 @@ import org.needle4j.injection.InjectionTargetInformation;
 import org.needle4j.mock.MockProvider;
 import org.needle4j.mock.SpyProvider;
 import org.needle4j.reflection.ReflectionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract test case to process and initialize all fields annotated with
@@ -44,7 +43,6 @@ import org.needle4j.reflection.ReflectionUtil;
 public abstract class NeedleTestcase {
 
     private static final Logger LOG = LoggerFactory.getLogger(NeedleTestcase.class);
-
 
     private NeedleContext context;
 

@@ -8,15 +8,14 @@ import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.needle4j.NeedleTestcase;
 import org.needle4j.configuration.NeedleConfiguration;
 import org.needle4j.injection.InjectionConfiguration;
 import org.needle4j.injection.InjectionProvider;
 import org.needle4j.injection.InjectionProviderInstancesSupplier;
 import org.needle4j.mock.MockProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 

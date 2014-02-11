@@ -1,13 +1,12 @@
 package org.needle4j.common;
 
-import static org.needle4j.common.Annotations.isQualifier;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.needle4j.common.Annotations.isQualifier;
 
 import javax.inject.Named;
 
 import org.junit.Test;
-
 import org.needle4j.injection.CurrentUser;
 
 public class AnnotationsTest {

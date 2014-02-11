@@ -33,23 +33,23 @@ import org.needle4j.NeedleTestcase;
  */
 public interface InjectionProvider<T> extends InjectionVerifier {
 
-	/**
-	 * Provides an instance of {@code T}.
-	 * 
-	 * @param injectionPointType
-	 *            the type of the injection target.
-	 * @return <T> instance of {@code T}
-	 */
-	T getInjectedObject(Class<?> injectionPointType);
+    /**
+     * Provides an instance of {@code T}.
+     * 
+     * @param injectionPointType
+     *            the type of the injection target.
+     * @return <T> instance of {@code T}
+     */
+    T getInjectedObject(Class<?> injectionPointType);
 
-	/**
-	 * Returns a key object, which identifies the provided object.
-	 * 
-	 * @param injectionTargetInformation
-	 *            information about the injection point
-	 * @return the key of the provided object
-	 * 
-	 * @see NeedleTestcase#getInjectedObject(Object)
-	 */
-	Object getKey(InjectionTargetInformation injectionTargetInformation);
+    /**
+     * Returns a key object, which identifies the provided object.
+     * 
+     * @param injectionTargetInformation
+     *            information about the injection point
+     * @return the key of the provided object
+     * 
+     * @see NeedleTestcase#getInjectedObject(Object)
+     */
+    Object getKey(InjectionTargetInformation injectionTargetInformation);
 }

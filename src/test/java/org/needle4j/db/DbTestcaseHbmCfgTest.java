@@ -8,33 +8,32 @@ import javax.persistence.EntityManager;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.junit.DatabaseRule;
 
 public class DbTestcaseHbmCfgTest {
 
-	private final static Class<?>[] entityClasses = { Person.class, Address.class };
+    private final static Class<?>[] entityClasses = { Person.class, Address.class };
 
-	@Rule
-	public DatabaseRule db = new DatabaseRule(entityClasses);
+    @Rule
+    public DatabaseRule db = new DatabaseRule(entityClasses);
 
-	@Test
-	public void testPersist() throws Exception {
-		final Person person = new Person();
-		final EntityManager entityManager = db.getEntityManager();
+    @Test
+    public void testPersist() throws Exception {
+        final Person person = new Person();
+        final EntityManager entityManager = db.getEntityManager();
 
-		person.setMyName("My Name");
+        person.setMyName("My Name");
 
-		assertNotNull(db);
-		assertNotNull(entityManager);
+        assertNotNull(db);
+        assertNotNull(entityManager);
 
-		entityManager.getTransaction().begin();
-		entityManager.persist(person);
+        entityManager.getTransaction().begin();
+        entityManager.persist(person);
 
-		final Person fromDB = entityManager.find(Person.class, person.getId());
+        final Person fromDB = entityManager.find(Person.class, person.getId());
 
-		assertThat(fromDB.getMyName(), equalTo(person.getMyName()));
-		entityManager.getTransaction().commit();
-	}
+        assertThat(fromDB.getMyName(), equalTo(person.getMyName()));
+        entityManager.getTransaction().commit();
+    }
 
 }

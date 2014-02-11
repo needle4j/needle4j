@@ -7,15 +7,13 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.needle4j.NeedleContext;
 import org.needle4j.processor.AbstractNeedleProcessor;
 import org.needle4j.reflection.ReflectionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TestcaseInjectionProcessor extends AbstractNeedleProcessor {
-
 
     private final Logger logger = LoggerFactory.getLogger(TestcaseInjectionProcessor.class);
 

@@ -61,8 +61,7 @@ public final class ConfigurationLoader {
 
             final URL url = ConfigurationLoader.class.getResource("/" + DEFAULT_CONFIGURATION_FILENAME + ".properties");
             LOG.debug("loaded default Needle config from: {}", url);
-        }
-        catch (final Exception e1) {
+        } catch (final Exception e1) {
             LOG.error("should never happen", e1);
 
             throw new RuntimeException("should never happen", e1);
@@ -82,8 +81,7 @@ public final class ConfigurationLoader {
 
             final URL url = NeedleConfiguration.class.getResource("/" + name + ".properties");
             LOG.info("loaded Needle config named {} from {}", name, url);
-        }
-        catch (final Exception e) {
+        } catch (final Exception e) {
             LOG.warn(e.getMessage());
         }
 
@@ -108,10 +106,10 @@ public final class ConfigurationLoader {
      * Returns an input stream for reading the specified resource.
      * 
      * @param resource
-     *        the resource name
+     *            the resource name
      * @return an input stream for reading the resource.
      * @throws FileNotFoundException
-     *         if the resource could not be found
+     *             if the resource could not be found
      */
     public static InputStream loadResource(final String resource) throws FileNotFoundException {
         final boolean hasLeadingSlash = resource.startsWith("/");

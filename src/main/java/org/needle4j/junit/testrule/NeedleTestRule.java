@@ -4,7 +4,6 @@ import org.junit.rules.RuleChain;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
-
 import org.needle4j.NeedleTestcase;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.injection.InjectionConfiguration;
@@ -60,7 +59,7 @@ public class NeedleTestRule extends NeedleTestcase implements TestRule {
     public NeedleTestRule(final Object testInstance, final InjectionProvider<?>... injectionProviders) {
         this(testInstance, new InjectionConfiguration(), injectionProviders);
     }
-    
+
     NeedleTestRule(final Object testInstance, final InjectionConfiguration configuration,
             final InjectionProvider<?>... injectionProviders) {
         super(configuration, injectionProviders);

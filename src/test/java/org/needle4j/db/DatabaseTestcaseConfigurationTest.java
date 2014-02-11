@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import javax.persistence.EntityManager;
 
 import org.junit.Test;
-
 import org.needle4j.configuration.PropertyBasedConfigurationFactory;
 import org.needle4j.db.operation.AbstractDBOperation;
 import org.needle4j.db.operation.ExecuteScriptOperation;

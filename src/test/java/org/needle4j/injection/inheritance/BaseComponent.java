@@ -8,13 +8,13 @@ public class BaseComponent {
 
     @Inject
     private MyComponent component;
-    
+
     @Inject
     private MyComponent qualifier;
-    
+
     @Inject
     private GraphDependencyComponent dependencyComponent;
-    
+
     private MyComponent componentSetterInjection;
 
     public MyComponent getComponentByFieldInjection() {

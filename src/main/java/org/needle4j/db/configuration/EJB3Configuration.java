@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.ejb.Ejb3Configuration;
-
 import org.needle4j.configuration.PropertyBasedConfigurationFactory;
 
 /**
@@ -22,7 +21,7 @@ class EJB3Configuration implements PersistenceConfiguration {
      * configuration file (*cfg.xml).
      * 
      * @param entityClasses
-     *        the entity classes
+     *            the entity classes
      */
     public EJB3Configuration(final Class<?>[] entityClasses) {
         factory = createEntityManagerFactory(entityClasses);

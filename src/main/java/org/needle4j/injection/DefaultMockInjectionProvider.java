@@ -29,8 +29,7 @@ public class DefaultMockInjectionProvider implements InjectionProvider<Object> {
     @Override
     public boolean verify(final InjectionTargetInformation injectionTargetInformation) {
 
-        return (injectionTargetInformation.getType() == annotationClass
-                || (annotationClass.isAnnotation() && injectionTargetInformation
+        return (injectionTargetInformation.getType() == annotationClass || (annotationClass.isAnnotation() && injectionTargetInformation
                 .isAnnotationPresent((Class<? extends Annotation>) annotationClass)));
     }
 

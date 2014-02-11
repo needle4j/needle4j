@@ -21,7 +21,8 @@ public class LookupCustomClassesTest {
 
     @Test
     public void shouldLoadInjectionProviders() throws ClassNotFoundException {
-        final Map<String, String> configurationProperties = createConfigurationProperties(KEY, String.class.getCanonicalName(), "foo.Bar", " ", null, Integer.class.getCanonicalName());
+        final Map<String, String> configurationProperties = createConfigurationProperties(KEY,
+                String.class.getCanonicalName(), "foo.Bar", " ", null, Integer.class.getCanonicalName());
 
         final LookupCustomClasses lookupCustomClasses = new LookupCustomClasses(configurationProperties);
         final Set<Class<Object>> providers = lookupCustomClasses.lookup(KEY);

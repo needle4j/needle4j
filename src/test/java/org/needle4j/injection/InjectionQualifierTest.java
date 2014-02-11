@@ -8,7 +8,6 @@ import javax.inject.Inject;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.db.User;
 import org.needle4j.junit.NeedleRule;

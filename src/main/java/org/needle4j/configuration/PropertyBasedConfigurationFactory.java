@@ -4,11 +4,10 @@ import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.needle4j.injection.InjectionProvider;
 import org.needle4j.injection.InjectionProviderInstancesSupplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PropertyBasedConfigurationFactory {
     private static final Logger LOG = LoggerFactory.getLogger(NeedleConfiguration.class);

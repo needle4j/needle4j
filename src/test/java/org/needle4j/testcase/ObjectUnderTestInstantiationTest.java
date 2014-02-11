@@ -1,7 +1,6 @@
 package org.needle4j.testcase;
 
 import org.junit.Test;
-
 import org.needle4j.NeedleTestcase;
 import org.needle4j.ObjectUnderTestInstantiationException;
 import org.needle4j.annotation.ObjectUnderTest;

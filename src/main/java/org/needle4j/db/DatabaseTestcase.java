@@ -169,7 +169,7 @@ public class DatabaseTestcase implements InjectionProvider<Object> {
     }
 
     private DBOperation getDBOperation() {
-        return dbOperation !=  null ? dbOperation : configuration.getDBOperation();
+        return dbOperation != null ? dbOperation : configuration.getDBOperation();
     }
 
     /**

@@ -3,7 +3,6 @@ package org.needle4j;
 import java.lang.reflect.Field;
 
 import org.junit.Test;
-
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.reflection.ReflectionUtil;
 

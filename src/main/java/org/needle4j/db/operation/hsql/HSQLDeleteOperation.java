@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.needle4j.db.operation.AbstractDBOperation;
 import org.needle4j.db.operation.JdbcConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Delete everything from the DB: This cannot be done with the JPA, because the
@@ -19,131 +18,132 @@ import org.needle4j.db.operation.JdbcConfiguration;
  */
 public class HSQLDeleteOperation extends AbstractDBOperation {
 
-	private static final Logger LOG = LoggerFactory.getLogger(HSQLDeleteOperation.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HSQLDeleteOperation.class);
 
-	public HSQLDeleteOperation(final JdbcConfiguration configuration) {
-		super(configuration);
-	}
+    public HSQLDeleteOperation(final JdbcConfiguration configuration) {
+        super(configuration);
+    }
 
-	/**
-	 * {@inheritDoc} No operation implementation.
-	 */
-	@Override
-	public void setUpOperation() throws SQLException {
-	}
+    /**
+     * {@inheritDoc} No operation implementation.
+     */
+    @Override
+    public void setUpOperation() throws SQLException {
+    }
 
-	/**
-	 * {@inheritDoc}. Delete all data from all tables given by {@link #getTableNames(java.sql.Connection)}.
-	 *
-	 * @throws SQLException
-	 *             if a database access error occurs
-	 */
-	@Override
-	public void tearDownOperation() throws SQLException {
-		Statement statement = null;
+    /**
+     * {@inheritDoc}. Delete all data from all tables given by
+     * {@link #getTableNames(java.sql.Connection)}.
+     * 
+     * @throws SQLException
+     *             if a database access error occurs
+     */
+    @Override
+    public void tearDownOperation() throws SQLException {
+        Statement statement = null;
 
-		try {
-		    Connection connection = getConnection();
-		    
-			statement = connection.createStatement();
-			
+        try {
+            Connection connection = getConnection();
 
-			disableReferentialIntegrity(statement);
-			List<String> tableNames = getTableNames(getConnection());
+            statement = connection.createStatement();
 
-			deleteContent(tableNames, statement);
+            disableReferentialIntegrity(statement);
+            List<String> tableNames = getTableNames(getConnection());
 
-		} catch (SQLException e) {
-			LOG.error(e.getMessage(), e);
-			try {
-				rollback();
-			} catch (SQLException e1) {
-				LOG.error(e1.getMessage(), e1);
-			}
-		} finally {
-			try {
-				enableReferentialIntegrity(statement);
+            deleteContent(tableNames, statement);
 
-				if (statement != null) {
-					statement.close();
-				}
-				commit();
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+            try {
+                rollback();
+            } catch (SQLException e1) {
+                LOG.error(e1.getMessage(), e1);
+            }
+        } finally {
+            try {
+                enableReferentialIntegrity(statement);
 
-				closeConnection();
-			} catch (Exception e) {
-			    rollback();
-				LOG.error(e.getMessage(), e);
-			}
-		}
+                if (statement != null) {
+                    statement.close();
+                }
+                commit();
 
-	}
+                closeConnection();
+            } catch (Exception e) {
+                rollback();
+                LOG.error(e.getMessage(), e);
+            }
+        }
 
-	/**
-	 * Disables the referential constraints of the database, e.g foreign keys.
-	 *
-	 * @throws SQLException
-	 *             - if a database access error occurs
-	 */
-	protected void disableReferentialIntegrity(final Statement statement) throws SQLException {
-		setReferentialIntegrity(false, statement);
-	}
+    }
 
-	/**
-	 * Enables the referential constraints of the database, e.g foreign keys.
-	 *
-	 * @throws SQLException
-	 *             - if a database access error occurs
-	 */
-	protected void enableReferentialIntegrity(final Statement statement) throws SQLException {
-		setReferentialIntegrity(true, statement);
-	}
+    /**
+     * Disables the referential constraints of the database, e.g foreign keys.
+     * 
+     * @throws SQLException
+     *             - if a database access error occurs
+     */
+    protected void disableReferentialIntegrity(final Statement statement) throws SQLException {
+        setReferentialIntegrity(false, statement);
+    }
 
-	private void setReferentialIntegrity(final boolean enable, final Statement statement) throws SQLException {
-		final int databaseMajorVersion = statement.getConnection().getMetaData().getDatabaseMajorVersion();
-		final String referentialIntegrity = enable ? "TRUE" : "FALSE";
+    /**
+     * Enables the referential constraints of the database, e.g foreign keys.
+     * 
+     * @throws SQLException
+     *             - if a database access error occurs
+     */
+    protected void enableReferentialIntegrity(final Statement statement) throws SQLException {
+        setReferentialIntegrity(true, statement);
+    }
 
-		final String command = databaseMajorVersion < 2 ? "SET REFERENTIAL_INTEGRITY "
-		        : "SET DATABASE REFERENTIAL INTEGRITY ";
-		getConnection().prepareStatement(command + referentialIntegrity).execute();
-	}
+    private void setReferentialIntegrity(final boolean enable, final Statement statement) throws SQLException {
+        final int databaseMajorVersion = statement.getConnection().getMetaData().getDatabaseMajorVersion();
+        final String referentialIntegrity = enable ? "TRUE" : "FALSE";
 
-	/**
-	 * Deletes all contents from the given tables.
-	 *
-	 * @param tables
-	 *            a {@link List} of table names who are to be deleted.
-	 *
-	 * @param statement
-	 *            the {@link Statement} to be used for executing a SQL statement.
-	 *
-	 *
-	 * @throws SQLException
-	 *             - if a database access error occurs
-	 */
-	protected void deleteContent(final List<String> tables, final Statement statement) throws SQLException {
+        final String command = databaseMajorVersion < 2 ? "SET REFERENTIAL_INTEGRITY "
+                : "SET DATABASE REFERENTIAL INTEGRITY ";
+        getConnection().prepareStatement(command + referentialIntegrity).execute();
+    }
 
-		final ArrayList<String> tempTables = new ArrayList<String>(tables);
+    /**
+     * Deletes all contents from the given tables.
+     * 
+     * @param tables
+     *            a {@link List} of table names who are to be deleted.
+     * 
+     * @param statement
+     *            the {@link Statement} to be used for executing a SQL
+     *            statement.
+     * 
+     * 
+     * @throws SQLException
+     *             - if a database access error occurs
+     */
+    protected void deleteContent(final List<String> tables, final Statement statement) throws SQLException {
 
-		// Loop until all data is deleted: we don't know the correct DROP
-		// order, so we have to retry upon failure
-		while (!tempTables.isEmpty()) {
-			final int sizeBefore = tempTables.size();
-			for (final ListIterator<String> iterator = tempTables.listIterator(); iterator.hasNext();) {
-				final String table = iterator.next();
+        final ArrayList<String> tempTables = new ArrayList<String>(tables);
 
-				try {
-					statement.executeUpdate("DELETE FROM " + table);
-					iterator.remove();
-				} catch (final SQLException exc) {
-					LOG.warn("Ignored exception: " + exc.getMessage() + ". WILL RETRY.");
-				}
-			}
-			if (tempTables.size() == sizeBefore) {
-				throw new AssertionError("unable to clean tables " + tempTables);
-			}
+        // Loop until all data is deleted: we don't know the correct DROP
+        // order, so we have to retry upon failure
+        while (!tempTables.isEmpty()) {
+            final int sizeBefore = tempTables.size();
+            for (final ListIterator<String> iterator = tempTables.listIterator(); iterator.hasNext();) {
+                final String table = iterator.next();
 
-		}
+                try {
+                    statement.executeUpdate("DELETE FROM " + table);
+                    iterator.remove();
+                } catch (final SQLException exc) {
+                    LOG.warn("Ignored exception: " + exc.getMessage() + ". WILL RETRY.");
+                }
+            }
+            if (tempTables.size() == sizeBefore) {
+                throw new AssertionError("unable to clean tables " + tempTables);
+            }
 
-	}
+        }
+
+    }
 
 }

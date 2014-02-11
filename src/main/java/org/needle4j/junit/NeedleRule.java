@@ -6,7 +6,6 @@ import java.util.List;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
-
 import org.needle4j.NeedleTestcase;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.injection.InjectionConfiguration;
@@ -44,7 +43,7 @@ public class NeedleRule extends NeedleTestcase implements MethodRule {
     private final List<MethodRule> methodRuleChain = new ArrayList<MethodRule>();
 
     public NeedleRule() {
-      super();
+        super();
     }
 
     /**
@@ -53,10 +52,10 @@ public class NeedleRule extends NeedleTestcase implements MethodRule {
     public NeedleRule(final InjectionProvider<?>... injectionProviders) {
         super(injectionProviders);
     }
-    
+
     NeedleRule(final InjectionConfiguration configuration, final InjectionProvider<?>... injectionProviders) {
         super(configuration, injectionProviders);
-    } 
+    }
 
     /**
      * {@inheritDoc} Before evaluation of the base statement, the test instance

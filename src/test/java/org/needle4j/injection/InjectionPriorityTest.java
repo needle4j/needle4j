@@ -7,30 +7,29 @@ import java.util.Map;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.junit.NeedleRule;
 
 public class InjectionPriorityTest {
 
-  private final Map<Object, Object> map = new HashMap<Object, Object>();
+    private final Map<Object, Object> map = new HashMap<Object, Object>();
 
-  private final InjectionProvider<Map<Object, Object>> injectionProvider = new CustomMapInjectionProvider() {
-    @Override
-    public Map<Object, Object> getInjectedObject(final java.lang.Class<?> injectionPointType) {
-      return map;
+    private final InjectionProvider<Map<Object, Object>> injectionProvider = new CustomMapInjectionProvider() {
+        @Override
+        public Map<Object, Object> getInjectedObject(final java.lang.Class<?> injectionPointType) {
+            return map;
+        };
     };
-  };
 
-  @Rule
-  public NeedleRule needleRule = new NeedleRule(injectionProvider);
+    @Rule
+    public NeedleRule needleRule = new NeedleRule(injectionProvider);
 
-  @ObjectUnderTest
-  private CustomInjectionTestComponent component;
+    @ObjectUnderTest
+    private CustomInjectionTestComponent component;
 
-  @Test
-  public void testInjectionProviderPriority() throws Exception {
-    assertSame(map, component.getMap());
-  }
+    @Test
+    public void testInjectionProviderPriority() throws Exception {
+        assertSame(map, component.getMap());
+    }
 
 }

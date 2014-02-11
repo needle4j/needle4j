@@ -13,7 +13,6 @@ import javax.annotation.PostConstruct;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.needle4j.NeedleContext;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.reflection.ReflectionUtil;

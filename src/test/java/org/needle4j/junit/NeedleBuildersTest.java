@@ -12,7 +12,6 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
-
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.mock.MockitoProvider;
 

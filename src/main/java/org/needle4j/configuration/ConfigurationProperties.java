@@ -1,7 +1,7 @@
 package org.needle4j.configuration;
 
 interface ConfigurationProperties {
-	String MOCK_PROVIDER_KEY = "mock.provider";
+    String MOCK_PROVIDER_KEY = "mock.provider";
     String CUSTOM_INJECTION_ANNOTATIONS_KEY = "custom.injection.annotations";
     String CUSTOM_INJECTION_PROVIDER_CLASSES_KEY = "custom.injection.provider.classes";
     String CUSTOM_INSTANCES_SUPPLIER_CLASSES_KEY = "custom.instances.supplier.classes";

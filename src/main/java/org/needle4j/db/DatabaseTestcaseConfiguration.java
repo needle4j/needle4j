@@ -5,15 +5,14 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.needle4j.configuration.NeedleConfiguration;
 import org.needle4j.db.configuration.PersistenceConfigurationFactory;
 import org.needle4j.db.operation.AbstractDBOperation;
 import org.needle4j.db.operation.DBOperation;
 import org.needle4j.db.operation.JdbcConfiguration;
 import org.needle4j.reflection.ReflectionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 final class DatabaseTestcaseConfiguration {
 
@@ -56,11 +55,10 @@ final class DatabaseTestcaseConfiguration {
     DatabaseTestcaseConfiguration(final NeedleConfiguration needleConfiguration, final Class<?>... clazzes) {
         this(needleConfiguration, new PersistenceConfigurationFactory(clazzes));
     }
-    
+
     DatabaseTestcaseConfiguration(final NeedleConfiguration needleConfiguration) {
         this(needleConfiguration, new PersistenceConfigurationFactory(needleConfiguration.getPersistenceunitName()));
     }
-
 
     DatabaseTestcaseConfiguration(final NeedleConfiguration needleConfiguration, final String persistenceUnitName) {
         this(needleConfiguration, new PersistenceConfigurationFactory(persistenceUnitName));
@@ -116,7 +114,7 @@ final class DatabaseTestcaseConfiguration {
             throw new Exception("error while loading jdbc configuration properties form EntityManagerFactory", e);
         }
     }
-    
+
     static Class<? extends AbstractDBOperation> lookupDBOperationClass(final String dbOperation) {
         try {
 

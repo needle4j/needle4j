@@ -64,7 +64,8 @@ public final class InjectionProviders {
      *            the instance to return whenever needed
      * @return InjectionProvider for instance
      */
-    public static <T> InjectionProvider<T> providerForQualifiedInstance(final Class<? extends Annotation> qualifier, final T instance) {
+    public static <T> InjectionProvider<T> providerForQualifiedInstance(final Class<? extends Annotation> qualifier,
+            final T instance) {
         return new QualifiedInstanceInjectionProvider<T>(qualifier, instance);
     }
 
@@ -95,7 +96,8 @@ public final class InjectionProviders {
      *            vararg array of providers
      * @return new supplier
      */
-    public static InjectionProviderInstancesSupplier supplierForInjectionProviders(final InjectionProvider<?>... providers) {
+    public static InjectionProviderInstancesSupplier supplierForInjectionProviders(
+            final InjectionProvider<?>... providers) {
         return new InjectionProviderInstancesSupplier() {
 
             @Override
@@ -112,7 +114,8 @@ public final class InjectionProviders {
      *            vararg array of existing suppliers
      * @return new instance containing all providers
      */
-    private static InjectionProviderInstancesSupplier mergeSuppliers(final InjectionProviderInstancesSupplier... suppliers) {
+    private static InjectionProviderInstancesSupplier mergeSuppliers(
+            final InjectionProviderInstancesSupplier... suppliers) {
         final Set<InjectionProvider<?>> result = new LinkedHashSet<InjectionProvider<?>>();
 
         if (suppliers != null && suppliers.length > 0) {
@@ -139,7 +142,8 @@ public final class InjectionProviders {
      *            vararg array of suppliers
      * @return array of providers for use with vararg method
      */
-    public static InjectionProvider<?>[] providersForInstancesSuppliers(final InjectionProviderInstancesSupplier... suppliers) {
+    public static InjectionProvider<?>[] providersForInstancesSuppliers(
+            final InjectionProviderInstancesSupplier... suppliers) {
         final InjectionProviderInstancesSupplier supplier = mergeSuppliers(suppliers);
         return supplier.get().toArray(new InjectionProvider<?>[supplier.get().size()]);
     }
@@ -164,15 +168,13 @@ public final class InjectionProviders {
      * @return array of given providers
      */
     public static InjectionProvider<?>[] providersToArray(final Collection<InjectionProvider<?>> providers) {
-        return providers == null ? new InjectionProvider<?>[0] : providers
-                .toArray(new InjectionProvider<?>[providers.size()]);
+        return providers == null ? new InjectionProvider<?>[0] : providers.toArray(new InjectionProvider<?>[providers
+                .size()]);
     }
-
 
     private InjectionProviders() {
         // hide default constructor
     }
-
 
     /**
      * Base class for all instance injection providers.
@@ -205,7 +207,8 @@ public final class InjectionProviders {
             return injectionTargetInformation.getType().isAssignableFrom(instance.getClass());
         }
 
-        protected boolean isTargetQualifierPresent(final InjectionTargetInformation injectionTargetInformation, final Class<? extends Annotation> qualifier) {
+        protected boolean isTargetQualifierPresent(final InjectionTargetInformation injectionTargetInformation,
+                final Class<? extends Annotation> qualifier) {
             assertIsQualifier(qualifier);
             return injectionTargetInformation.isAnnotationPresent(qualifier);
         }

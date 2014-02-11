@@ -13,7 +13,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.db.Address;
 import org.needle4j.db.operation.JdbcConfiguration;
 import org.needle4j.db.transaction.VoidRunnable;
@@ -25,12 +24,9 @@ public class H2DeleteOperationTest {
             "org.h2.Driver", "sa", "");
 
     private H2DeleteOperationForTest h2DeleteOperation = new H2DeleteOperationForTest(H2_DB_CONFIGURATION);
-    
-    
+
     @Rule
     public DatabaseRule databaseRule = new DatabaseRule("H2TestDataModel", h2DeleteOperation);
-    
-    
 
     @Test
     public void testDisableReferentialIntegrity() throws Exception {

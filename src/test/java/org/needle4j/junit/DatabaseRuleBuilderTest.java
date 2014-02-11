@@ -1,6 +1,7 @@
 package org.needle4j.junit;
 
 import static org.needle4j.junit.NeedleBuilders.databaseRule;
+
 import javax.persistence.PersistenceException;
 
 import org.junit.Assert;

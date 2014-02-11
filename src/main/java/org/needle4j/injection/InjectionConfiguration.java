@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.needle4j.common.MapEntry;
 import org.needle4j.configuration.NeedleConfiguration;
 import org.needle4j.configuration.PropertyBasedConfigurationFactory;
@@ -24,6 +21,8 @@ import org.needle4j.mock.SpyProvider;
 import org.needle4j.postconstruct.PostConstructProcessor;
 import org.needle4j.processor.ChainedNeedleProcessor;
 import org.needle4j.reflection.ReflectionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class InjectionConfiguration {
 
@@ -134,7 +133,6 @@ public final class InjectionConfiguration {
 
     }
 
-
     @SuppressWarnings("unchecked")
     public <T extends MockProvider> T getMockProvider() {
         return (T) mockProvider;
@@ -242,7 +240,7 @@ public final class InjectionConfiguration {
         return null;
     }
 
-    //TODO extract 
+    // TODO extract
     public static Class<? extends MockProvider> lookupMockProviderClass(final String mockProviderClassName) {
 
         try {

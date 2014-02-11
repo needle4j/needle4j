@@ -9,7 +9,6 @@ import javax.persistence.EntityTransaction;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.needle4j.junit.DatabaseRule;
 import org.needle4j.junit.NeedleRule;
 

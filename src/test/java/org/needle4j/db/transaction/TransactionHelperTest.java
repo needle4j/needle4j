@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import org.needle4j.db.Address;
 import org.needle4j.db.Person;
 import org.needle4j.db.PersonTestdataBuilder;
@@ -45,13 +44,12 @@ public class TransactionHelperTest {
         List<User> loadAllObjects = objectUnderTest.loadAllObjects(User.class);
         Assert.assertEquals(1, loadAllObjects.size());
     }
-    
+
     @Test
     public void testLoadAllObjects_EmptyResultList() throws Exception {
         List<Address> loadAllObjects = objectUnderTest.loadAllObjects(Address.class);
         Assert.assertEquals(0, loadAllObjects.size());
     }
-
 
     @Test(expected = IllegalArgumentException.class)
     public void testLoadAllObjects_WithUnknownEntity() throws Exception {

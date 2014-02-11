@@ -9,18 +9,18 @@ import org.needle4j.MyEjbComponent;
 
 public class TestInjectionComponent {
 
-	@Inject
-	private Authenticator authenticator;
+    @Inject
+    private Authenticator authenticator;
 
-	@EJB
-	private MyEjbComponent ejbComponent;
+    @EJB
+    private MyEjbComponent ejbComponent;
 
-	public Authenticator getAuthenticator() {
-		return authenticator;
-	}
+    public Authenticator getAuthenticator() {
+        return authenticator;
+    }
 
-	public MyEjbComponent getEjbComponent() {
-		return ejbComponent;
-	}
+    public MyEjbComponent getEjbComponent() {
+        return ejbComponent;
+    }
 
 }
