@@ -1,5 +1,6 @@
 package org.needle4j.junit.builder;
 
+import static org.needle4j.junit.NeedleBuilders.needleRule;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class NeedleRuleBuilderWithSupplierTest {
     private final Runnable runnable = new RunnableImpl();
     
     @Rule
-    public NeedleRule needleRule = new NeedleRuleBuilder().add(TestBuilderQualifier.class).add(new SupplierImpl())
+    public NeedleRule needleRule = needleRule().addAnnotation(TestBuilderQualifier.class).addSupplier(new SupplierImpl())
             .build();
 
     @ObjectUnderTest

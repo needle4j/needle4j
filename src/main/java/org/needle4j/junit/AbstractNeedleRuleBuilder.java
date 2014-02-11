@@ -35,22 +35,22 @@ public abstract class AbstractNeedleRuleBuilder<B, R extends NeedleTestcase> ext
     private Class<?>[] withAnnotations = {};
     private final Set<InjectionProvider<?>> providers = new HashSet<InjectionProvider<?>>();
 
-    public B with(final Class<? extends MockProvider> mockProviderClass) {
+    public B withMockProvider(final Class<? extends MockProvider> mockProviderClass) {
         this.mockProviderClass = mockProviderClass;
         return (B) this;
     }
 
-    public B add(final InjectionProvider<?>... injectionProviders) {
+    public B addProvider(final InjectionProvider<?>... injectionProviders) {
         providers.addAll(providersToSet(injectionProviders));
         return (B) this;
     }
 
-    public B add(final Class<?>... annotations) {
+    public B addAnnotation(final Class<? extends Annotation>... annotations) {
         this.withAnnotations = annotations;
         return (B) this;
     }
 
-    public B add(final InjectionProviderInstancesSupplier... suppliers) {
+    public B addSupplier(final InjectionProviderInstancesSupplier... suppliers) {
         this.providers.addAll(providersToSet(providersForInstancesSuppliers(suppliers)));
         return (B) this;
     }

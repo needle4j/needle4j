@@ -19,7 +19,7 @@ import org.needle4j.mock.SpyProviderTest.B;
 public class SpyProviderWithExistingObjectTest {
 
     @Rule
-    public final NeedleRule needle = needleRule().with(MockitoProvider.class).build();
+    public final NeedleRule needle = needleRule().withMockProvider(MockitoProvider.class).build();
 
     @ObjectUnderTest
     @Spy

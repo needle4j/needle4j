@@ -16,12 +16,12 @@ public abstract class AbstractDatabaseRuleBuilder<B, R extends DatabaseTestcase>
     private String hibernateCfgFilename;
 
     @Override
-    public B with(final String configFile) {
-        this.configFile = configFile;
+    public B fromResource(final String configurationResourceName) {
+        this.configurationResourceName = configurationResourceName;
         return (B) this;
     }
 
-    public B with(final Class<? extends AbstractDBOperation> dbOperationClass) {
+    public B withDBOperation(final Class<? extends AbstractDBOperation> dbOperationClass) {
         this.dbOperationClass = dbOperationClass;
         return (B) this;
     }

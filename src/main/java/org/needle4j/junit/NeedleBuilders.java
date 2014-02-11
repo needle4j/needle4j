@@ -2,7 +2,6 @@ package org.needle4j.junit;
 
 import org.junit.rules.RuleChain;
 import org.junit.rules.TestRule;
-
 import org.needle4j.junit.testrule.DatabaseTestRule;
 import org.needle4j.junit.testrule.DatabaseTestRuleBuilder;
 import org.needle4j.junit.testrule.NeedleTestRule;
@@ -19,7 +18,17 @@ public final class NeedleBuilders {
     public static NeedleRuleBuilder needleRule() {
         return new NeedleRuleBuilder();
     }
-    
+
+    /**
+     * 
+     * @param configurationResourceName
+     *            the configuration to read (without properties-suffix)
+     * @return new builder instance
+     */
+    public static NeedleRuleBuilder needleRule(String configurationResourceName) {
+        return new NeedleRuleBuilder().fromResource(configurationResourceName);
+    }
+
     /**
      * @return a new builder for {@link NeedleTestRule}.
      */
@@ -35,10 +44,18 @@ public final class NeedleBuilders {
     }
 
     /**
-     * @return a new builder for {@link DatabaseTestRule}.
+     * @return a new builder for {@link DatabaseRule}.
      */
     public static DatabaseRuleBuilder databaseRule() {
         return new DatabaseRuleBuilder();
+    }
+
+  /**
+   * @param  configurationResourceName config file to read (without .properties suffix)
+     * @return a new builder for {@link DatabaseRule}.
+     */
+    public static DatabaseRuleBuilder databaseRule(String configurationResourceName) {
+        return new DatabaseRuleBuilder().fromResource(configurationResourceName);
     }
 
     /**
@@ -56,7 +73,7 @@ public final class NeedleBuilders {
     /**
      * Returns a {@code RuleChain} without a {@link TestRule}. This method may
      * be the starting point of a {@code RuleChain}.
-     *
+     * 
      * @return a {@code RuleChain} without a {@link TestRule}.
      */
     public static RuleChain emptyRuleChain() {

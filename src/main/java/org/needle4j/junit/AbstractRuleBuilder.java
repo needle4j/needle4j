@@ -15,27 +15,31 @@ import org.needle4j.configuration.PropertyBasedConfigurationFactory;
 @SuppressWarnings("unchecked")
 public abstract class AbstractRuleBuilder<B, R> implements Builder<R> {
 
-    protected String configFile;
+    protected String configurationResourceName;
 
     /**
-     * @param configFile
+     * @param configurationResourceName
      *            the config file resource to use (filename without
      *            ".properties" suffix)
      */
-    public B with(final String configFile) {
-        this.configFile = configFile;
+    public B fromResource(final String configurationResourceName) {
+        this.configurationResourceName = configurationResourceName;
         return (B) this;
     }
 
     private NeedleConfiguration getNeedleConfiguration() {
         try {
-            return configFile == null ? PropertyBasedConfigurationFactory.get().clone()
-                    : PropertyBasedConfigurationFactory.get(configFile);
+            return configurationResourceName == null ? PropertyBasedConfigurationFactory.get().clone()
+                    : PropertyBasedConfigurationFactory.get(configurationResourceName);
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("could not create needle configuration", e);
         }
     }
 
+    /**
+     * 
+     * @return new Rule instance
+     */
     public final R build() {
         return build(getNeedleConfiguration());
     }

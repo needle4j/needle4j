@@ -1,5 +1,6 @@
 package org.needle4j.junit;
 
+import static org.needle4j.junit.NeedleBuilders.databaseRule;
 import javax.persistence.PersistenceException;
 
 import org.junit.Assert;
@@ -10,19 +11,19 @@ public class DatabaseRuleBuilderTest {
 
     @Test(expected = PersistenceException.class)
     public void testCustomConfiguration_WithNoPersistenceProvider() throws Exception {
-        DatabaseRule databaseRule = new DatabaseRuleBuilder().with("database-custom").build();
+        DatabaseRule databaseRule = databaseRule("database-custom").build();
         databaseRule.getEntityManagerFactory();
     }
 
     @Test(expected = PersistenceException.class)
     public void testWithPersitenceUnitName_NoPersistenceProvider() throws Exception {
-        DatabaseRule databaseRule = new DatabaseRuleBuilder().withPersistenceUnit("name").build();
+        DatabaseRule databaseRule = databaseRule().withPersistenceUnit("name").build();
         databaseRule.getEntityManagerFactory();
     }
 
     @Test
     public void testDBOperation() throws Exception {
-        DatabaseRule build = new DatabaseRuleBuilder().with(DBOperationImpl.class).build();
+        DatabaseRule build = databaseRule().withDBOperation(DBOperationImpl.class).build();
         Statement base = new Statement() {
 
             @Override

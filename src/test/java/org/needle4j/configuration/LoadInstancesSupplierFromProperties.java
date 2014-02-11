@@ -22,7 +22,7 @@ import org.needle4j.junit.NeedleRule;
 public class LoadInstancesSupplierFromProperties {
 
     @Rule
-    public final NeedleRule needle = needleRule().with("needle-mockito").build();
+    public final NeedleRule needle = needleRule("needle-mockito").build();
 
     @Inject
     private MyComponent component;

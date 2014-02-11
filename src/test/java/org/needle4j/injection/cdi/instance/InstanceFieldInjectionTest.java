@@ -17,7 +17,7 @@ import org.needle4j.junit.NeedleRule;
 public class InstanceFieldInjectionTest {
     
     @Rule
-    public NeedleRule needleRule = needleRule().with("needle-mockito").build();
+    public NeedleRule needleRule = needleRule("needle-mockito").build();
     
     @ObjectUnderTest
     private InstanceFieldInjectionBean component;

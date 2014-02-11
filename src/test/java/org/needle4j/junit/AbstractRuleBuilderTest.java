@@ -20,7 +20,7 @@ public class AbstractRuleBuilderTest {
 
     @Test
     public void shouldReturnSpecializedBuilder() {
-        assertThat(new SpecializedBuilder().with("needle").getClass().getCanonicalName(),
+        assertThat(new SpecializedBuilder().fromResource("needle").getClass().getCanonicalName(),
                 is(SpecializedBuilder.class.getCanonicalName()));
     }
 

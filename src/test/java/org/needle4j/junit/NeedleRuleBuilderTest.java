@@ -1,5 +1,6 @@
 package org.needle4j.junit;
 
+import static org.needle4j.junit.NeedleBuilders.needleRule;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ public class NeedleRuleBuilderTest {
     
     @Test
     public void testWithMockitoProvider() throws Exception {
-        NeedleRule needleRule = new NeedleRuleBuilder().with(MockitoProvider.class).build();
+        NeedleRule needleRule = needleRule().withMockProvider(MockitoProvider.class).build();
         Assert.assertTrue(needleRule.getMockProvider() instanceof MockitoProvider);
     }
     
@@ -24,7 +25,7 @@ public class NeedleRuleBuilderTest {
     @Test
     public void shouldReturnConcreteBuilderInstance() throws Exception {
         AbstractNeedleRuleBuilder<NeedleRuleBuilder, NeedleRule> builder = new NeedleRuleBuilder();
-        builder.with("needle").withOuter(null);
+        builder.fromResource("needle").withOuter(null);
         NeedleRule rule = builder.build();
 
     }

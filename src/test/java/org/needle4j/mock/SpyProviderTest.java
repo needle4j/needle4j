@@ -53,7 +53,7 @@ public class SpyProviderTest {
     }
 
     @Rule
-    public final NeedleRule needle = needleRule().with("needle-mockito").build();
+    public final NeedleRule needle = needleRule("needle-mockito").build();
 
     @ObjectUnderTest
     @Spy
