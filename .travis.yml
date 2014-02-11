@@ -1,0 +1,12 @@
+language: java
+jdk:
+- oraclejdk7
+before_install: git clone https://github.com/holisticon/travis-configuration.git target/travis
+script: mvn -q clean deploy --settings target/travis/settings.xml
+branches:
+  only:
+  - master
+env:
+  global:
+  - secure: PMLl96AZjRnMl26jAYI11C3SgAPobbZ3Wr1cm8hUKgTOJgy30OCbiCXmnB9TIYdg8cKrlfH8Zz9toXEft3ss/bBv3UHO/GW8BDsW6tUedSg86+ib3b8W3w69ofpjFIJJijJtHMlEceNPBOSHcOP+x3JQf51URUopqYIQIwNzNig=
+  - secure: c0apXF5trXBra4bJHsRmW6za0+/91mBzZji+dblqFdE+zDguXqM/IyvaJFw3e5m47DQD9ltdid1QU30tVguyWeADHZUVLcx7kJuk1rPPdWpLmim5xpbOSYRvNsr0VUR3S0MOzETSeXFt6Ub3vGBVwctlFOunnzdxZucbWYeXvAM=
