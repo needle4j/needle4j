@@ -1,4 +1,4 @@
-[![Build Status](https://buildhive.cloudbees.com/job/akquinet/job/needle/badge/icon)](https://buildhive.cloudbees.com/job/akquinet/job/needle/)
+[![Build Status](https://secure.travis-ci.org/needle4j/needle4j.png)](https://travis-ci.org/needle4j/needle4j)
 
 This project is currently rebased, so some documents might not be updated yet.
 
@@ -42,10 +42,9 @@ Needle is licensed under GNU Lesser General Public License (LGPL) version 2.1 or
 
 **Needle URLs**
 
-* Needle Home Page:	http://needle.spree.de/
-* Downloads:				https://sourceforge.net/projects/jbosscc-needle/
-* Source Code:			https://github.com/akquinet/needle
-* Issue Tracking:			https://github.com/akquinet/needle/issues
+* Needle Home Page:	http://www.needle4j.org
+* Source Code:			https://github.com/needle4j/needle4j
+* Issue Tracking:			https://github.com/needle4j/needle4j/issues
 
 **Release Nodes**
 
