@@ -6,6 +6,7 @@ import org.needle4j.junit.testrule.DatabaseTestRule;
 import org.needle4j.junit.testrule.DatabaseTestRuleBuilder;
 import org.needle4j.junit.testrule.NeedleTestRule;
 import org.needle4j.junit.testrule.NeedleTestRuleBuilder;
+import org.needle4j.mock.MockitoProvider;
 
 /**
  * Allows static factory method access to selected needle components.
@@ -17,6 +18,14 @@ public final class NeedleBuilders {
      */
     public static NeedleRuleBuilder needleRule() {
         return new NeedleRuleBuilder();
+    }
+
+  /**
+   *
+   * @return new builder with Mockito mock provider pre configured.
+   */
+    public static NeedleRuleBuilder needleMockitoRule() {
+        return new NeedleRuleBuilder().withMockProvider(MockitoProvider.class);
     }
 
     /**
@@ -35,6 +44,12 @@ public final class NeedleBuilders {
     public static NeedleTestRuleBuilder needleTestRule(final Object testInstance) {
         return new NeedleTestRuleBuilder(testInstance);
     }
+    /**
+     * @return a new builder for {@link NeedleTestRule} with Mockito Provider preconfigured.
+     */
+    public static NeedleTestRuleBuilder needleMockitoTestRule(final Object testInstance) {
+        return new NeedleTestRuleBuilder(testInstance).withMockProvider(MockitoProvider.class);
+    }
 
     /**
      * @return a new builder for {@link DatabaseTestRule}.
@@ -50,8 +65,9 @@ public final class NeedleBuilders {
         return new DatabaseRuleBuilder();
     }
 
-  /**
-   * @param  configurationResourceName config file to read (without .properties suffix)
+    /**
+     * @param configurationResourceName
+     *            config file to read (without .properties suffix)
      * @return a new builder for {@link DatabaseRule}.
      */
     public static DatabaseRuleBuilder databaseRule(String configurationResourceName) {
