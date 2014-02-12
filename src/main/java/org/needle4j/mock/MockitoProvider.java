@@ -6,8 +6,11 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import com.sun.org.apache.regexp.internal.REUtil;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.needle4j.injection.InjectionConfiguration;
+import org.needle4j.reflection.ReflectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +22,13 @@ public class MockitoProvider implements MockProvider, SpyProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(MockitoProvider.class);
 
+  public static final String SPY_ANNOTATION_FQN = "org.mockito.Spy";
+
+    private final Class<? extends Annotation> spyAnnotation = (Class<? extends Annotation>) ReflectionUtil.forName(SPY_ANNOTATION_FQN);
+
     /**
      * {@inheritDoc} Skipping creation, if the type is final or primitive.
-     * 
+     *
      * @return the mock object or null, if the type is final or primitive.
      */
     @Override
@@ -61,13 +68,13 @@ public class MockitoProvider implements MockProvider, SpyProvider {
 
     @Override
     public Class<? extends Annotation> getSpyAnnotation() {
-        return Spy.class;
+        return spyAnnotation;
     }
 
     @Override
     public boolean isSpyRequested(final Field field) {
         checkArgument(field != null, "field must not be null!");
 
-        return getSpyAnnotation() != null && field.isAnnotationPresent(getSpyAnnotation());
+        return spyAnnotation != null && field.isAnnotationPresent(spyAnnotation);
     }
 }

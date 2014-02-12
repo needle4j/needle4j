@@ -72,12 +72,14 @@ public abstract class AbstractNeedleRuleBuilder<B, R extends NeedleTestcase> ext
         return annotations;
     }
 
+
     @Override
     protected final R build(final NeedleConfiguration needleConfiguration) {
-        final Class<? extends MockProvider> mockProviderClass = getMockProviderClass(needleConfiguration);
+        if (this.mockProviderClass != null) {
+          needleConfiguration.setMockProviderClassName(this.mockProviderClass.getCanonicalName());
+        }
 
-        final InjectionConfiguration injectionConfiguration = new InjectionConfiguration(needleConfiguration,
-                mockProviderClass);
+        final InjectionConfiguration injectionConfiguration = new InjectionConfiguration(needleConfiguration);
 
         injectionConfiguration.addGlobalInjectionAnnotation(getCustomInjectionAnnotations());
 

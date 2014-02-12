@@ -155,9 +155,9 @@ public class InjectionTargetInformation {
             return (T) annotation;
         }
 
-        for (final Annotation parameterAnnoation : parameterAnnotations) {
-            if (parameterAnnoation.annotationType() == annotationClass) {
-                return (T) parameterAnnoation;
+        for (final Annotation parameterAnnotation : parameterAnnotations) {
+            if (parameterAnnotation.annotationType() == annotationClass) {
+                return (T) parameterAnnotation;
             }
         }
 

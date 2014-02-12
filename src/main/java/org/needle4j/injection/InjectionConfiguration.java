@@ -65,19 +65,17 @@ public final class InjectionConfiguration {
     private final ChainedNeedleProcessor chainedNeedleProcessor;
 
     /**
-     * @see #InjectionConfiguration(NeedleConfiguration, Class)
+     * @see #InjectionConfiguration(NeedleConfiguration)
      */
     public InjectionConfiguration() {
-        this(PropertyBasedConfigurationFactory.get(), lookupMockProviderClass(PropertyBasedConfigurationFactory.get()
-                .getMockProviderClassName()));
+        this(PropertyBasedConfigurationFactory.get());
     }
 
     @SuppressWarnings("unchecked")
-    public InjectionConfiguration(final NeedleConfiguration needleConfiguration,
-            final Class<? extends MockProvider> mockProviderClass) {
+    public InjectionConfiguration(final NeedleConfiguration needleConfiguration) {
 
         this.needleConfiguration = needleConfiguration;
-        this.mockProvider = createMockProvider(mockProviderClass);
+        this.mockProvider = createMockProvider(lookupMockProviderClass(needleConfiguration.getMockProviderClassName()));
 
         // use mockprovider if mockprovider supports spies, otherwise Fake
         // implementation
@@ -247,7 +245,9 @@ public final class InjectionConfiguration {
 
         try {
             if (mockProviderClassName != null) {
-                return ReflectionUtil.lookupClass(MockProvider.class, mockProviderClassName);
+                final Class<MockProvider> mockProviderClass = ReflectionUtil.lookupClass(MockProvider.class,
+                        mockProviderClassName);
+                return mockProviderClass;
             }
         } catch (final Exception e) {
             throw new RuntimeException("could not load mock provider class: '" + mockProviderClassName + "'", e);
