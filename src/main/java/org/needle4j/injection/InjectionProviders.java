@@ -98,11 +98,16 @@ public final class InjectionProviders {
      */
     public static InjectionProviderInstancesSupplier supplierForInjectionProviders(
             final InjectionProvider<?>... providers) {
+        return supplierForInjectionProviders(newProviderSet(providers));
+    }
+
+    public static InjectionProviderInstancesSupplier supplierForInjectionProviders(
+            final Set<InjectionProvider<?>> providers) {
         return new InjectionProviderInstancesSupplier() {
 
             @Override
             public Set<InjectionProvider<?>> get() {
-                return newProviderSet(providers);
+                return providers;
             }
         };
     }
@@ -236,15 +241,6 @@ public final class InjectionProviders {
 
         protected final Class<? extends Annotation> qualifier;
 
-        /**
-         * Constructs a provider for given @Named element encapsulating the
-         * value.
-         * 
-         * @param name
-         *            name of the interest.
-         * @param value
-         *            value to return.
-         */
         protected QualifiedInstanceInjectionProvider(final Class<? extends Annotation> qualifier, final T instance) {
             super(instance);
             assertIsQualifier(qualifier);
@@ -274,7 +270,7 @@ public final class InjectionProviders {
          * 
          * @param name
          *            name of the interest.
-         * @param value
+         * @param instance
          *            value to return.
          */
         protected NamedInstanceInjectionProvider(final String name, final T instance) {
