@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.needle4j.predicate.IsSupportedAnnotationPredicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +41,27 @@ public final class ReflectionUtil {
         super();
     }
 
+    public static List<Field> getAllFieldsWithSupportedAnnotation(final Class<?> clazz,
+            final IsSupportedAnnotationPredicate isSupportedAnnotationPredicate) {
+        final List<Field> result = new ArrayList<Field>();
+
+        new DerivedClassIterator(clazz) {
+
+            @Override
+            protected boolean handleClass(final Class<?> clazz) {
+                for (final Field field : getDeclaredFields(clazz)) {
+                    if (isSupportedAnnotationPredicate.applyAny(field.getAnnotations())) {
+                        result.add(field);
+                    }
+                }
+                return true;
+
+            }
+        }.iterate();
+
+        return result;
+    }
+
     public static List<Field> getAllFieldsWithAnnotation(final Class<?> clazz,
             final Class<? extends Annotation> annotation) {
         final List<Field> result = new ArrayList<Field>();
@@ -48,9 +70,7 @@ public final class ReflectionUtil {
 
             @Override
             protected boolean handleClass(final Class<?> clazz) {
-                final Field[] fields = clazz.getDeclaredFields();
-
-                for (final Field field : fields) {
+                for (final Field field : getDeclaredFields(clazz)) {
                     if (field.getAnnotation(annotation) != null) {
                         result.add(field);
                     }
@@ -108,17 +128,15 @@ public final class ReflectionUtil {
         return result;
     }
 
-    public static List<Field> getAllFieldsAssinableFrom(final Class<?> assinableType, final Class<?> clazz) {
+    public static List<Field> getAllFieldsAssignableFrom(final Class<?> assignableType, final Class<?> clazz) {
         final List<Field> result = new ArrayList<Field>();
 
         new DerivedClassIterator(clazz) {
 
             @Override
             protected boolean handleClass(final Class<?> clazz) {
-                final Field[] fields = clazz.getDeclaredFields();
-
-                for (final Field field : fields) {
-                    if (field.getType().isAssignableFrom(assinableType)) {
+                for (final Field field : getDeclaredFields(clazz)) {
+                    if (field.getType().isAssignableFrom(assignableType)) {
                         result.add(field);
                     }
                 }
@@ -129,6 +147,15 @@ public final class ReflectionUtil {
 
         return result;
 
+    }
+
+    /**
+     * @deprecated typo
+     * @see #getAllFieldsAssignableFrom(Class, Class)
+     */
+    @Deprecated
+    public static List<Field> getAllFieldsAssinableFrom(final Class<?> assinableType, final Class<?> clazz) {
+        return getAllFieldsAssignableFrom(assinableType, clazz);
     }
 
     public static List<Field> getAllFieldsWithAnnotation(final Object instance,
@@ -145,7 +172,7 @@ public final class ReflectionUtil {
 
             @Override
             protected boolean handleClass(final Class<?> clazz) {
-                final Field[] fields = clazz.getDeclaredFields();
+                final Field[] fields = getDeclaredFields(clazz);
 
                 Collections.addAll(result, fields);
                 return true;
@@ -156,8 +183,13 @@ public final class ReflectionUtil {
         return result;
     }
 
+    private static Field[] getDeclaredFields(Class<?> clazz) {
+        return clazz.getDeclaredFields();
+    }
+
     /**
-     * @param class object
+     * @param clazz
+     *            object
      * @return list of method objects
      * @see Class#getMethods()
      */

@@ -19,6 +19,7 @@ import org.needle4j.mock.MockAnnotationProcessor;
 import org.needle4j.mock.MockProvider;
 import org.needle4j.mock.SpyProvider;
 import org.needle4j.postconstruct.PostConstructProcessor;
+import org.needle4j.predicate.IsSupportedAnnotationPredicate;
 import org.needle4j.processor.ChainedNeedleProcessor;
 import org.needle4j.reflection.ReflectionUtil;
 import org.slf4j.Logger;
@@ -84,7 +85,8 @@ public final class InjectionConfiguration {
 
         this.postConstructProcessor = new PostConstructProcessor(POSTCONSTRUCT_CLASSES);
 
-        this.injectionIntoAnnotationProcessor = new InjectionAnnotationProcessor();
+        this.injectionIntoAnnotationProcessor = new InjectionAnnotationProcessor(new IsSupportedAnnotationPredicate(
+                this));
         this.testcaseInjectionProcessor = new TestcaseInjectionProcessor(this);
         this.mockAnnotationProcessor = new MockAnnotationProcessor(this);
 

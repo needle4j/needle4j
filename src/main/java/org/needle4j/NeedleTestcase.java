@@ -1,6 +1,5 @@
 package org.needle4j;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -17,6 +16,7 @@ import org.needle4j.injection.InjectionProvider;
 import org.needle4j.injection.InjectionTargetInformation;
 import org.needle4j.mock.MockProvider;
 import org.needle4j.mock.SpyProvider;
+import org.needle4j.predicate.IsSupportedAnnotationPredicate;
 import org.needle4j.reflection.ReflectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +47,7 @@ public abstract class NeedleTestcase {
     private NeedleContext context;
 
     private final InjectionConfiguration configuration;
+    private final IsSupportedAnnotationPredicate isSupportedAnnotationPredicate;
 
     /**
      * Create an instance of {@link NeedleTestcase} with optional additional
@@ -63,6 +64,7 @@ public abstract class NeedleTestcase {
     protected NeedleTestcase(final InjectionConfiguration configuration,
             final InjectionProvider<?>... injectionProviders) {
         this.configuration = configuration;
+        this.isSupportedAnnotationPredicate = new IsSupportedAnnotationPredicate(configuration);
 
         addInjectionProvider(injectionProviders);
     }
@@ -135,10 +137,9 @@ public abstract class NeedleTestcase {
         final List<Method> methods = ReflectionUtil.getMethods(instance.getClass());
 
         for (final Method method : methods) {
-
-            final Annotation[] annotations = method.getDeclaredAnnotations();
-
-            if (!checkAnnotationIsSupported(annotations)) {
+            // if the method is not annotated with at least one supported
+            // annotation, skip it!
+            if (!isSupportedAnnotationPredicate.applyAny(method.getDeclaredAnnotations())) {
                 continue;
             }
 
@@ -185,7 +186,9 @@ public abstract class NeedleTestcase {
     }
 
     private void initFields(final Object instance) {
-        final List<Field> fields = ReflectionUtil.getAllFields(instance.getClass());
+
+        final List<Field> fields = ReflectionUtil.getAllFieldsWithSupportedAnnotation(instance.getClass(),
+                isSupportedAnnotationPredicate);
 
         for (final Field field : fields) {
             final InjectionTargetInformation injectionTargetInformation = new InjectionTargetInformation(
@@ -257,7 +260,7 @@ public abstract class NeedleTestcase {
         }
     }
 
-    private Object createInstanceByNoArgConstructor(final Class<?> implementation)
+    protected Object createInstanceByNoArgConstructor(final Class<?> implementation)
             throws ObjectUnderTestInstantiationException {
         try {
             implementation.getConstructor();
@@ -276,15 +279,13 @@ public abstract class NeedleTestcase {
 
     }
 
-    private Object getInstanceByConstructorInjection(final Class<?> implementation)
+    protected Object getInstanceByConstructorInjection(final Class<?> implementation)
             throws ObjectUnderTestInstantiationException {
         final Constructor<?>[] constructors = implementation.getConstructors();
 
         for (final Constructor<?> constructor : constructors) {
-
-            final Annotation[] annotations = constructor.getAnnotations();
-
-            if (!checkAnnotationIsSupported(annotations)) {
+            // has the constructor at least one supported injection annotation?
+            if (!isSupportedAnnotationPredicate.applyAny(constructor.getAnnotations())) {
                 continue;
             }
 
@@ -310,16 +311,6 @@ public abstract class NeedleTestcase {
         }
 
         return null;
-    }
-
-    private boolean checkAnnotationIsSupported(final Annotation[] annotations) {
-
-        for (final Annotation annotation : annotations) {
-            if (configuration.isAnnotationSupported(annotation.annotationType())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

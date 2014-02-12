@@ -6,6 +6,7 @@ import java.util.List;
 import org.needle4j.NeedleContext;
 import org.needle4j.annotation.InjectInto;
 import org.needle4j.annotation.InjectIntoMany;
+import org.needle4j.predicate.IsSupportedAnnotationPredicate;
 import org.needle4j.processor.NeedleProcessor;
 import org.needle4j.reflection.ReflectionUtil;
 import org.slf4j.Logger;
@@ -14,6 +15,11 @@ import org.slf4j.LoggerFactory;
 public class InjectionAnnotationProcessor implements NeedleProcessor {
 
     private final Logger logger = LoggerFactory.getLogger(InjectionAnnotationProcessor.class);
+    private final IsSupportedAnnotationPredicate isSupportedAnnotationPredicate;
+
+    public InjectionAnnotationProcessor(IsSupportedAnnotationPredicate isSupportedAnnotationPredicate) {
+        this.isSupportedAnnotationPredicate = isSupportedAnnotationPredicate;
+    }
 
     @Override
     public void process(final NeedleContext context) {
@@ -34,9 +40,8 @@ public class InjectionAnnotationProcessor implements NeedleProcessor {
 
             // inject into all object under test instance
             if (value.length == 0) {
-                for (Object inejctedObject : context.getObjectsUnderTest()) {
-                    injectByType(inejctedObject, sourceObject, field.getType());
-
+                for (Object objectUnderTest : context.getObjectsUnderTest()) {
+                    injectByType(objectUnderTest, sourceObject, field.getType());
                 }
             } else {
                 for (InjectInto injectInto : value) {
@@ -78,6 +83,11 @@ public class InjectionAnnotationProcessor implements NeedleProcessor {
         final List<Field> fields = ReflectionUtil.getAllFieldsAssinableFrom(type, objectUnderTest.getClass());
 
         for (Field field : fields) {
+            // skip injection when the field is not annotated with at least one
+            // supported injection annotation
+            if (!isSupportedAnnotationPredicate.applyAny(field.getDeclaredAnnotations())) {
+                continue;
+            }
             try {
                 ReflectionUtil.setField(field, objectUnderTest, sourceObject);
             } catch (Exception e) {

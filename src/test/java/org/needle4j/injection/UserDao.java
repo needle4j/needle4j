@@ -15,6 +15,7 @@ public class UserDao {
     @Inject
     private User user;
 
+    @Inject
     private Queue<?> queue;
 
     public User getCurrentUser() {

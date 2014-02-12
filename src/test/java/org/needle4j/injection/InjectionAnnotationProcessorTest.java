@@ -1,11 +1,11 @@
 package org.needle4j.injection;
 
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.needle4j.MyEjbComponentBean;
@@ -49,7 +49,8 @@ public class InjectionAnnotationProcessorTest {
         assertSame(queue, _userDao2.getQueue());
         assertSame(queue, bean.getQueue());
 
-        Assert.assertNull(_userDao1.getQueue());
+        // these are not the same since userDao1 gets a default mock injected
+        assertNotSame(queue, _userDao1.getQueue());
     }
 
     @Test

@@ -49,6 +49,7 @@ public class PostConstructAfterInjectionTest {
 
         private boolean postConstructCalled;
 
+        @Inject
         private PostConstructDummyA dummyA;
 
         @Inject
