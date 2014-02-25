@@ -45,10 +45,13 @@ Needle is licensed under GNU Lesser General Public License (LGPL) version 2.1 or
 * Needle Home Page:	http://www.needle4j.org
 * Source Code:			https://github.com/needle4j/needle4j
 * Issue Tracking:			https://github.com/needle4j/needle4j/issues
+* [needle4j@ohloh.net](https://www.ohloh.net/p/needle4j)
 
-<html>
-<script type="text/javascript" src="http://www.ohloh.net/p/714248/widgets/project_thin_badge.js"></script>
-</html>
+
+
+<script type="text/javascript" src="http://www.ohloh.net/p/714248/widgets/project_thin_badge.js">
+</script>
+
 
 **Release Nodes**
 
