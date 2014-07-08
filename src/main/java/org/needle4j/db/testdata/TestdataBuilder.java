@@ -9,16 +9,16 @@ package org.needle4j.db.testdata;
 public interface TestdataBuilder<T> {
 
     /**
-     * Creates a new instance of type {@link T}
-     * 
-     * @return a new instance of type {@link T}
+     * Creates a new instance of generic type.
+     *
+     * @return a new instance of generic type
      */
     T build();
 
     /**
-     * Creates a new instance of type {@link T} and saves the instance.
+     * Creates a new instance of generic type  and saves the instance.
      * 
-     * @return a new persisted instance of type {@link T}
+     * @return a new persisted instance of generic type
      */
     T buildAndSave();
 

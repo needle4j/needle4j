@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="needle4j - hhh" xmlns="http://maven.apache.org/DECORATION/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.3.1</version>
+    </skin>
+
+    <custom>
+        <fluidoSkin>
+            <topBarEnabled>false</topBarEnabled>
+            <sideBarEnabled>true</sideBarEnabled>
+
+            <sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+            <breadcrumbDivider>/</breadcrumbDivider>
+
+            <gitHub>
+                <projectId>needle4j/needle4j</projectId>
+                <ribbonOrientation>right</ribbonOrientation>
+                <ribbonColor>red</ribbonColor>
+            </gitHub>
+        </fluidoSkin>
+    </custom>
+
+
+    <body>
+        <breadcrumbs>
+            <item name="Home" href="/"/>
+        </breadcrumbs>
+
+        <menu name="Main" inherit="top">
+            <item name="Overview" href="index.html"/>
+            <item name="License" href="license.html"/>
+        </menu>
+
+        <menu name="Documentation" inherit="top">
+            <item name="Getting started" href="getting-started.html"/>
+            <item name="Configuration" href="configuration.html"/>
+            <item name="Needle Testcase" href="needle-testcase.html"/>
+            <item name="Database Testing" href="database-testing.html"/>
+            <item name="Testing with Mock objects" href="mock-objectsg.html"/>
+        </menu>
+
+        <menu name="Development" inherit="top">
+            <item name="JavaDoc" href="apidocs/index.html"/>
+            <item name="GitHub project" href="http://github.com/needle4j/needle4j/"/>
+            <item name="Issue tracking" href="issue-tracking.html"/>
+            <item name="Project info" href="project-info.html"/>
+
+            <item name="project-reports" href="project-reports.html"/>
+        </menu>
+    </body>
+
+</project>

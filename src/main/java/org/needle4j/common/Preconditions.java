@@ -42,8 +42,7 @@ public final class Preconditions {
      *            text to use as exception message
      * @param parameters
      *            optional parameters used in
-     *            {@link String#format(String, Object...)
-
+     *            {@link String#format(String, Object...)}
      */
     public static void checkArgument(final boolean condition, final String message, final Object... parameters) {
         if (!condition) {

@@ -32,8 +32,8 @@ public final class ConfigurationLoader {
 
     /**
      * @deprecated values are accessed in NeedleConfiguration
-     * @param key
-     * @return
+     * @param key the key look at
+     * @return property value for given key
      */
     @Deprecated
     String getProperty(final String key) {
@@ -42,8 +42,8 @@ public final class ConfigurationLoader {
 
     /**
      * @deprecated values are accessed in NeedleConfiguration
-     * @param key
-     * @return
+     * @param key the key look at
+     * @return property value for given key
      */
     @Deprecated
     boolean containsKey(final String key) {

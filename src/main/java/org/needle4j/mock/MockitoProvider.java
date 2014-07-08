@@ -6,10 +6,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import com.sun.org.apache.regexp.internal.REUtil;
 import org.mockito.Mockito;
-import org.mockito.Spy;
-import org.needle4j.injection.InjectionConfiguration;
 import org.needle4j.reflection.ReflectionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

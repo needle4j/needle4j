@@ -1,10 +1,8 @@
 [![Build Status](https://secure.travis-ci.org/needle4j/needle4j.png)](https://travis-ci.org/needle4j/needle4j)
 
-This project is currently rebased, so some documents might not be updated yet.
 
+# Need(le) for Speed - Effective Unit Testing for Java EE
 
-Need(le) for Speed - Effective Unit Testing for Java EE
-================================
 [@NeedleProject](https://twitter.com/NeedleProject)
 
 **Needle4j is a lightweight framework for testing Java EE components outside of the
@@ -14,8 +12,7 @@ as well as the execution of unit tests.**
 
 ![Needle Coffee Cups](http://needle.spree.de/public/images/needle-coffeecups-380px.jpg)
 
-
-**Core Features:**
+## Core Features:
 
 * Instantiation of @ObjectUnderTest Components
 * Constructor, Method and Field based dependency injection
@@ -33,27 +30,67 @@ as well as the execution of unit tests.**
 * Needle can be used with [JUnit](http://www.junit.org/) or [TestNG](http://testng.org/).
 * It supports [EasyMock](http://www.easymock.org/) and [Mockito](http://code.google.com/p/mockito/) out-of-the-box.
 
+## Getting started
 
+Add the following dependencies to your pom.xml file to get started using Needle:
 
-**Licensing**
+```
+<dependency>
+    <groupId>org.needle4j</groupId>
+    <artifactId>needle4j</artifactId>
+    <version>2.3</version>
+    <scope>test</scope>
+</dependency>
+
+(plus junit, mockito, ...)
+``` 
+
+Implementing your first Needle Test:
+
+```
+public class UserDaoTest {
+
+    @Rule
+    public DatabaseRule databaseRule = new DatabaseRule();
+
+    @Rule
+    public NeedleRule needleRule = new NeedleRule(databaseRule);
+
+    @ObjectUnderTest
+    private UserDao userDao;
+
+    @Test
+    public void testFindByUsername() throws Exception {
+        final User user = new UserTestdataBuilder(
+        databaseRule.getEntityManager()).buildAndSave();
+
+        User userFromDb =
+            userDao.findBy(user.getUsername(), user.getPassword());
+
+        Assert.assertEquals(user.getId(), userFromDb.getId());
+    }
+}
+``` 
+
+For the documentation and more examples please refer to the maven site.
+
+## Licensing
 
 Needle is licensed under GNU Lesser General Public License (LGPL) version 2.1 or later.
 
+## Needle URLs
 
-**Needle URLs**
-
-* Needle Home Page:	http://www.needle4j.org
-* Source Code:			https://github.com/needle4j/needle4j
-* Issue Tracking:			https://github.com/needle4j/needle4j/issues
+* Needle Home Page: http://www.needle4j.org
+* Source Code:      https://github.com/needle4j/needle4j
+* Issue Tracking:   https://github.com/needle4j/needle4j/issues
 * [needle4j@ohloh.net](https://www.ohloh.net/p/needle4j)
-
 
 
 <script type="text/javascript" src="http://www.ohloh.net/p/714248/widgets/project_thin_badge.js">
 </script>
 
 
-**Release Nodes**
+## Release Nodes
 
 Version 2.2 - https://github.com/akquinet/needle/issues?milestone=1&state=closed
 

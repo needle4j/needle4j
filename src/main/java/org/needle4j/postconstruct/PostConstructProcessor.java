@@ -26,7 +26,7 @@ import org.needle4j.reflection.ReflectionUtil;
 public class PostConstructProcessor implements NeedleProcessor {
 
     /**
-     * internal Container of all Annotations that trigger invocation
+     * Internal Container of all Annotations that trigger invocation.
      */
     private final Set<Class<? extends Annotation>> postConstructAnnotations = new HashSet<Class<? extends Annotation>>();
 
@@ -39,11 +39,11 @@ public class PostConstructProcessor implements NeedleProcessor {
 
     /**
      * calls process(instance) for each object under test, only if field is
-     * marked with
+     * marked with {@link ObjectUnderTest}(postConstruct=true), else ignored.
      * 
-     * @ObjectUNderTest(postConstruct=true), else ignored
+     *
      * @param context
-     *            - the NeedleContext
+     *            the NeedleContext
      * @throws ObjectUnderTestInstantiationException
      */
     @Override
