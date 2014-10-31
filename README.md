@@ -1,4 +1,5 @@
 [![Build Status](https://secure.travis-ci.org/needle4j/needle4j.png)](https://travis-ci.org/needle4j/needle4j)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.needle4j/needle4j/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.needle4j/needle4j)
 
 
 # Need(le) for Speed - Effective Unit Testing for Java EE
