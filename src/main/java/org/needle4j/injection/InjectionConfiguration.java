@@ -226,7 +226,7 @@ public final class InjectionConfiguration {
     }
 
     public Entry<Object, Object> handleInjectionProvider(final Collection<InjectionProvider<?>> injectionProviders,
-            final InjectionTargetInformation injectionTargetInformation) {
+                                                         final InjectionTargetInformation injectionTargetInformation) {
 
         for (final InjectionProvider<?> provider : injectionProviders) {
 
@@ -243,14 +243,28 @@ public final class InjectionConfiguration {
     // TODO extract
     public static Class<? extends MockProvider> lookupMockProviderClass(final String mockProviderClassName) {
 
+        if (mockProviderClassName == null) {
+            return autoDetectMockProviderClass();
+        }
+
         try {
-            if (mockProviderClassName != null) {
-                final Class<MockProvider> mockProviderClass = ReflectionUtil.lookupClass(MockProvider.class,
-                        mockProviderClassName);
-                return mockProviderClass;
-            }
+            final Class<MockProvider> mockProviderClass = ReflectionUtil.lookupClass(MockProvider.class,
+                    mockProviderClassName);
+            return mockProviderClass;
         } catch (final Exception e) {
             throw new RuntimeException("could not load mock provider class: '" + mockProviderClassName + "'", e);
+        }
+    }
+
+    private static Class<? extends MockProvider> autoDetectMockProviderClass() {
+        List<String> providers = Arrays.asList("org.needle4j.mock.MockitoProvider", "org.needle4j.mock.EasyMockProvider");
+
+        for (String p: providers) {
+            try {
+                return ReflectionUtil.lookupClass(MockProvider.class, p);
+            } catch (Exception e) {
+                // ignored. provider not available due to missing dependencies.
+            }
         }
 
         throw new RuntimeException("no mock provider configured");

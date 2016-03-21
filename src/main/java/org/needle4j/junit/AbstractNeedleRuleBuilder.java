@@ -54,11 +54,6 @@ public abstract class AbstractNeedleRuleBuilder<B, R extends NeedleTestcase> ext
         return (B) this;
     }
 
-    private Class<? extends MockProvider> getMockProviderClass(final NeedleConfiguration needleConfiguration) {
-        return mockProviderClass != null ? mockProviderClass : InjectionConfiguration
-                .lookupMockProviderClass(needleConfiguration.getMockProviderClassName());
-    }
-
     private Set<Class<Annotation>> getCustomInjectionAnnotations() {
         final Set<Class<Annotation>> annotations = new HashSet<Class<Annotation>>();
         for (final Class<?> annotationClass : withAnnotations) {
