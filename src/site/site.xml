@@ -41,7 +41,7 @@
             <item name="Configuration" href="configuration.html"/>
             <item name="Needle Testcase" href="needle-testcase.html"/>
             <item name="Database Testing" href="database-testing.html"/>
-            <item name="Testing with Mock objects" href="mock-objectsg.html"/>
+            <item name="Testing with Mock objects" href="mock-objects.html"/>
         </menu>
 
         <menu name="Development" inherit="top">
