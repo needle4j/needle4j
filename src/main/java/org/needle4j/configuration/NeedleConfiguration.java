@@ -19,6 +19,7 @@ public final class NeedleConfiguration implements Cloneable {
     private String jdbcDriver;
     private String jdbcUser;
     private String jdbcPassword;
+    private PostConstructExecuteStrategy postConstructExecuteStrategy;
 
     /**
      * Returns the configured custom {@link Annotation} classes for default mock
@@ -138,6 +139,14 @@ public final class NeedleConfiguration implements Cloneable {
     public void setCustomInjectionProviderInstancesSupplierClasses(
             final Set<Class<InjectionProviderInstancesSupplier>> supplier) {
         this.customInjectionProviderInstancesSupplierClasses = supplier;
+    }
+
+    public PostConstructExecuteStrategy getPostConstructExecuteStrategy() {
+        return postConstructExecuteStrategy;
+    }
+
+    public void setPostConstructExecuteStrategy(final PostConstructExecuteStrategy postConstructExecuteStrategy) {
+        this.postConstructExecuteStrategy = postConstructExecuteStrategy;
     }
 
     @Override

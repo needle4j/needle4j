@@ -12,4 +12,5 @@ interface ConfigurationProperties {
     String JDBC_USER_KEY = "jdbc.user";
     String JDBC_PASSWORD_KEY = "jdbc.password";
     String HIBERNATE_CFG_FILENAME_KEY = "hibernate.cfg.filename";
+    String POSTCONSTRUCT_EXECUTESTRATEGY = "postconstruct.executestrategy";
 }

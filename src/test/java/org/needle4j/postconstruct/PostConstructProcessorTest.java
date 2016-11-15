@@ -1,7 +1,6 @@
 package org.needle4j.postconstruct;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import java.lang.reflect.Method;
@@ -15,6 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.needle4j.NeedleContext;
 import org.needle4j.annotation.ObjectUnderTest;
+import org.needle4j.configuration.NeedleConfiguration;
+import org.needle4j.configuration.PostConstructExecuteStrategy;
 import org.needle4j.reflection.ReflectionUtil;
 
 /**
@@ -68,7 +69,8 @@ public class PostConstructProcessorTest {
         ANNOTATIONS.add(PostConstruct.class);
     }
 
-    private final PostConstructProcessor postConstructProcessor = new PostConstructProcessor(ANNOTATIONS);
+    private NeedleConfiguration configuration;
+    private PostConstructProcessor postConstructProcessor;
 
     // This Processor test does not use the NeeldeRule!
     @ObjectUnderTest(postConstruct = true)
@@ -88,7 +90,9 @@ public class PostConstructProcessorTest {
 
     @Before
     public void setUp() {
-        assertNotNull(postConstructProcessor);
+        configuration = new NeedleConfiguration();
+        configuration.setPostConstructExecuteStrategy(PostConstructExecuteStrategy.DEFAULT);
+        postConstructProcessor = new PostConstructProcessor(ANNOTATIONS, configuration);
     }
 
     @Test
@@ -150,6 +154,35 @@ public class PostConstructProcessorTest {
     public void shouldFindTwoPostconstructMethodsForC() throws Exception {
         final Set<Method> methods = postConstructProcessor.getPostConstructMethods(C.class);
         assertThat(methods.size(), is(2));
+    }
+
+    @Test
+    public void shouldExecuteAlways() {
+        runnableMock.run();
+        EasyMock.replay(runnableMock);
+
+        final NeedleContext context = new NeedleContext(this);
+        configuration.setPostConstructExecuteStrategy(PostConstructExecuteStrategy.ALWAYS);
+        final ObjectUnderTest objectUnderTestAnnotation = getObjectUnderTestAnnotation("isNotConfiguredForPostConstruction");
+        context.addObjectUnderTest(objectUnderTestAnnotation.id(), isConfiguredForPostConstruction,
+                objectUnderTestAnnotation);
+
+        postConstructProcessor.process(context);
+        EasyMock.verify(runnableMock);
+    }
+
+    @Test
+    public void shouldExecuteNever() {
+        EasyMock.replay(runnableMock);
+
+        final NeedleContext context = new NeedleContext(this);
+        configuration.setPostConstructExecuteStrategy(PostConstructExecuteStrategy.NEVER);
+        final ObjectUnderTest objectUnderTestAnnotation = getObjectUnderTestAnnotation("isConfiguredForPostConstruction");
+        context.addObjectUnderTest(objectUnderTestAnnotation.id(), isConfiguredForPostConstruction,
+                objectUnderTestAnnotation);
+
+        postConstructProcessor.process(context);
+        EasyMock.verify(runnableMock);
     }
 
     private ObjectUnderTest getObjectUnderTestAnnotation(final String fieldname) {

@@ -72,6 +72,9 @@ public class PropertyBasedConfigurationFactory {
         configuration.setJdbcUser(configurationProperties.get(ConfigurationProperties.JDBC_USER_KEY));
         configuration.setJdbcPassword(configurationProperties.get(ConfigurationProperties.JDBC_PASSWORD_KEY));
 
+        configuration.setPostConstructExecuteStrategy(
+                PostConstructExecuteStrategy.fromString(configurationProperties.get(ConfigurationProperties.POSTCONSTRUCT_EXECUTESTRATEGY)));
+
         LOG.info("Needle Configuration: {}", configuration);
 
         return configuration;

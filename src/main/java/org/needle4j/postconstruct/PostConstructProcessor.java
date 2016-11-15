@@ -9,6 +9,8 @@ import java.util.Set;
 import org.needle4j.NeedleContext;
 import org.needle4j.ObjectUnderTestInstantiationException;
 import org.needle4j.annotation.ObjectUnderTest;
+import org.needle4j.configuration.NeedleConfiguration;
+import org.needle4j.configuration.PostConstructExecuteStrategy;
 import org.needle4j.processor.NeedleProcessor;
 import org.needle4j.reflection.ReflectionUtil;
 
@@ -29,9 +31,12 @@ public class PostConstructProcessor implements NeedleProcessor {
      * Internal Container of all Annotations that trigger invocation.
      */
     private final Set<Class<? extends Annotation>> postConstructAnnotations = new HashSet<Class<? extends Annotation>>();
+    private final NeedleConfiguration needleConfiguration;
 
     @SuppressWarnings("unchecked")
-    public PostConstructProcessor(final Set<Class<?>> postConstructAnnotations) {
+    public PostConstructProcessor(final Set<Class<?>> postConstructAnnotations,
+                                  final NeedleConfiguration needleConfiguration) {
+        this.needleConfiguration = needleConfiguration;
         for (final Class<?> annotation : postConstructAnnotations) {
             this.postConstructAnnotations.add((Class<? extends Annotation>) annotation);
         }
@@ -48,10 +53,16 @@ public class PostConstructProcessor implements NeedleProcessor {
      */
     @Override
     public void process(final NeedleContext context) {
-        Set<String> objectsUnderTestIds = context.getObjectsUnderTestIds();
+        final PostConstructExecuteStrategy postConstructExecuteStrategy = needleConfiguration.getPostConstructExecuteStrategy();
+        if (postConstructExecuteStrategy == PostConstructExecuteStrategy.NEVER) {
+            return;
+        }
+
+        final Set<String> objectsUnderTestIds = context.getObjectsUnderTestIds();
         for (String objectUnderTestId : objectsUnderTestIds) {
-            ObjectUnderTest objectUnderTestAnnotation = context.getObjectUnderTestAnnotation(objectUnderTestId);
-            if (objectUnderTestAnnotation != null && objectUnderTestAnnotation.postConstruct()) {
+            final ObjectUnderTest objectUnderTestAnnotation = context.getObjectUnderTestAnnotation(objectUnderTestId);
+            if (postConstructExecuteStrategy == PostConstructExecuteStrategy.ALWAYS ||
+                    objectUnderTestAnnotation != null && objectUnderTestAnnotation.postConstruct()) {
                 try {
                     process(context.getObjectUnderTest(objectUnderTestId));
                 } catch (ObjectUnderTestInstantiationException e) {
