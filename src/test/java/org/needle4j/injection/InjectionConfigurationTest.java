@@ -1,13 +1,11 @@
 package org.needle4j.injection;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.needle4j.mock.EasyMockProvider;
 import org.needle4j.mock.MockProvider;
 import org.needle4j.mock.MockitoProvider;
+
+import static org.junit.Assert.*;
 
 public class InjectionConfigurationTest {
 
@@ -20,13 +18,18 @@ public class InjectionConfigurationTest {
     }
 
     @Test
-    public void testLookupMockProviderClass() throws Exception {
+    public void canLookupMockitoProvider() throws Exception {
         assertNotNull(InjectionConfiguration.lookupMockProviderClass(MockitoProvider.class.getName()));
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testLookupMockProviderClass_Null() throws Exception {
-        assertNull(InjectionConfiguration.lookupMockProviderClass(null));
+    @Test
+    public void canLookupEasyMockProvider() {
+        assertNotNull(InjectionConfiguration.lookupMockProviderClass(EasyMockProvider.class.getName()));
+    }
+
+    @Test
+    public void lookupMockProviderDefaultsToMockitoProvider() throws Exception {
+        assertEquals(MockitoProvider.class, InjectionConfiguration.lookupMockProviderClass(null));
     }
 
 }

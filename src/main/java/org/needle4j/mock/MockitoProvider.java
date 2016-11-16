@@ -17,6 +17,15 @@ import org.slf4j.LoggerFactory;
  */
 public class MockitoProvider implements MockProvider, SpyProvider {
 
+    static {
+        // fail fast if Mockito is not available.
+        try {
+            Class.forName("org.mockito.Mockito");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private static final Logger LOG = LoggerFactory.getLogger(MockitoProvider.class);
 
   public static final String SPY_ANNOTATION_FQN = "org.mockito.Spy";
