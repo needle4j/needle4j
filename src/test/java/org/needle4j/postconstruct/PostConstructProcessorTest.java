@@ -3,6 +3,8 @@ package org.needle4j.postconstruct;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.needle4j.configuration.PostConstructExecuteStrategy.ALWAYS;
+import static org.needle4j.configuration.PostConstructExecuteStrategy.NEVER;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -150,6 +152,33 @@ public class PostConstructProcessorTest {
     public void shouldFindTwoPostconstructMethodsForC() throws Exception {
         final Set<Method> methods = postConstructProcessor.getPostConstructMethods(C.class);
         assertThat(methods.size(), is(2));
+    }
+
+    @Test
+    public void shouldExecuteAlways() {
+        runnableMock.run();
+        EasyMock.replay(runnableMock);
+
+        final NeedleContext context = new NeedleContext(this);
+        final ObjectUnderTest objectUnderTestAnnotation = getObjectUnderTestAnnotation("isNotConfiguredForPostConstruction");
+        context.addObjectUnderTest(objectUnderTestAnnotation.id(), isConfiguredForPostConstruction,
+                objectUnderTestAnnotation);
+
+        new PostConstructProcessor(ANNOTATIONS, ALWAYS).process(context);
+        EasyMock.verify(runnableMock);
+    }
+
+    @Test
+    public void shouldExecuteNever() {
+        EasyMock.replay(runnableMock);
+
+        final NeedleContext context = new NeedleContext(this);
+        final ObjectUnderTest objectUnderTestAnnotation = getObjectUnderTestAnnotation("isConfiguredForPostConstruction");
+        context.addObjectUnderTest(objectUnderTestAnnotation.id(), isConfiguredForPostConstruction,
+                objectUnderTestAnnotation);
+
+        new PostConstructProcessor(ANNOTATIONS, NEVER).process(context);
+        EasyMock.verify(runnableMock);
     }
 
     private ObjectUnderTest getObjectUnderTestAnnotation(final String fieldname) {

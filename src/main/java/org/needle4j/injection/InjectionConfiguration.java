@@ -81,7 +81,8 @@ public final class InjectionConfiguration {
         // implementation
         this.spyProvider = (this.mockProvider instanceof SpyProvider) ? (SpyProvider) mockProvider : SpyProvider.FAKE;
 
-        this.postConstructProcessor = new PostConstructProcessor(POSTCONSTRUCT_CLASSES);
+        this.postConstructProcessor = new PostConstructProcessor(
+                POSTCONSTRUCT_CLASSES, needleConfiguration.getPostConstructExecuteStrategy());
 
         this.injectionIntoAnnotationProcessor = new InjectionAnnotationProcessor(new IsSupportedAnnotationPredicate(
                 this));
