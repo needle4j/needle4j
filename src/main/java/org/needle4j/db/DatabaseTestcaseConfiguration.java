@@ -38,6 +38,15 @@ final class DatabaseTestcaseConfiguration {
      */
     private static final String JDBC_PASSWORD_KEY = "javax.persistence.jdbc.password";
 
+    /**
+     * The override JDBC connection password key.
+     *
+     * Can be used to override the property name from which the JDBC password
+     * will be retrieved. In Hibernate 4.3+ the value provided in
+     * <code>javax.persistence.jdbc.password</code> is obscured.
+     */
+    private static final String OVERIDE_PASSWORD_KEY = "needle4j.jdbc.password";
+
     private final DBOperation dbOperation;
 
     private final PersistenceConfigurationFactory configuration;
@@ -107,9 +116,16 @@ final class DatabaseTestcaseConfiguration {
         try {
             final Map<String, Object> properties = getEntityManagerFactory().getProperties();
 
+            String password;
+            if (properties.containsKey(OVERIDE_PASSWORD_KEY)) {
+                password = (String) properties.get(OVERIDE_PASSWORD_KEY);
+            } else {
+                password = (String) properties.get(JDBC_PASSWORD_KEY);
+            }
+
             return new JdbcConfiguration((String) properties.get(JDBC_URL_KEY),
                     (String) properties.get(JDBC_DRIVER_KEY), (String) properties.get(JDBC_USER_KEY),
-                    (String) properties.get(JDBC_PASSWORD_KEY));
+                    password);
         } catch (final Exception e) {
             throw new Exception("error while loading jdbc configuration properties form EntityManagerFactory", e);
         }
