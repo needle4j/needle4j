@@ -14,6 +14,10 @@ import org.needle4j.configuration.PostConstructExecuteStrategy;
 import org.needle4j.processor.NeedleProcessor;
 import org.needle4j.reflection.ReflectionUtil;
 
+import static org.needle4j.configuration.PostConstructExecuteStrategy.ALWAYS;
+import static org.needle4j.configuration.PostConstructExecuteStrategy.DEFAULT;
+import static org.needle4j.configuration.PostConstructExecuteStrategy.NEVER;
+
 /**
  * Handles execution of postConstruction methods of instances marked with
  * {@link ObjectUnderTest#postConstruct()}
@@ -31,15 +35,19 @@ public class PostConstructProcessor implements NeedleProcessor {
      * Internal Container of all Annotations that trigger invocation.
      */
     private final Set<Class<? extends Annotation>> postConstructAnnotations = new HashSet<Class<? extends Annotation>>();
-    private final NeedleConfiguration needleConfiguration;
+    private final PostConstructExecuteStrategy postConstructExecuteStrategy;
+
+    public PostConstructProcessor(final Set<Class<?>> postConstructAnnotations) {
+        this(postConstructAnnotations, DEFAULT);
+    }
 
     @SuppressWarnings("unchecked")
     public PostConstructProcessor(final Set<Class<?>> postConstructAnnotations,
-                                  final NeedleConfiguration needleConfiguration) {
-        this.needleConfiguration = needleConfiguration;
+                                  final PostConstructExecuteStrategy postConstructExecuteStrategy) {
         for (final Class<?> annotation : postConstructAnnotations) {
             this.postConstructAnnotations.add((Class<? extends Annotation>) annotation);
         }
+        this.postConstructExecuteStrategy = postConstructExecuteStrategy;
     }
 
     /**
@@ -53,15 +61,14 @@ public class PostConstructProcessor implements NeedleProcessor {
      */
     @Override
     public void process(final NeedleContext context) {
-        final PostConstructExecuteStrategy postConstructExecuteStrategy = needleConfiguration.getPostConstructExecuteStrategy();
-        if (postConstructExecuteStrategy == PostConstructExecuteStrategy.NEVER) {
+        if (this.postConstructExecuteStrategy == NEVER) {
             return;
         }
 
         final Set<String> objectsUnderTestIds = context.getObjectsUnderTestIds();
         for (String objectUnderTestId : objectsUnderTestIds) {
             final ObjectUnderTest objectUnderTestAnnotation = context.getObjectUnderTestAnnotation(objectUnderTestId);
-            if (postConstructExecuteStrategy == PostConstructExecuteStrategy.ALWAYS ||
+            if (this.postConstructExecuteStrategy == ALWAYS ||
                     objectUnderTestAnnotation != null && objectUnderTestAnnotation.postConstruct()) {
                 try {
                     process(context.getObjectUnderTest(objectUnderTestId));
