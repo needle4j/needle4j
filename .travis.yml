@@ -1,7 +1,12 @@
 language: java
 
-jdk:
-- oraclejdk7
+addons:
+  apt:
+    sources:
+      - sourceline: 'deb http://repos.azulsystems.com/ubuntu stable main'
+        key_url: 'http://repos.azulsystems.com/RPM-GPG-KEY-azulsystems'
+    packages:
+      - zulu-8
 
 before_install: git clone https://github.com/holisticon/travis-configuration.git target/travis
 
