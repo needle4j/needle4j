@@ -1,11 +1,5 @@
 package org.needle4j;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import javax.ejb.SessionContext;
-import javax.persistence.EntityManagerFactory;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.needle4j.annotation.InjectIntoMany;
@@ -13,8 +7,13 @@ import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.junit.DatabaseRule;
 import org.needle4j.junit.NeedleRule;
 
-public class NeedleTest {
+import javax.ejb.SessionContext;
+import javax.persistence.EntityManagerFactory;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+public class NeedleTest {
     @Rule
     public DatabaseRule databaseRule = new DatabaseRule();
 
@@ -28,7 +27,7 @@ public class NeedleTest {
     @ObjectUnderTest(implementation = MyEjbComponentBean.class)
     private MyEjbComponent ejbComponent;
 
-    private MyComponentBean componentBean1 = new MyComponentBean();
+    private final MyComponentBean componentBean1 = new MyComponentBean();
 
     @ObjectUnderTest
     private MyComponentBean componentBean2 = componentBean1;
@@ -39,14 +38,14 @@ public class NeedleTest {
         assertNotNull(componentBean.getEntityManager());
         assertNotNull(componentBean.getMyEjbComponent());
 
-        MyEjbComponent mock = (MyEjbComponent) needle.getInjectedObject(MyEjbComponent.class);
+        final MyEjbComponent mock = (MyEjbComponent) needle.getInjectedObject(MyEjbComponent.class);
 
         assertNotNull(mock);
     }
 
     @Test
     public void testResourceMock() throws Exception {
-        SessionContext sessionContextMock = (SessionContext) needle.getInjectedObject(SessionContext.class);
+        final SessionContext sessionContextMock = (SessionContext) needle.getInjectedObject(SessionContext.class);
         assertNotNull(sessionContextMock);
 
         assertNotNull(needle.getInjectedObject("queue1"));
@@ -66,7 +65,7 @@ public class NeedleTest {
 
     @Test
     public void testEntityManagerFactoryInjection() throws Exception {
-        EntityManagerFactory entityManagerFactory = componentBean2.getEntityManagerFactory();
+        final EntityManagerFactory entityManagerFactory = componentBean2.getEntityManagerFactory();
         assertNotNull(entityManagerFactory);
 
         assertNotNull(needle.getInjectedObject(EntityManagerFactory.class));

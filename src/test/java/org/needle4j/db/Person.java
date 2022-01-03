@@ -1,26 +1,18 @@
 package org.needle4j.db;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity(name = "personEntity")
 @Table(name = Person.TABLE_NAME)
 public class Person {
-
     public static final String TABLE_NAME = "NEEDLE_TEST_PERSON";
-
-    @Column(nullable = false)
-    private String myName;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column(nullable = false)
+    private String myName;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
     private Address address;

@@ -8,19 +8,17 @@ import javax.persistence.EntityManagerFactory;
  * {@link EntityManager}.
  */
 interface PersistenceConfiguration {
+  /**
+   * Returns an {@link EntityManager} instance.
+   *
+   * @return entityManager
+   */
+  EntityManager getEntityManager();
 
-    /**
-     * Returns an {@link EntityManager} instance.
-     * 
-     * @return entityManager
-     */
-    EntityManager getEntityManager();
-
-    /**
-     * Returns the EntityManagerFactory.
-     * 
-     * @return EntityManagerFactory
-     */
-    EntityManagerFactory getEntityManagerFactory();
-
+  /**
+   * Returns the EntityManagerFactory.
+   *
+   * @return EntityManagerFactory
+   */
+  EntityManagerFactory getEntityManagerFactory();
 }

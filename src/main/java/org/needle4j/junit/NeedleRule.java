@@ -1,8 +1,5 @@
 package org.needle4j.junit;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
@@ -10,6 +7,9 @@ import org.needle4j.NeedleTestcase;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.injection.InjectionConfiguration;
 import org.needle4j.injection.InjectionProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JUnit {@link MethodRule} for the initialization of the test. The Rule
@@ -39,8 +39,7 @@ import org.needle4j.injection.InjectionProvider;
  * @see NeedleTestcase
  */
 public class NeedleRule extends NeedleTestcase implements MethodRule {
-
-    private final List<MethodRule> methodRuleChain = new ArrayList<MethodRule>();
+    private final List<MethodRule> methodRuleChain = new ArrayList<>();
 
     public NeedleRule() {
         super();
@@ -64,7 +63,7 @@ public class NeedleRule extends NeedleTestcase implements MethodRule {
     @Override
     public Statement apply(final Statement base, final FrameworkMethod method, final Object target) {
         Statement appliedStatement = base;
-        for (MethodRule rule : methodRuleChain) {
+        for (final MethodRule rule : methodRuleChain) {
             appliedStatement = rule.apply(appliedStatement, method, target);
         }
 
