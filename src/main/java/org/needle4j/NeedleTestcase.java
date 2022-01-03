@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
@@ -92,12 +93,11 @@ public abstract class NeedleTestcase {
     for (final Field field : fields) {
       LOG.debug("found field {}", field.getName());
       final ObjectUnderTest objectUnderTestAnnotation = field.getAnnotation(ObjectUnderTest.class);
+
       try {
         final Object instance = setInstanceIfNotNull(field, objectUnderTestAnnotation, test);
         initInstance(instance);
-      } catch (final InstantiationException e) {
-        LOG.error(e.getMessage(), e);
-      } catch (final IllegalAccessException e) {
+      } catch (final InstantiationException | IllegalAccessException e) {
         LOG.error(e.getMessage(), e);
       }
     }
@@ -125,7 +125,6 @@ public abstract class NeedleTestcase {
    * annotations are supported.
    *
    * @param instance the instance to initialize.
-   * @throws ObjectUnderTestInstantiationException
    */
   protected final void initInstance(final Object instance) {
     initFields(instance);
@@ -144,16 +143,10 @@ public abstract class NeedleTestcase {
 
       final Class<?>[] parameterTypes = method.getParameterTypes();
 
-      final InjectionTargetInformationFactory injectionTargetInformationFactory = new InjectionTargetInformationFactory() {
-
-        @Override
-        public InjectionTargetInformation create(final Class<?> parameterType, final int parameterIndex) {
-
-          return new InjectionTargetInformation(parameterType, method,
+      final InjectionTargetInformationFactory injectionTargetInformationFactory =
+          (parameterType, parameterIndex) -> new InjectionTargetInformation(parameterType, method,
               method.getGenericParameterTypes()[parameterIndex],
               method.getParameterAnnotations()[parameterIndex]);
-        }
-      };
       final Object[] arguments = createArguments(parameterTypes, injectionTargetInformationFactory);
 
       try {
@@ -161,7 +154,6 @@ public abstract class NeedleTestcase {
       } catch (final Exception e) {
         LOG.warn("could not invoke method", e);
       }
-
     }
   }
 
@@ -185,7 +177,6 @@ public abstract class NeedleTestcase {
   }
 
   private void initFields(final Object instance) {
-
     final List<Field> fields = ReflectionUtil.getAllFieldsWithSupportedAnnotation(instance.getClass(),
         isSupportedAnnotationPredicate);
 
@@ -204,15 +195,13 @@ public abstract class NeedleTestcase {
         }
       }
     }
-
   }
 
   private Object setInstanceIfNotNull(final Field field, final ObjectUnderTest objectUnderTestAnnotation,
                                       final Object test) throws Exception {
-
     final SpyProvider spyProvider = configuration.getSpyProvider();
-
     final String id = objectUnderTestAnnotation.id().equals("") ? field.getName() : objectUnderTestAnnotation.id();
+
     Object instance = ReflectionUtil.getFieldValue(test, field);
 
     if (instance == null) {
@@ -247,7 +236,6 @@ public abstract class NeedleTestcase {
     context.addObjectUnderTest(id, instance, objectUnderTestAnnotation);
 
     return instance;
-
   }
 
   private void setField(final Field field, final Object test, final Object instance)
@@ -264,18 +252,13 @@ public abstract class NeedleTestcase {
     try {
       implementation.getConstructor();
 
-      return implementation.newInstance();
-
+      return implementation.getDeclaredConstructor().newInstance();
     } catch (final NoSuchMethodException e) {
       throw new ObjectUnderTestInstantiationException("could not create an instance of object under test "
           + implementation + ",implementation has no public no-arguments constructor", e);
-    } catch (final InstantiationException e) {
-
-      throw new ObjectUnderTestInstantiationException(e);
-    } catch (final IllegalAccessException e) {
+    } catch (final InstantiationException | IllegalAccessException | InvocationTargetException e) {
       throw new ObjectUnderTestInstantiationException(e);
     }
-
   }
 
   protected Object getInstanceByConstructorInjection(final Class<?> implementation)
@@ -289,15 +272,10 @@ public abstract class NeedleTestcase {
       }
 
       final Class<?>[] parameterTypes = constructor.getParameterTypes();
-      final InjectionTargetInformationFactory injectionTargetInformationFactory = new InjectionTargetInformationFactory() {
-
-        @Override
-        public InjectionTargetInformation create(final Class<?> parameterType, final int parameterIndex) {
-          return new InjectionTargetInformation(parameterType, constructor,
+      final InjectionTargetInformationFactory injectionTargetInformationFactory =
+          (parameterType, parameterIndex) -> new InjectionTargetInformation(parameterType, constructor,
               constructor.getGenericParameterTypes()[parameterIndex],
               constructor.getParameterAnnotations()[parameterIndex]);
-        }
-      };
 
       final Object[] arguments = createArguments(parameterTypes, injectionTargetInformationFactory);
 
@@ -306,7 +284,6 @@ public abstract class NeedleTestcase {
       } catch (final Exception e) {
         throw new ObjectUnderTestInstantiationException(e);
       }
-
     }
 
     return null;
@@ -320,7 +297,6 @@ public abstract class NeedleTestcase {
    *            {@link InjectionProvider#getKey(InjectionTargetInformation)}
    * @return the injected object or null
    */
-  @SuppressWarnings("unchecked")
   public <X> X getInjectedObject(final Object key) {
     return context.getInjectedObject(key);
   }
@@ -330,7 +306,6 @@ public abstract class NeedleTestcase {
    *
    * @return the configured {@link MockProvider}
    */
-  @SuppressWarnings("unchecked")
   public <X extends MockProvider> X getMockProvider() {
     return configuration.getMockProvider();
   }
