@@ -19,18 +19,18 @@ import org.needle4j.junit.NeedleRule;
  * calling test-instance has to be passed when the Rule is created, since the
  * new junit api does not pass the caller to the statement execution.<br/>
  * Using this Rule enables the {@link RuleChain}s feature of junit >= 4.10.
- * 
+ *
  * <pre>
  * Example:
- * 
+ *
  * public class UserDaoBeanTest {
- * 
+ *
  *  &#064;Rule
  *  public final NeedleTestRule needle = new NeedleTestRule(this);
- * 
+ *
  *  &#064;ObjectUnderTest
  *  private UserDaoBean userDao;
- * 
+ *
  *  &#064;Test
  *  public void test() {
  *   ...
@@ -38,43 +38,41 @@ import org.needle4j.junit.NeedleRule;
  *   ...
  *  }
  * }
- * 
+ *
  * </pre>
- * 
+ *
  * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  * @see NeedleRule
  * @see NeedleTestcase
  */
 public class NeedleTestRule extends NeedleTestcase implements TestRule {
 
-    private final Object testInstance;
+  private final Object testInstance;
 
-    /**
-     * @param testInstance
-     *            - target of injection
-     * @param injectionProviders
-     *            - optional custom injection provider
-     * @see NeedleTestcase#NeedleTestcase(InjectionProvider...)
-     */
-    public NeedleTestRule(final Object testInstance, final InjectionProvider<?>... injectionProviders) {
-        this(testInstance, new InjectionConfiguration(), injectionProviders);
-    }
+  /**
+   * @param testInstance       - target of injection
+   * @param injectionProviders - optional custom injection provider
+   * @see NeedleTestcase#NeedleTestcase(InjectionProvider...)
+   */
+  public NeedleTestRule(final Object testInstance, final InjectionProvider<?>... injectionProviders) {
+    this(testInstance, new InjectionConfiguration(), injectionProviders);
+  }
 
-    NeedleTestRule(final Object testInstance, final InjectionConfiguration configuration,
-            final InjectionProvider<?>... injectionProviders) {
-        super(configuration, injectionProviders);
-        this.testInstance = testInstance;
-    }
+  NeedleTestRule(final Object testInstance, final InjectionConfiguration configuration,
+                 final InjectionProvider<?>... injectionProviders) {
+    super(configuration, injectionProviders);
+    this.testInstance = testInstance;
+  }
 
-    @Override
-    public Statement apply(final Statement base, final Description description) {
-        return new Statement() {
+  @Override
+  public Statement apply(final Statement base, final Description description) {
+    return new Statement() {
 
-            @Override
-            public void evaluate() throws Throwable {
-                initTestcase(testInstance);
-                base.evaluate();
-            }
-        };
-    }
+      @Override
+      public void evaluate() throws Throwable {
+        initTestcase(testInstance);
+        base.evaluate();
+      }
+    };
+  }
 }

@@ -2,13 +2,13 @@ package org.needle4j.postconstruct.injection;
 
 public class DependentComponent {
 
-    private int i;
+  private int i;
 
-    public void count() {
-        i++;
-    }
+  public void count() {
+    i++;
+  }
 
-    public int getCounter() {
-        return i;
-    }
+  public int getCounter() {
+    return i;
+  }
 }

@@ -6,25 +6,25 @@ import org.needle4j.injection.InjectionTargetInformation;
 
 class TransactionHelperProvider implements InjectionProvider<TransactionHelper> {
 
-    private final DatabaseTestcase databaseTestcase;
+  private final DatabaseTestcase databaseTestcase;
 
-    public TransactionHelperProvider(DatabaseTestcase databaseTestcase) {
-        super();
-        this.databaseTestcase = databaseTestcase;
-    }
+  public TransactionHelperProvider(DatabaseTestcase databaseTestcase) {
+    super();
+    this.databaseTestcase = databaseTestcase;
+  }
 
-    @Override
-    public boolean verify(InjectionTargetInformation information) {
-        return information.getType() == TransactionHelper.class ? true : false;
-    }
+  @Override
+  public boolean verify(InjectionTargetInformation information) {
+    return information.getType() == TransactionHelper.class;
+  }
 
-    @Override
-    public TransactionHelper getInjectedObject(Class<?> injectionPointType) {
-        return databaseTestcase.getTransactionHelper();
-    }
+  @Override
+  public TransactionHelper getInjectedObject(Class<?> injectionPointType) {
+    return databaseTestcase.getTransactionHelper();
+  }
 
-    @Override
-    public Object getKey(InjectionTargetInformation information) {
-        return TransactionHelper.class;
-    }
+  @Override
+  public Object getKey(InjectionTargetInformation information) {
+    return TransactionHelper.class;
+  }
 }

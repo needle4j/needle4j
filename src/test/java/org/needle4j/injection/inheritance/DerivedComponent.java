@@ -1,35 +1,36 @@
 package org.needle4j.injection.inheritance;
 
-import javax.inject.Inject;
-
 import org.needle4j.MyComponent;
+
+import javax.inject.Inject;
 
 public class DerivedComponent extends BaseComponent {
 
-    @Inject
-    private MyComponent componentFieldInjectionDerived;
+  @Inject
+  private MyComponent componentFieldInjectionDerived;
 
-    private MyComponent componentSetterInjectionDerived;
+  private MyComponent componentSetterInjectionDerived;
 
-    @Override
-    public MyComponent getComponentByFieldInjection() {
-        return componentFieldInjectionDerived;
-    }
+  @Override
+  public MyComponent getComponentByFieldInjection() {
+    return componentFieldInjectionDerived;
+  }
 
-    public MyComponent getComponentFromBaseByFieldInjection() {
-        return super.getComponentByFieldInjection();
-    }
+  public MyComponent getComponentFromBaseByFieldInjection() {
+    return super.getComponentByFieldInjection();
+  }
 
-    @Inject
-    public void setComponentBySetter(final MyComponent component) {
-        componentSetterInjectionDerived = component;
-    }
+  @Inject
+  public void setComponentBySetter(final MyComponent component) {
+    componentSetterInjectionDerived = component;
+  }
 
-    public MyComponent getComponentBySetter() {
-        return componentSetterInjectionDerived;
-    }
+  @Override
+  public MyComponent getComponentBySetter() {
+    return componentSetterInjectionDerived;
+  }
 
-    public MyComponent getComponentFromBaseBySetter() {
-        return super.getComponentBySetter();
-    }
+  public MyComponent getComponentFromBaseBySetter() {
+    return super.getComponentBySetter();
+  }
 }

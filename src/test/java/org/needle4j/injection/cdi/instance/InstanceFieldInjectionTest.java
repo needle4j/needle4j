@@ -1,39 +1,37 @@
 package org.needle4j.injection.cdi.instance;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-import static org.needle4j.junit.NeedleBuilders.needleRule;
-
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.junit.NeedleRule;
 
+import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
+
+import static org.junit.Assert.*;
+import static org.needle4j.junit.NeedleBuilders.needleRule;
+
 public class InstanceFieldInjectionTest {
 
-    @Rule
-    public NeedleRule needleRule = needleRule("needle-mockito").build();
+  @Rule
+  public NeedleRule needleRule = needleRule("needle-mockito").build();
 
-    @ObjectUnderTest
-    private InstanceFieldInjectionBean component;
+  @ObjectUnderTest
+  private InstanceFieldInjectionBean component;
 
-    @Inject
-    private Instance<InstanceTestBean> instance;
+  @Inject
+  private Instance<InstanceTestBean> instance;
 
-    @Inject
-    private Instance<Runnable> runnableInstances;
+  @Inject
+  private Instance<Runnable> runnableInstances;
 
-    @Test
-    public void testInstanceFieldInjection() throws Exception {
-        assertNotNull(instance);
-        assertNotNull(runnableInstances);
+  @Test
+  public void testInstanceFieldInjection() throws Exception {
+    assertNotNull(instance);
+    assertNotNull(runnableInstances);
 
-        assertNotSame(instance, runnableInstances);
-        assertSame(instance, component.getInstance());
-    }
+    assertNotSame(instance, runnableInstances);
+    assertSame(instance, component.getInstance());
+  }
 
 }

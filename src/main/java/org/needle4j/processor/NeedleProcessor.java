@@ -4,9 +4,8 @@ import org.needle4j.NeedleContext;
 
 public interface NeedleProcessor {
 
-    /**
-     * @param context
-     *            needle context for test class
-     */
-    void process(NeedleContext context);
+  /**
+   * @param context needle context for test class
+   */
+  void process(NeedleContext context);
 }

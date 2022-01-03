@@ -7,14 +7,14 @@ import org.testng.annotations.Test;
 
 public class DatabaseTestNGTest extends DatabaseTestcase {
 
-    public DatabaseTestNGTest() {
-        super(Person.class, Address.class);
-    }
+  public DatabaseTestNGTest() {
+    super(Person.class, Address.class);
+  }
 
-    @Test
-    public void testGetDBAccess() throws Exception {
-        Assert.assertNotNull(getEntityManagerFactory());
-        Assert.assertNotNull(getEntityManager());
-    }
+  @Test
+  public void testGetDBAccess() throws Exception {
+    Assert.assertNotNull(getEntityManagerFactory());
+    Assert.assertNotNull(getEntityManager());
+  }
 
 }

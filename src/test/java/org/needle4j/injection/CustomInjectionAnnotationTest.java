@@ -8,16 +8,16 @@ import org.needle4j.junit.NeedleRule;
 
 public class CustomInjectionAnnotationTest {
 
-    @Rule
-    public NeedleRule needleRule = new NeedleRule();
+  @Rule
+  public NeedleRule needleRule = new NeedleRule();
 
-    @ObjectUnderTest
-    private CustomInjectionTestComponent component;
+  @ObjectUnderTest
+  private CustomInjectionTestComponent component;
 
-    @Test
-    public void testCustomeInjection() throws Exception {
-        Assert.assertNotNull(component.getQueue1());
-        Assert.assertNotNull(component.getQueue2());
-    }
+  @Test
+  public void testCustomeInjection() throws Exception {
+    Assert.assertNotNull(component.getQueue1());
+    Assert.assertNotNull(component.getQueue2());
+  }
 
 }

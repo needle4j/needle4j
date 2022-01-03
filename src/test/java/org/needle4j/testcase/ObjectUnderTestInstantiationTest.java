@@ -8,20 +8,20 @@ import org.needle4j.annotation.ObjectUnderTest;
 @SuppressWarnings("unused")
 public class ObjectUnderTestInstantiationTest extends NeedleTestcase {
 
-    @ObjectUnderTest
-    private ObjectUnderTestBean objectUnderTest;
+  @ObjectUnderTest
+  private ObjectUnderTestBean objectUnderTest;
 
-    @Test(expected = ObjectUnderTestInstantiationException.class)
-    public void testInstantiationWithNoArgConstructor() throws Exception {
-        initTestcase(this);
+  @Test(expected = ObjectUnderTestInstantiationException.class)
+  public void testInstantiationWithNoArgConstructor() throws Exception {
+    initTestcase(this);
+  }
+
+  class ObjectUnderTestBean {
+
+    private ObjectUnderTestBean() {
+      super();
     }
 
-    class ObjectUnderTestBean {
-
-        private ObjectUnderTestBean() {
-            super();
-        }
-
-    }
+  }
 
 }

@@ -1,28 +1,26 @@
 package org.needle4j.common;
 
-import static org.needle4j.common.Preconditions.checkArgument;
-
+import javax.inject.Qualifier;
 import java.lang.annotation.Annotation;
 
-import javax.inject.Qualifier;
+import static org.needle4j.common.Preconditions.checkArgument;
 
 public final class Annotations {
 
-    private Annotations() {
-        // hide
-    }
+  private Annotations() {
+    // hide
+  }
 
-    /**
-     * @param annotation
-     *            annotation to check
-     * @return <code>true</code> if annotation is marked with {@link Qualifier}.
-     */
-    public static final boolean isQualifier(final Class<? extends Annotation> annotation) {
-        checkArgument(annotation != null, "annotation must not be null");
-        return annotation.getAnnotation(Qualifier.class) != null;
-    }
+  /**
+   * @param annotation annotation to check
+   * @return <code>true</code> if annotation is marked with {@link Qualifier}.
+   */
+  public static final boolean isQualifier(final Class<? extends Annotation> annotation) {
+    checkArgument(annotation != null, "annotation must not be null");
+    return annotation.getAnnotation(Qualifier.class) != null;
+  }
 
-    public static final void assertIsQualifier(final Class<? extends Annotation> annotation) {
-        checkArgument(isQualifier(annotation), "annotation is no qualifier");
-    }
+  public static final void assertIsQualifier(final Class<? extends Annotation> annotation) {
+    checkArgument(isQualifier(annotation), "annotation is no qualifier");
+  }
 }

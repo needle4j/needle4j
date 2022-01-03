@@ -322,7 +322,7 @@ public abstract class NeedleTestcase {
    */
   @SuppressWarnings("unchecked")
   public <X> X getInjectedObject(final Object key) {
-    return (X) context.getInjectedObject(key);
+    return context.getInjectedObject(key);
   }
 
   /**
@@ -332,7 +332,7 @@ public abstract class NeedleTestcase {
    */
   @SuppressWarnings("unchecked")
   public <X extends MockProvider> X getMockProvider() {
-    return (X) configuration.getMockProvider();
+    return configuration.getMockProvider();
   }
 
   private interface InjectionTargetInformationFactory {

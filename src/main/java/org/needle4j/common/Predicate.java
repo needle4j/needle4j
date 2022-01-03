@@ -5,5 +5,5 @@ package org.needle4j.common;
  */
 public interface Predicate<T> {
 
-    boolean apply(T input);
+  boolean apply(T input);
 }

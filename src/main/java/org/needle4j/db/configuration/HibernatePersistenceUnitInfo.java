@@ -19,9 +19,9 @@ import static javax.persistence.ValidationMode.AUTO;
 public class HibernatePersistenceUnitInfo implements PersistenceUnitInfo {
   public static String JPA_VERSION = "2.1";
 
-  private String persistenceUnitName;
-  private List<String> managedClassNames;
-  private Properties properties;
+  private final String persistenceUnitName;
+  private final List<String> managedClassNames;
+  private final Properties properties;
 
   public HibernatePersistenceUnitInfo(final String persistenceUnitName, final List<String> managedClassNames,
                                       final Properties properties) {
