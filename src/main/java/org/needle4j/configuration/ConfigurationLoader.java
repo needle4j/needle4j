@@ -30,28 +30,8 @@ public final class ConfigurationLoader {
     configProperties = loadResourceAndDefault(resourceName);
   }
 
-  /**
-   * @param key the key look at
-   * @return property value for given key
-   * @deprecated values are accessed in NeedleConfiguration
-   */
-  @Deprecated
-  String getProperty(final String key) {
-    return configProperties.get(key);
-  }
-
-  /**
-   * @param key the key look at
-   * @return property value for given key
-   * @deprecated values are accessed in NeedleConfiguration
-   */
-  @Deprecated
-  boolean containsKey(final String key) {
-    return configProperties.containsKey(key);
-  }
-
   private static Map<String, String> loadDefaults() {
-    final Map<String, String> defaults = new HashMap<String, String>();
+    final Map<String, String> defaults = new HashMap<>();
 
     try {
       final ResourceBundle defaultResourceBundle = ResourceBundle.getBundle(DEFAULT_CONFIGURATION_FILENAME);

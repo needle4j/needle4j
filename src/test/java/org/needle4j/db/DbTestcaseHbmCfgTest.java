@@ -6,19 +6,15 @@ import org.needle4j.junit.DatabaseRule;
 
 import javax.persistence.EntityManager;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 
 public class DbTestcaseHbmCfgTest {
-
-  private final static Class<?>[] entityClasses = {Person.class, Address.class};
-
   @Rule
-  public DatabaseRule db = new DatabaseRule(entityClasses);
+  public DatabaseRule db = new DatabaseRule();
 
   @Test
-  public void testPersist() throws Exception {
+  public void testPersist() {
     final Person person = new Person();
     final EntityManager entityManager = db.getEntityManager();
 
@@ -32,8 +28,7 @@ public class DbTestcaseHbmCfgTest {
 
     final Person fromDB = entityManager.find(Person.class, person.getId());
 
-    assertThat(fromDB.getMyName(), equalTo(person.getMyName()));
+    assertEquals(fromDB.getMyName(), person.getMyName());
     entityManager.getTransaction().commit();
   }
-
 }

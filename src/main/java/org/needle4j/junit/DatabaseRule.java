@@ -38,23 +38,6 @@ public class DatabaseRule extends DatabaseTestcase implements MethodRule {
   }
 
   /**
-   * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(Class...)
-   */
-  @Deprecated
-  public DatabaseRule(final Class<?>... clazzes) {
-    super(clazzes);
-  }
-
-  /**
-   * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(DBOperation,
-   * Class...)
-   */
-  @Deprecated
-  public DatabaseRule(final DBOperation dbOperation, final Class<?>... clazzes) {
-    super(dbOperation, clazzes);
-  }
-
-  /**
    * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(DBOperation)
    */
   public DatabaseRule(final DBOperation dbOperation) {

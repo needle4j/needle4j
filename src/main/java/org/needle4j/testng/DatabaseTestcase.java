@@ -17,23 +17,6 @@ public class DatabaseTestcase extends org.needle4j.db.DatabaseTestcase {
   }
 
   /**
-   * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(Class...)
-   */
-  @Deprecated
-  public DatabaseTestcase(final Class<?>... clazzes) {
-    super(clazzes);
-  }
-
-  /**
-   * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(DBOperation,
-   * Class...)
-   */
-  @Deprecated
-  public DatabaseTestcase(final DBOperation dbOperation, final Class<?>... clazzes) {
-    super(dbOperation, clazzes);
-  }
-
-  /**
    * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase(DBOperation)
    */
   public DatabaseTestcase(final DBOperation dbOperation) {

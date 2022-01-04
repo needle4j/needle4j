@@ -56,12 +56,8 @@ final class DatabaseTestcaseConfiguration {
                                         final PersistenceConfigurationFactory configuratiorn) {
     this.needleConfiguration = needleConfiguration;
     this.configuration = configuratiorn;
-    this.dbOperation = createDBOperation(lookupDBOperationClass(needleConfiguration.getDBOperationClassName()));
-  }
-
-  @Deprecated
-  DatabaseTestcaseConfiguration(final NeedleConfiguration needleConfiguration, final Class<?>... clazzes) {
-    this(needleConfiguration, new PersistenceConfigurationFactory(clazzes));
+    final String dbOperationClassName = needleConfiguration.getDBOperationClassName();
+    this.dbOperation = dbOperationClassName != null ? createDBOperation(lookupDBOperationClass(dbOperationClassName)) : null;
   }
 
   DatabaseTestcaseConfiguration(final NeedleConfiguration needleConfiguration) {
@@ -115,7 +111,7 @@ final class DatabaseTestcaseConfiguration {
     try {
       final Map<String, Object> properties = getEntityManagerFactory().getProperties();
 
-      String password;
+      final String password;
       if (properties.containsKey(OVERIDE_PASSWORD_KEY)) {
         password = (String) properties.get(OVERIDE_PASSWORD_KEY);
       } else {
@@ -141,5 +137,4 @@ final class DatabaseTestcaseConfiguration {
 
     return null;
   }
-
 }

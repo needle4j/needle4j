@@ -27,7 +27,7 @@ public abstract class AbstractDeleteOperation extends AbstractDBOperation {
    * {@inheritDoc} No operation implementation.
    */
   @Override
-  public void setUpOperation() throws SQLException {
+  public void setUpOperation() {
   }
 
   /**
@@ -38,41 +38,25 @@ public abstract class AbstractDeleteOperation extends AbstractDBOperation {
    */
   @Override
   public void tearDownOperation() throws SQLException {
-    Statement statement = null;
-
-    try {
-      final Connection connection = getConnection();
-
-      statement = connection.createStatement();
-
+    try (final Connection connection = getConnection(); final Statement statement = connection.createStatement()) {
+      final List<String> tableNames = getTableNames(connection);
       disableReferentialIntegrity(statement);
-      final List<String> tableNames = getTableNames(getConnection());
 
       deleteContent(tableNames, statement);
+      enableReferentialIntegrity(statement);
 
+      commit();
     } catch (final SQLException e) {
       LOG.error(e.getMessage(), e);
+
       try {
         rollback();
       } catch (final SQLException e1) {
         LOG.error(e1.getMessage(), e1);
       }
-    } finally {
-      try {
-        enableReferentialIntegrity(statement);
 
-        if (statement != null) {
-          statement.close();
-        }
-        commit();
-
-        closeConnection();
-      } catch (final Exception e) {
-        rollback();
-        LOG.error(e.getMessage(), e);
-      }
+      throw e;
     }
-
   }
 
   /**

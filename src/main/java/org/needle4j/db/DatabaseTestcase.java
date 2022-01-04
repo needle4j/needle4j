@@ -31,7 +31,7 @@ public class DatabaseTestcase implements InjectionProvider<Object> {
 
   private DBOperation dbOperation;
 
-  private final Map<Class<?>, InjectionProvider<?>> injectionProviderMap = new HashMap<Class<?>, InjectionProvider<?>>();
+  private final Map<Class<?>, InjectionProvider<?>> injectionProviderMap = new HashMap<>();
 
   {
     injectionProviderMap.put(EntityManager.class, new EntityManagerProvider(this));
@@ -90,39 +90,8 @@ public class DatabaseTestcase implements InjectionProvider<Object> {
     this.dbOperation = dbOperation;
   }
 
-  /**
-   * Creates an instance of {@link DatabaseTestcase} for the given entity
-   * classes by using the configured hibernate specific configuration file
-   * (*cfg.xml) and use the global configured {@link DBOperation}.
-   *
-   * @param clazzes the entity classes
-   * @see DBOperation
-   */
-  @Deprecated
-  public DatabaseTestcase(final Class<?>... clazzes) {
-    configuration = new DatabaseTestcaseConfiguration(PropertyBasedConfigurationFactory.get(), clazzes);
-  }
-
-  /**
-   * Creates an instance of {@link DatabaseTestcase} for the given entity
-   * classes by using the configured hibernate specific configuration file
-   * (*cfg.xml) and overrides the global configured {@link DBOperation} with
-   * the give database operation.
-   *
-   * @param dbOperation database operation to execute on test setup and tear down
-   * @param clazzes     the entity classes
-   * @see DBOperation
-   */
-  @Deprecated
-  public DatabaseTestcase(final DBOperation dbOperation, final Class<?>... clazzes) {
-    this(clazzes);
-    this.dbOperation = dbOperation;
-  }
-
   protected DatabaseTestcase(final NeedleConfiguration needleConfiguration) {
-    configuration = new DatabaseTestcaseConfiguration(needleConfiguration,
-        needleConfiguration.getPersistenceunitName());
-
+    configuration = new DatabaseTestcaseConfiguration(needleConfiguration, needleConfiguration.getPersistenceunitName());
   }
 
   /**

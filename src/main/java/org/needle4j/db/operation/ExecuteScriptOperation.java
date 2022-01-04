@@ -3,6 +3,7 @@ package org.needle4j.db.operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -40,35 +41,21 @@ public class ExecuteScriptOperation extends AbstractDBOperation {
     execute(AFTER_SCRIPT_NAME);
   }
 
-  private void execute(final String filename) {
-    Statement statement = null;
-
-    try {
-      statement = getConnection().createStatement();
-
+  private void execute(final String filename) throws SQLException {
+    try (final Connection connection = getConnection(); final Statement statement = connection.createStatement()) {
       executeScript(filename, statement);
 
       commit();
-    } catch (SQLException e) {
+    } catch (final SQLException e) {
       LOG.error(e.getMessage(), e);
+
       try {
         rollback();
-      } catch (SQLException e1) {
+      } catch (final SQLException e1) {
         LOG.error(e1.getMessage(), e1);
       }
-    } finally {
-      try {
 
-        if (statement != null) {
-          statement.close();
-        }
-        commit();
-
-        closeConnection();
-      } catch (SQLException e) {
-        LOG.error(e.getMessage(), e);
-      }
+      throw e;
     }
   }
-
 }

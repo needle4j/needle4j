@@ -2,7 +2,6 @@ package org.needle4j.db.operation;
 
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -11,36 +10,27 @@ import java.sql.Statement;
 import java.util.List;
 
 public class AbstractDBOperationTest {
-
   private static final JdbcConfiguration HSQL_DB_CONFIGURATION = new JdbcConfiguration(
       "jdbc:hsqldb:mem:AbstractDBOperationTestDB", "org.hsqldb.jdbcDriver", "sa", "");
 
-  private AbstractDBOperation dbOperation = new AbstractDBOperation(HSQL_DB_CONFIGURATION) {
-
+  private final AbstractDBOperation dbOperation = new AbstractDBOperation(HSQL_DB_CONFIGURATION) {
     @Override
-    public void tearDownOperation() throws SQLException {
-
+    public void tearDownOperation() {
     }
 
     @Override
-    public void setUpOperation() throws SQLException {
-
+    public void setUpOperation() {
     }
   };
 
-  @Before
-  public void setUp() throws Exception {
-    dbOperation.openConnection();
-  }
-
   @Test
   public void testGetTableNames() throws Exception {
-    Connection connection = dbOperation.getConnection();
+    final Connection connection = dbOperation.getConnection();
     List<String> tableNames = dbOperation.getTableNames(connection);
 
     Assert.assertTrue(tableNames.isEmpty());
 
-    Statement statement = connection.createStatement();
+    final Statement statement = connection.createStatement();
     dbOperation.executeScript("before.sql", statement);
 
     tableNames = dbOperation.getTableNames(connection);
@@ -55,19 +45,12 @@ public class AbstractDBOperationTest {
 
   @Test(expected = SQLException.class)
   public void testExecuteScript() throws Exception {
-    Statement statement = null;
-    try {
-      Connection connection = dbOperation.getConnection();
-      statement = connection.createStatement();
+    try (final Statement statement = dbOperation.getConnection().createStatement()) {
       dbOperation.executeScript("exception.sql", statement);
-    } finally {
-      if (statement != null) {
-        statement.close();
-      }
     }
   }
 
-  @Test
+  @Test(expected = SQLException.class)
   public void testExecuteScript_UnknownFileName() throws Exception {
     // expect logging and not an NullPointerException
     dbOperation.executeScript("unknown.sql", null);
@@ -77,5 +60,4 @@ public class AbstractDBOperationTest {
   public void tearDown() throws Exception {
     dbOperation.closeConnection();
   }
-
 }

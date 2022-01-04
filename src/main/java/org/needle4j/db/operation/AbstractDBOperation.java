@@ -5,12 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,27 +29,6 @@ public abstract class AbstractDBOperation implements DBOperation {
   }
 
   /**
-   * Establish a connection to the given database.
-   *
-   * @throws SQLException if a database access error occurs
-   */
-  protected void openConnection() throws SQLException {
-    if (connection == null) {
-      try {
-        Class.forName(configuration.getJdbcDriver());
-      } catch (final NullPointerException npe) {
-        throw new RuntimeException("error while lookup jdbc driver class. jdbc driver is not configured.", npe);
-      } catch (final ClassNotFoundException e) {
-        throw new RuntimeException("jdbc driver not found", e);
-      }
-
-      connection = DriverManager.getConnection(configuration.getJdbcUrl(), configuration.getJdbcUser(),
-          configuration.getJdbcPassword());
-      connection.setAutoCommit(false);
-    }
-  }
-
-  /**
    * Close the connection to the database.
    *
    * @throws SQLException if a database access error occurs
@@ -60,7 +38,6 @@ public abstract class AbstractDBOperation implements DBOperation {
       connection.close();
       connection = null;
     }
-
   }
 
   /**
@@ -115,14 +92,13 @@ public abstract class AbstractDBOperation implements DBOperation {
    * @return schemas to be ignored in upper case
    */
   protected List<String> getIgnoredSchemas() {
-    return Arrays.asList("INFORMATION_SCHEMA");
+    return List.of("INFORMATION_SCHEMA");
   }
 
   private void executeScript(final BufferedReader script, final Statement statement) throws SQLException {
-
     long lineNo = 0;
 
-    StringBuffer sql = new StringBuffer();
+    StringBuilder sql = new StringBuilder();
     String line;
 
     try {
@@ -131,33 +107,30 @@ public abstract class AbstractDBOperation implements DBOperation {
         lineNo++;
         final String trimmedLine = line.trim();
 
-        if (trimmedLine.length() == 0 || trimmedLine.startsWith("--") || trimmedLine.startsWith("//")) {
-          continue;
-        } else if (trimmedLine.startsWith("/*")) {
-          while ((line = script.readLine()) != null) {
-            if (line.endsWith("*/")) {
-              LOG.debug("ignore " + line);
-              break;
+        if (!trimmedLine.isEmpty() && !trimmedLine.startsWith("--") && !trimmedLine.startsWith("//")) {
+          if (trimmedLine.startsWith("/*")) {
+            while ((line = script.readLine()) != null) {
+              if (line.trim().endsWith("*/")) {
+                LOG.debug("ignore " + line);
+                break;
+              }
+            }
+          } else {
+            sql.append(trimmedLine);
+            if (trimmedLine.endsWith(";")) {
+              String sqlStatement = sql.toString();
+              sqlStatement = sqlStatement.substring(0, sqlStatement.length() - 1);
+              LOG.info(sqlStatement);
+
+              statement.execute(sqlStatement);
+              sql = new StringBuilder();
             }
           }
-
-        } else {
-          sql.append(trimmedLine);
-          if (trimmedLine.endsWith(";")) {
-            String sqlStatement = sql.toString();
-            sqlStatement = sqlStatement.substring(0, sqlStatement.length() - 1);
-            LOG.info(sqlStatement);
-
-            statement.execute(sqlStatement);
-            sql = new StringBuffer();
-          }
-
         }
       }
     } catch (final Exception e) {
       throw new SQLException("Error during import script execution at line " + lineNo, e);
     }
-
   }
 
   /**
@@ -169,33 +142,41 @@ public abstract class AbstractDBOperation implements DBOperation {
    * @throws SQLException if a database access error occurs
    */
   protected void executeScript(final String filename, final Statement statement) throws SQLException {
-    LOG.info("Executing sql script: " + filename);
+    final var message = "Executing sql script: " + filename;
+    LOG.info(message);
 
-    final InputStream fileInputStream;
-    try {
-      fileInputStream = ConfigurationLoader.loadResource(filename);
-    } catch (final FileNotFoundException e) {
-      LOG.error("could not execute script", e);
-      return;
+    try (final InputStream fileInputStream = ConfigurationLoader.loadResource(filename);
+         final BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream))) {
+      executeScript(reader, statement);
+    } catch (final IOException e) {
+      LOG.error(message, e);
+      throw new SQLException(message, e);
     }
-
-    final BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
-    executeScript(reader, statement);
   }
 
   /**
-   * Returns the sql connection object. If there is no connection a new
-   * connection is established.
+   * Returns the sql connection object. If there is no connection a new connection is established.
    *
    * @return the sql connection object
    * @throws SQLException if a database access error occurs
    */
   protected Connection getConnection() throws SQLException {
-    if (connection == null) {
-      openConnection();
+    if (connection == null || connection.isClosed()) {
+      final var jdbcDriver = configuration.getJdbcDriver();
+
+      try {
+        Class.forName(jdbcDriver);
+      } catch (final NullPointerException npe) {
+        throw new RuntimeException("Error while looking up JDBC driver class. JDBC driver is not configured.", npe);
+      } catch (final ClassNotFoundException e) {
+        throw new RuntimeException("JDBC driver " + jdbcDriver + "not found", e);
+      }
+
+      connection = DriverManager.getConnection(configuration.getJdbcUrl(), configuration.getJdbcUser(),
+          configuration.getJdbcPassword());
+      connection.setAutoCommit(false);
     }
 
     return connection;
   }
-
 }
