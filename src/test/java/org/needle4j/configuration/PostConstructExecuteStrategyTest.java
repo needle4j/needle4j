@@ -7,15 +7,13 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.needle4j.configuration.PostConstructExecuteStrategy.*;
 
 @RunWith(Parameterized.class)
 public class PostConstructExecuteStrategyTest {
-
-  private String value;
-  private PostConstructExecuteStrategy expected;
+  private final String value;
+  private final PostConstructExecuteStrategy expected;
 
   public PostConstructExecuteStrategyTest(final String value, final PostConstructExecuteStrategy expected) {
     this.value = value;
@@ -39,7 +37,6 @@ public class PostConstructExecuteStrategyTest {
 
   @Test
   public void fromString() {
-    assertThat(PostConstructExecuteStrategy.fromString(this.value), is(this.expected));
+    assertEquals(PostConstructExecuteStrategy.fromString(this.value), this.expected);
   }
-
 }

@@ -7,18 +7,15 @@ import org.needle4j.junit.NeedleRule;
 
 import javax.inject.Inject;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.needle4j.injection.InjectionProviders.providerForQualifiedInstance;
 
 public class InjectionProvidersQualifiedInstanceInjectionProviderTest {
-
   private final MyConcreteComponent providedQualifiedInstance = new MyConcreteComponent();
 
   @Rule
-  public final NeedleRule needle = new NeedleRule(providerForQualifiedInstance(CurrentUser.class,
-      providedQualifiedInstance));
+  public final NeedleRule needle = new NeedleRule(providerForQualifiedInstance(CurrentUser.class, providedQualifiedInstance));
 
   @Inject
   private MyConcreteComponent mockInstance;
@@ -29,12 +26,11 @@ public class InjectionProvidersQualifiedInstanceInjectionProviderTest {
 
   @Test
   public void shouldInjectNamedInstance() {
-    assertThat(qualifiedInstance, is(providedQualifiedInstance));
+    assertEquals(qualifiedInstance, providedQualifiedInstance);
   }
 
   @Test
   public void shouldInjectDefaultInstance() {
-    assertThat(mockInstance, not(providedQualifiedInstance));
+    assertNotEquals(mockInstance, providedQualifiedInstance);
   }
-
 }

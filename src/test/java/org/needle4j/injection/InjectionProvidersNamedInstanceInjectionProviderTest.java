@@ -7,17 +7,14 @@ import org.needle4j.junit.NeedleRule;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.needle4j.injection.InjectionProviders.providerForNamedInstance;
 
 public class InjectionProvidersNamedInstanceInjectionProviderTest {
-
   private static final String FOO = "foo";
 
   public static class SomeType {
-
   }
 
   private final SomeType providedNamedInstance = new SomeType();
@@ -28,18 +25,18 @@ public class InjectionProvidersNamedInstanceInjectionProviderTest {
   @Inject
   private SomeType mockInstance;
 
+  @SuppressWarnings("CdiInjectionPointsInspection")
   @Inject
   @Named(FOO)
   private SomeType namedInstance;
 
   @Test
   public void shouldInjectNamedInstance() {
-    assertThat(namedInstance, is(providedNamedInstance));
+    assertEquals(namedInstance, providedNamedInstance);
   }
 
   @Test
   public void shouldInjectDefaultInstance() {
-    assertThat(mockInstance, not(providedNamedInstance));
+    assertNotEquals(mockInstance, providedNamedInstance);
   }
-
 }

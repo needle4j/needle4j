@@ -6,11 +6,9 @@ import org.needle4j.annotation.InjectIntoMany;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.junit.NeedleRule;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class PrivatePostConstructInjectIntoTest {
-
   @Rule
   public final NeedleRule needleRule = new NeedleRule();
 
@@ -23,10 +21,10 @@ public class PrivatePostConstructInjectIntoTest {
   private DependentComponent dependentComponent;
 
   @Test
-  public void testPostConstruct_InjectIntoMany() throws Exception {
+  public void testPostConstruct_InjectIntoMany() {
     dependentComponent.count();
 
     // expect one call in postConstruct, one call in here
-    assertThat(dependentComponent.getCounter(), is(2));
+    assertEquals(dependentComponent.getCounter(), 2);
   }
 }

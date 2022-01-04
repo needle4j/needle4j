@@ -6,16 +6,15 @@ import org.mockito.Mockito;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 public class MockitoProviderTest {
-
   private final MockitoProvider mockitoProvider = new MockitoProvider();
 
   @Test
-  public void shouldCreateMockComponent() throws Exception {
+  public void shouldCreateMockComponent() {
     @SuppressWarnings("unchecked") final Map<String, String> mapMock = mockitoProvider.createMockComponent(Map.class);
 
     final String key = "key";
@@ -28,16 +27,16 @@ public class MockitoProviderTest {
   }
 
   @Test
-  public void shouldCreateSpyComponent() throws Exception {
-    Map<String, String> mapSpy = new HashMap<String, String>();
+  public void shouldCreateSpyComponent() {
+    Map<String, String> mapSpy = new HashMap<>();
     mapSpy = mockitoProvider.createSpyComponent(mapSpy);
 
     mapSpy.put("foo", "a");
 
     when(mapSpy.get("bar")).thenReturn("b");
 
-    assertThat(mapSpy.get("foo"), is("a"));
-    assertThat(mapSpy.get("bar"), is("b"));
+    assertEquals(mapSpy.get("foo"), "a");
+    assertEquals(mapSpy.get("bar"), "b");
 
     verify(mapSpy).get("foo");
     verify(mapSpy).get("bar");
@@ -45,29 +44,29 @@ public class MockitoProviderTest {
     verifyNoMoreInteractions(mapSpy);
   }
 
+  @SuppressWarnings("ConstantConditions")
   @Test(expected = IllegalArgumentException.class)
-  public void shouldFailToCreateSpyWhenInstanceIsNull() throws Exception {
+  public void shouldFailToCreateSpyWhenInstanceIsNull() {
     mockitoProvider.createSpyComponent(null);
   }
 
   @Test
-  public void shouldSkipCreateMockComponentForFinalType() throws Exception {
+  public void shouldSkipCreateMockComponentForFinalType() {
     assertNull(mockitoProvider.createMockComponent(String.class));
   }
 
   @Test
-  public void shouldSkipCreateMockComponentForPrimitiveType() throws Exception {
+  public void shouldSkipCreateMockComponentForPrimitiveType() {
     assertNull(mockitoProvider.createMockComponent(int.class));
   }
 
   @Test
-  public void shouldSkipCreateSpyComponentForFinal() throws Exception {
+  public void shouldSkipCreateSpyComponentForFinal() {
     assertNull(mockitoProvider.createSpyComponent("foo"));
   }
 
   @Test
-  public void shouldSkipCreateSpyComponentForPrimitive() throws Exception {
+  public void shouldSkipCreateSpyComponentForPrimitive() {
     assertNull(mockitoProvider.createSpyComponent(1));
   }
-
 }

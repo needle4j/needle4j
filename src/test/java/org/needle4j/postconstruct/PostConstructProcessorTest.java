@@ -12,9 +12,8 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
 import static org.needle4j.configuration.PostConstructExecuteStrategy.ALWAYS;
 import static org.needle4j.configuration.PostConstructExecuteStrategy.NEVER;
 
@@ -22,10 +21,9 @@ import static org.needle4j.configuration.PostConstructExecuteStrategy.NEVER;
  * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 public class PostConstructProcessorTest {
-
-  private Runnable runnableMock = EasyMock.createStrictMock(Runnable.class);
-  private Runnable secondRunnableMock = EasyMock.createStrictMock(Runnable.class);
-  private Runnable privateRunnableMock = EasyMock.createStrictMock(Runnable.class);
+  private final Runnable runnableMock = EasyMock.createStrictMock(Runnable.class);
+  private final Runnable secondRunnableMock = EasyMock.createStrictMock(Runnable.class);
+  private final Runnable privateRunnableMock = EasyMock.createStrictMock(Runnable.class);
 
   /**
    * a dummy class without init()
@@ -37,12 +35,10 @@ public class PostConstructProcessorTest {
    * a dummy class with init()
    */
   public class B extends A {
-
     @PostConstruct
     protected void init() {
       runnableMock.run();
     }
-
   }
 
   /**
@@ -94,7 +90,7 @@ public class PostConstructProcessorTest {
   }
 
   @Test
-  public void testWithoutPostConstructMethod() throws Exception {
+  public void testWithoutPostConstructMethod() {
     final NeedleContext context = new NeedleContext(this);
     final ObjectUnderTest objectUnderTestAnnotation = getObjectUnderTestAnnotation("isConfiguredForPostConstructionButDoesNotContainMethod");
     context.addObjectUnderTest(objectUnderTestAnnotation.id(),
@@ -106,7 +102,7 @@ public class PostConstructProcessorTest {
   }
 
   @Test
-  public void testWithPostConstructMethod() throws Exception {
+  public void testWithPostConstructMethod() {
     runnableMock.run();
     EasyMock.replay(runnableMock);
 
@@ -121,7 +117,7 @@ public class PostConstructProcessorTest {
   }
 
   @Test
-  public void testWithPostConstructMethod_NotConfigured() throws Exception {
+  public void testWithPostConstructMethod_NotConfigured() {
     EasyMock.replay(runnableMock);
 
     final NeedleContext context = new NeedleContext(this);
@@ -134,7 +130,7 @@ public class PostConstructProcessorTest {
   }
 
   @Test
-  public void shouldCallPostConstructOnInstanceAndParent() throws Exception {
+  public void shouldCallPostConstructOnInstanceAndParent() {
     runnableMock.run();
     secondRunnableMock.run();
     EasyMock.replay(runnableMock, secondRunnableMock);
@@ -149,9 +145,9 @@ public class PostConstructProcessorTest {
   }
 
   @Test
-  public void shouldFindTwoPostconstructMethodsForC() throws Exception {
+  public void shouldFindTwoPostconstructMethodsForC() {
     final Set<Method> methods = postConstructProcessor.getPostConstructMethods(C.class);
-    assertThat(methods.size(), is(2));
+    assertEquals(methods.size(), 2);
   }
 
   @Test

@@ -10,17 +10,14 @@ import org.needle4j.junit.NeedleRule;
 import javax.inject.Inject;
 import java.lang.reflect.Field;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.needle4j.junit.NeedleBuilders.needleRule;
 
 public class SpyProviderTest {
-
-  public static interface B {
-
+  public interface B {
     String getName();
   }
 
@@ -42,14 +39,6 @@ public class SpyProviderTest {
     }
   }
 
-  public static class C {
-
-    public String getName() {
-      return "c";
-    }
-
-  }
-
   @Rule
   public final NeedleRule needle = needleRule("needle-mockito").build();
 
@@ -66,15 +55,14 @@ public class SpyProviderTest {
   public void shouldInjectSpyForA() {
     when(b.getName()).thenReturn("world");
 
-    assertThat(a.hello(), is("hello world"));
+    assertEquals(a.hello(), "hello world");
     verify(a).hello();
     verify(b).getName();
   }
 
   @Test
   public void shouldNotRequestSpyWhenAnnotationIsNull() throws Exception {
-    Field field = SpyProviderTest.class.getDeclaredField("b");
+    final Field field = SpyProviderTest.class.getDeclaredField("b");
     assertFalse(SpyProvider.FAKE.isSpyRequested(field));
   }
-
 }

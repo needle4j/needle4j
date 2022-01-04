@@ -8,8 +8,7 @@ import org.needle4j.junit.NeedleRule;
 
 import javax.inject.Inject;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.needle4j.junit.NeedleBuilders.needleRule;
 
 /**
@@ -19,16 +18,15 @@ import static org.needle4j.junit.NeedleBuilders.needleRule;
  * for injection.
  */
 public class LoadInstancesSupplierFromProperties {
-
   @Rule
   public final NeedleRule needle = needleRule("needle-mockito").build();
 
+  @SuppressWarnings("CdiInjectionPointsInspection")
   @Inject
   private MyComponent component;
 
   @Test
   public void shouldInjectMyComponentWithFoo() {
-    assertThat(component.testMock(), is(CustomMyComponentInjectionProviderInstancesSupplier.ID));
+    assertEquals(component.testMock(), CustomMyComponentInjectionProviderInstancesSupplier.ID);
   }
-
 }

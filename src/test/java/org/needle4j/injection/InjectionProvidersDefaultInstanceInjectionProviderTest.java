@@ -7,14 +7,12 @@ import org.needle4j.junit.NeedleRule;
 
 import javax.inject.Inject;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 /**
  * moved from original package to avoid
  */
 public class InjectionProvidersDefaultInstanceInjectionProviderTest {
-
   private final MyConcreteComponent instance = new MyConcreteComponent();
 
   @Rule
@@ -25,7 +23,6 @@ public class InjectionProvidersDefaultInstanceInjectionProviderTest {
 
   @Test
   public void shouldInjectInstanceA() {
-    assertThat(injectedInstance, is(instance));
+    assertEquals(injectedInstance, instance);
   }
-
 }
