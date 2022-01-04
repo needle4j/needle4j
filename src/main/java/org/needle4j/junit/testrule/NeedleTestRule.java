@@ -20,7 +20,7 @@ import org.needle4j.junit.NeedleRule;
  * calling test-instance has to be passed when the Rule is created, since the
  * new junit api does not pass the caller to the statement execution.
  * <p>
- * Using this Rule enables the {@link RuleChain}s feature of junit >= 4.10.
+ * Using this Rule enables the {@link RuleChain}s feature of JUnit 4.
  * </p>
  * <pre>
  * Example:

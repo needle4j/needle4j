@@ -8,10 +8,9 @@ import javax.persistence.EntityManager;
  * An abstract implementation of {@link TestdataBuilder}.
  *
  * <pre>
- *
  * Implementation example:
  *
- * public class PersonTestDataBuilder extends AbstractTestdataBuilder<Person> {
+ * public class PersonTestDataBuilder extends AbstractTestdataBuilder&lt;Person&gt; {
  *
  *  ...
  *
@@ -45,12 +44,12 @@ import javax.persistence.EntityManager;
  * Person transientPerson = new PersonTestDataBuilder(em).build();
  * Person persistedPerson = new PersonTestDataBuilder(em).buildAndSave();
  * new PersonTestDataBuilder(em).withAddress(address).buildAndSave();
- *
- *
- *
  * </pre>
  *
  * @param <T> The type of the object to build.
+ *
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 public abstract class AbstractTestdataBuilder<T> implements TestdataBuilder<T> {
   private static int count = 0;

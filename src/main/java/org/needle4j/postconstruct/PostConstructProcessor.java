@@ -53,7 +53,6 @@ public class PostConstructProcessor implements NeedleProcessor {
    * marked with {@link ObjectUnderTest}(postConstruct=true), else ignored.
    *
    * @param context the NeedleContext
-   * @throws ObjectUnderTestInstantiationException
    */
   @Override
   public void process(final NeedleContext context) {
