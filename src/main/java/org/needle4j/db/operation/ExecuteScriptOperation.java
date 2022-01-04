@@ -11,7 +11,6 @@ import java.sql.Statement;
  * Execute before and after sql scripts in test setup and tear down.
  */
 public class ExecuteScriptOperation extends AbstractDBOperation {
-
   private static final Logger LOG = LoggerFactory.getLogger(ExecuteScriptOperation.class);
 
   public ExecuteScriptOperation(JdbcConfiguration jdbcConfiguration) {

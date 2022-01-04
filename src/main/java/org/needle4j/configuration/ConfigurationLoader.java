@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public final class ConfigurationLoader {
-
   private static final Logger LOG = LoggerFactory.getLogger(ConfigurationLoader.class);
 
   private final Map<String, String> configProperties;
@@ -35,6 +34,7 @@ public final class ConfigurationLoader {
 
     try {
       final ResourceBundle defaultResourceBundle = ResourceBundle.getBundle(DEFAULT_CONFIGURATION_FILENAME);
+
       for (final String key : defaultResourceBundle.keySet()) {
         addKeyValuePair(defaults, key, defaultResourceBundle.getString(key));
       }
@@ -46,12 +46,13 @@ public final class ConfigurationLoader {
 
       throw new RuntimeException("should never happen", e1);
     }
+
     return defaults;
   }
 
   static Map<String, String> loadResourceAndDefault(final String name) {
-
     final Map<String, String> result = loadDefaults();
+
     try {
       final ResourceBundle customBundle = ResourceBundle.getBundle(name);
 

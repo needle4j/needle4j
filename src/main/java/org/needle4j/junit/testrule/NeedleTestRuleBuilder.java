@@ -8,7 +8,6 @@ import org.needle4j.junit.AbstractNeedleRuleBuilder;
  * Builder that created a new {@link NeedleTestRule}.
  */
 public class NeedleTestRuleBuilder extends AbstractNeedleRuleBuilder<NeedleTestRuleBuilder, NeedleTestRule> {
-
   private final Object testInstance;
 
   /**
@@ -23,8 +22,6 @@ public class NeedleTestRuleBuilder extends AbstractNeedleRuleBuilder<NeedleTestR
   @Override
   protected NeedleTestRule build(final InjectionConfiguration injectionConfiguration,
                                  final InjectionProvider<?>... injectionProvider) {
-
     return new NeedleTestRule(testInstance, injectionConfiguration, injectionProvider);
   }
-
 }

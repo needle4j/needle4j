@@ -6,7 +6,6 @@ import java.lang.reflect.Proxy;
 
 final class EntityManagerProxyFactory {
   private EntityManagerProxyFactory() {
-    super();
   }
 
   static EntityManager createProxy(final EntityManager real) {

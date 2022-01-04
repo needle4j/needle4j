@@ -14,8 +14,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 public class TestcaseInjectionProcessor extends AbstractNeedleProcessor {
-
-  private final Logger logger = LoggerFactory.getLogger(TestcaseInjectionProcessor.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TestcaseInjectionProcessor.class);
 
   public TestcaseInjectionProcessor(final InjectionConfiguration configuration) {
     super(configuration);
@@ -25,7 +24,7 @@ public class TestcaseInjectionProcessor extends AbstractNeedleProcessor {
   public void process(final NeedleContext context) {
     final Set<Class<? extends Annotation>> supportedAnnotations = configuration.getSupportedAnnotations();
 
-    for (Class<? extends Annotation> supportedAnnotation : supportedAnnotations) {
+    for (final Class<? extends Annotation> supportedAnnotation : supportedAnnotations) {
       processAnnotation(context, configuration, supportedAnnotation);
     }
   }
@@ -34,33 +33,30 @@ public class TestcaseInjectionProcessor extends AbstractNeedleProcessor {
                                  final Class<? extends Annotation> annotation) {
     final List<Field> fields = context.getAnnotatedTestcaseFields(annotation);
 
-    for (Field field : fields) {
+    for (final Field field : fields) {
       processField(context, configuration, field);
     }
   }
 
   private void processField(final NeedleContext context, final InjectionConfiguration configuration, final Field field) {
     final List<List<InjectionProvider<?>>> injectionProviderList = configuration.getInjectionProvider();
-    final InjectionTargetInformation injectionTargetInformation = new InjectionTargetInformation(field.getType(),
-        field);
+    final InjectionTargetInformation injectionTargetInformation = new InjectionTargetInformation(field.getType(), field);
 
-    for (Collection<InjectionProvider<?>> injectionProvider : injectionProviderList) {
-      Entry<Object, Object> injection = configuration.handleInjectionProvider(injectionProvider,
-          injectionTargetInformation);
+    for (final Collection<InjectionProvider<?>> injectionProvider : injectionProviderList) {
+      final Entry<Object, Object> injection = configuration.handleInjectionProvider(injectionProvider, injectionTargetInformation);
 
       if (injection != null) {
-        Object contextObject = context.getInjectedObject(injection.getKey());
-        Object injectedObject = contextObject != null ? contextObject : injection.getValue();
+        final Object contextObject = context.getInjectedObject(injection.getKey());
+        final Object injectedObject = contextObject != null ? contextObject : injection.getValue();
 
         try {
           ReflectionUtil.setField(field, context.getTest(), injectedObject);
           return;
 
-        } catch (Exception e) {
-          logger.error(e.getMessage(), e);
+        } catch (final Exception e) {
+          LOGGER.error(e.getMessage(), e);
         }
       }
     }
   }
-
 }

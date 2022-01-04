@@ -46,7 +46,7 @@ public abstract class AbstractDBOperation implements DBOperation {
    * @throws SQLException if a database access error occurs
    */
   protected void commit() throws SQLException {
-    if (connection != null) {
+    if (connection != null && !connection.isClosed()) {
       connection.commit();
     }
   }
@@ -57,7 +57,7 @@ public abstract class AbstractDBOperation implements DBOperation {
    * @throws SQLException if a database access error occurs
    */
   protected void rollback() throws SQLException {
-    if (connection != null) {
+    if (connection != null && !connection.isClosed()) {
       connection.rollback();
     }
   }
@@ -74,7 +74,6 @@ public abstract class AbstractDBOperation implements DBOperation {
     final List<String> tables = new ArrayList<>();
 
     try (ResultSet resultSet = connection.getMetaData().getTables(null, null, "%", new String[]{"TABLE"})) {
-
       while (resultSet.next()) {
         final String schema = resultSet.getString("TABLE_SCHEM");
 

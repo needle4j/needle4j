@@ -3,7 +3,6 @@ package org.needle4j.injection;
 import javax.annotation.Resource;
 
 public class ResourceMockInjectionProvider extends DefaultMockInjectionProvider {
-
   public ResourceMockInjectionProvider(final InjectionConfiguration injectionConfiguration) {
     super(Resource.class, injectionConfiguration);
   }

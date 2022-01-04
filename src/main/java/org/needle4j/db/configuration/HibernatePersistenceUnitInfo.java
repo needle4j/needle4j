@@ -23,8 +23,7 @@ public class HibernatePersistenceUnitInfo implements PersistenceUnitInfo {
   private final List<String> managedClassNames;
   private final Properties properties;
 
-  public HibernatePersistenceUnitInfo(final String persistenceUnitName, final List<String> managedClassNames,
-                                      final Properties properties) {
+  public HibernatePersistenceUnitInfo(final String persistenceUnitName, final List<String> managedClassNames, final Properties properties) {
     this.persistenceUnitName = persistenceUnitName;
     this.managedClassNames = managedClassNames;
     this.properties = properties;

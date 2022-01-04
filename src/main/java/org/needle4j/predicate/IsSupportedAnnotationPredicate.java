@@ -1,9 +1,10 @@
 package org.needle4j.predicate;
 
-import org.needle4j.common.Predicate;
 import org.needle4j.injection.InjectionConfiguration;
 
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
+import java.util.function.Predicate;
 
 /**
  * Evaluates if an annotation is supported.
@@ -11,7 +12,6 @@ import java.lang.annotation.Annotation;
  * @author Jan Galinski, Holisticon AG
  */
 public class IsSupportedAnnotationPredicate implements Predicate<Annotation> {
-
   private final InjectionConfiguration configuration;
 
   public IsSupportedAnnotationPredicate(InjectionConfiguration configuration) {
@@ -19,7 +19,7 @@ public class IsSupportedAnnotationPredicate implements Predicate<Annotation> {
   }
 
   @Override
-  public boolean apply(Annotation annotation) {
+  public boolean test(final Annotation annotation) {
     return configuration.isAnnotationSupported(annotation.annotationType());
   }
 
@@ -27,12 +27,7 @@ public class IsSupportedAnnotationPredicate implements Predicate<Annotation> {
    * @param annotations list of annotations
    * @return true if apply() returns true for at least one annotation
    */
-  public boolean applyAny(Annotation... annotations) {
-    for (final Annotation annotation : annotations) {
-      if (apply(annotation)) {
-        return true;
-      }
-    }
-    return false;
+  public boolean applyAny(final Annotation... annotations) {
+    return Arrays.stream(annotations).anyMatch(this::test);
   }
 }

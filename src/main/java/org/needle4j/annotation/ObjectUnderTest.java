@@ -9,13 +9,11 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Is used to specify an object under test. The annotated fields will be
- * initialized by the {@link NeedleTestcase}.
+ * Used to specify an object under test. The annotated fields will be initialized by the {@link NeedleTestcase}.
  */
 @Target({FIELD})
 @Retention(RUNTIME)
 public @interface ObjectUnderTest {
-
   /**
    * (Optional) The implementation class of the object under test.
    * <p>

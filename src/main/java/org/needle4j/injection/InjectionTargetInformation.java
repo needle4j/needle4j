@@ -7,13 +7,9 @@ import java.lang.reflect.*;
  * Provides information about the injection target.
  */
 public class InjectionTargetInformation {
-
   private final Class<?> type;
-
   private final AccessibleObject accessibleObject;
-
   private final Annotation[] parameterAnnotations;
-
   private final Type genericTypeParameter;
 
   private InjectionTargetInformation(final Class<?> type, final AccessibleObject accessibleObject,
@@ -22,7 +18,6 @@ public class InjectionTargetInformation {
     this.accessibleObject = accessibleObject;
     this.parameterAnnotations = parameterAnnotations;
     this.genericTypeParameter = genericTypeParameter;
-
   }
 
   /**
@@ -150,5 +145,4 @@ public class InjectionTargetInformation {
   public Type getGenericTypeParameter() {
     return genericTypeParameter;
   }
-
 }

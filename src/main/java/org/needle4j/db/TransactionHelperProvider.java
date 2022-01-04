@@ -5,11 +5,9 @@ import org.needle4j.injection.InjectionProvider;
 import org.needle4j.injection.InjectionTargetInformation;
 
 class TransactionHelperProvider implements InjectionProvider<TransactionHelper> {
-
   private final DatabaseTestcase databaseTestcase;
 
   public TransactionHelperProvider(DatabaseTestcase databaseTestcase) {
-    super();
     this.databaseTestcase = databaseTestcase;
   }
 

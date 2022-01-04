@@ -4,7 +4,6 @@ package org.needle4j.db.operation;
  * JDBC configuration properties.
  */
 public class JdbcConfiguration {
-
   private final String jdbcUrl;
   private final String jdbcDriver;
   private final String jdbcUser;
@@ -63,5 +62,4 @@ public class JdbcConfiguration {
   public String getJdbcPassword() {
     return jdbcPassword;
   }
-
 }

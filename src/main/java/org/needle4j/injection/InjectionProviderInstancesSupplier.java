@@ -12,7 +12,6 @@ import java.util.Set;
  * @author Jan Galinski, Holisticon AG
  */
 public interface InjectionProviderInstancesSupplier {
-
   /**
    * <a href=
    * "http://javadocs.techempower.com/jdk18/api/java/util/function/Supplier.html"

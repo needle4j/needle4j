@@ -14,10 +14,9 @@ import java.util.Map.Entry;
 import static java.lang.String.format;
 
 public final class ReflectionUtil {
-
   private static final Logger LOG = LoggerFactory.getLogger(ReflectionUtil.class);
 
-  private static final Map<Class<?>, Class<?>> PRIMITIVES = new HashMap<Class<?>, Class<?>>();
+  private static final Map<Class<?>, Class<?>> PRIMITIVES = new HashMap<>();
 
   static {
     PRIMITIVES.put(int.class, Integer.class);
@@ -36,7 +35,7 @@ public final class ReflectionUtil {
 
   public static List<Field> getAllFieldsWithSupportedAnnotation(final Class<?> clazz,
                                                                 final IsSupportedAnnotationPredicate isSupportedAnnotationPredicate) {
-    final List<Field> result = new ArrayList<Field>();
+    final List<Field> result = new ArrayList<>();
 
     new DerivedClassIterator(clazz) {
 
@@ -57,7 +56,7 @@ public final class ReflectionUtil {
 
   public static List<Field> getAllFieldsWithAnnotation(final Class<?> clazz,
                                                        final Class<? extends Annotation> annotation) {
-    final List<Field> result = new ArrayList<Field>();
+    final List<Field> result = new ArrayList<>();
 
     new DerivedClassIterator(clazz) {
 
@@ -78,7 +77,7 @@ public final class ReflectionUtil {
 
   public static List<Method> getAllMethodsWithAnnotation(final Class<?> clazz,
                                                          final Class<? extends Annotation> annotation) {
-    final List<Method> result = new ArrayList<Method>();
+    final List<Method> result = new ArrayList<>();
 
     new DerivedClassIterator(clazz) {
 
@@ -99,7 +98,7 @@ public final class ReflectionUtil {
   }
 
   public static Map<Class<? extends Annotation>, List<Field>> getAllAnnotatedFields(final Class<?> clazz) {
-    final Map<Class<? extends Annotation>, List<Field>> result = new HashMap<Class<? extends Annotation>, List<Field>>();
+    final Map<Class<? extends Annotation>, List<Field>> result = new HashMap<>();
     final List<Field> fields = getAllFields(clazz);
 
     for (final Field field : fields) {
@@ -109,7 +108,7 @@ public final class ReflectionUtil {
         List<Field> list = result.get(annotationType);
 
         if (list == null) {
-          list = new ArrayList<Field>();
+          list = new ArrayList<>();
         }
 
         list.add(field);
@@ -122,7 +121,7 @@ public final class ReflectionUtil {
   }
 
   public static List<Field> getAllFieldsAssignableFrom(final Class<?> assignableType, final Class<?> clazz) {
-    final List<Field> result = new ArrayList<Field>();
+    final List<Field> result = new ArrayList<>();
 
     new DerivedClassIterator(clazz) {
 
@@ -159,7 +158,7 @@ public final class ReflectionUtil {
 
   public static List<Field> getAllFields(final Class<?> clazz) {
 
-    final List<Field> result = new ArrayList<Field>();
+    final List<Field> result = new ArrayList<>();
 
     new DerivedClassIterator(clazz) {
 
@@ -341,7 +340,7 @@ public final class ReflectionUtil {
   public static Method getMethod(final Class<?> clazz, final String methodName, final Class<?>... parameterTypes)
       throws NoSuchMethodException {
 
-    final List<Method> result = new ArrayList<Method>();
+    final List<Method> result = new ArrayList<>();
 
     new DerivedClassIterator(clazz) {
 
@@ -406,7 +405,7 @@ public final class ReflectionUtil {
   }
 
   public static Set<Class<?>> getClasses(final String... classNames) {
-    final Set<Class<?>> classes = new HashSet<Class<?>>();
+    final Set<Class<?>> classes = new HashSet<>();
     for (final String className : classNames) {
       final Class<?> classObject = forName(className);
 

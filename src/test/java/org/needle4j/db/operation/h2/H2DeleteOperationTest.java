@@ -120,16 +120,6 @@ public class H2DeleteOperationTest {
     }
 
     @Override
-    protected void disableReferentialIntegrity(Statement statement) throws SQLException {
-      super.disableReferentialIntegrity(statement);
-    }
-
-    @Override
-    protected void enableReferentialIntegrity(Statement statement) throws SQLException {
-      super.enableReferentialIntegrity(statement);
-    }
-
-    @Override
     protected void deleteContent(List<String> tables, Statement statement) throws SQLException {
       super.deleteContent(tables, statement);
     }

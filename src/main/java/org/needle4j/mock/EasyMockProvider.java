@@ -33,7 +33,6 @@ import java.lang.reflect.Modifier;
  * </pre>
  */
 public class EasyMockProvider extends EasyMockSupport implements MockProvider {
-
   private static final Logger LOG = LoggerFactory.getLogger(EasyMockProvider.class);
 
   /**
@@ -45,15 +44,12 @@ public class EasyMockProvider extends EasyMockSupport implements MockProvider {
    */
   @Override
   public <T> T createMockComponent(final Class<T> type) {
-
     if (Modifier.isFinal(type.getModifiers()) || type.isPrimitive()) {
       LOG.warn("Skipping creation of a mock : {} as it is final or primitive type.", type.getSimpleName());
       return null;
     }
-    T mock = createNiceMock(type);
 
-    return mock;
-
+    return createNiceMock(type);
   }
 
   /**
@@ -124,5 +120,4 @@ public class EasyMockProvider extends EasyMockSupport implements MockProvider {
     EasyMock.resetToDefault(mock);
     return (X) mock;
   }
-
 }

@@ -44,9 +44,7 @@ public class PropertyBasedConfigurationFactory {
   }
 
   private NeedleConfiguration init() {
-
     final NeedleConfiguration configuration = new NeedleConfiguration();
-
     final Set<Class<Annotation>> customInjectionAnnotations = lookupCustomClasses
         .lookup(ConfigurationProperties.CUSTOM_INJECTION_ANNOTATIONS_KEY);
     configuration.setCustomInjectionAnnotations(customInjectionAnnotations);

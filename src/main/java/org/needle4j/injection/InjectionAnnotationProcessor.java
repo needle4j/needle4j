@@ -13,8 +13,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class InjectionAnnotationProcessor implements NeedleProcessor {
-
-  private final Logger logger = LoggerFactory.getLogger(InjectionAnnotationProcessor.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(InjectionAnnotationProcessor.class);
   private final IsSupportedAnnotationPredicate isSupportedAnnotationPredicate;
 
   public InjectionAnnotationProcessor(IsSupportedAnnotationPredicate isSupportedAnnotationPredicate) {
@@ -25,26 +24,25 @@ public class InjectionAnnotationProcessor implements NeedleProcessor {
   public void process(final NeedleContext context) {
     proccessInjectIntoMany(context);
     proccessInjectInto(context);
-
   }
 
   private void proccessInjectIntoMany(final NeedleContext context) {
-    Object testcase = context.getTest();
+    final Object testcase = context.getTest();
     final List<Field> fieldsWithInjectIntoManyAnnotation = context.getAnnotatedTestcaseFields(InjectIntoMany.class);
 
-    for (Field field : fieldsWithInjectIntoManyAnnotation) {
+    for (final Field field : fieldsWithInjectIntoManyAnnotation) {
       final Object sourceObject = ReflectionUtil.getFieldValue(testcase, field);
 
-      InjectIntoMany injectIntoManyAnnotation = field.getAnnotation(InjectIntoMany.class);
-      InjectInto[] value = injectIntoManyAnnotation.value();
+      final InjectIntoMany injectIntoManyAnnotation = field.getAnnotation(InjectIntoMany.class);
+      final InjectInto[] value = injectIntoManyAnnotation.value();
 
       // inject into all object under test instance
       if (value.length == 0) {
-        for (Object objectUnderTest : context.getObjectsUnderTest()) {
+        for (final Object objectUnderTest : context.getObjectsUnderTest()) {
           injectByType(objectUnderTest, sourceObject, field.getType());
         }
       } else {
-        for (InjectInto injectInto : value) {
+        for (final InjectInto injectInto : value) {
           processInjectInto(context, field, sourceObject, injectInto);
         }
       }
@@ -55,7 +53,7 @@ public class InjectionAnnotationProcessor implements NeedleProcessor {
     final Object testcase = context.getTest();
     final List<Field> fields = context.getAnnotatedTestcaseFields(InjectInto.class);
 
-    for (Field field : fields) {
+    for (final Field field : fields) {
       final Object sourceObject = ReflectionUtil.getFieldValue(testcase, field);
       processInjectInto(context, field, sourceObject, field.getAnnotation(InjectInto.class));
     }
@@ -74,7 +72,7 @@ public class InjectionAnnotationProcessor implements NeedleProcessor {
       }
 
     } else {
-      logger.warn("could not inject component {} -  unknown object under test with id {}", sourceObject,
+      LOGGER.warn("could not inject component {} -  unknown object under test with id {}", sourceObject,
           injectInto.targetComponentId());
     }
   }
@@ -82,7 +80,7 @@ public class InjectionAnnotationProcessor implements NeedleProcessor {
   private void injectByType(final Object objectUnderTest, final Object sourceObject, final Class<?> type) {
     final List<Field> fields = ReflectionUtil.getAllFieldsAssinableFrom(type, objectUnderTest.getClass());
 
-    for (Field field : fields) {
+    for (final Field field : fields) {
       // skip injection when the field is not annotated with at least one
       // supported injection annotation
       if (!isSupportedAnnotationPredicate.applyAny(field.getDeclaredAnnotations())) {
@@ -90,8 +88,8 @@ public class InjectionAnnotationProcessor implements NeedleProcessor {
       }
       try {
         ReflectionUtil.setField(field, objectUnderTest, sourceObject);
-      } catch (Exception e) {
-        logger.warn("could not inject into component " + objectUnderTest, e);
+      } catch (final Exception e) {
+        LOGGER.warn("could not inject into component " + objectUnderTest, e);
       }
     }
 
@@ -100,8 +98,8 @@ public class InjectionAnnotationProcessor implements NeedleProcessor {
   private void injectByFieldName(final Object objectUnderTest, final Object sourceObject, final String fieldName) {
     try {
       ReflectionUtil.setField(fieldName, objectUnderTest, sourceObject);
-    } catch (Exception e) {
-      logger.warn("could not inject into component " + objectUnderTest, e);
+    } catch (final Exception e) {
+      LOGGER.warn("could not inject into component " + objectUnderTest, e);
     }
   }
 

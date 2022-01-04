@@ -10,7 +10,6 @@ import org.needle4j.injection.InjectionTargetInformation;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,21 +23,14 @@ import java.util.Map;
  * @see DBOperation
  */
 public class DatabaseTestcase implements InjectionProvider<Object> {
-
   private final DatabaseTestcaseConfiguration configuration;
 
   private TransactionHelper transactionHelper;
-
   private DBOperation dbOperation;
-
-  private final Map<Class<?>, InjectionProvider<?>> injectionProviderMap = new HashMap<>();
-
-  {
-    injectionProviderMap.put(EntityManager.class, new EntityManagerProvider(this));
-    injectionProviderMap.put(EntityManagerFactory.class, new EntityManagerFactoryProvider(this));
-    injectionProviderMap.put(EntityTransaction.class, new EntityTransactionProvider(this));
-    injectionProviderMap.put(TransactionHelper.class, new TransactionHelperProvider(this));
-  }
+  private final Map<Class<?>, InjectionProvider<?>> injectionProviderMap = Map.of(EntityManager.class, new EntityManagerProvider(this),
+      EntityManagerFactory.class, new EntityManagerFactoryProvider(this),
+      EntityTransaction.class, new EntityTransactionProvider(this),
+      TransactionHelper.class, new TransactionHelperProvider(this));
 
   /**
    * Creates an instance of {@link DatabaseTestcase} with the global
@@ -48,7 +40,6 @@ public class DatabaseTestcase implements InjectionProvider<Object> {
    * @see DBOperation
    */
   public DatabaseTestcase() {
-
     configuration = new DatabaseTestcaseConfiguration(PropertyBasedConfigurationFactory.get());
   }
 

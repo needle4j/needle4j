@@ -1,7 +1,6 @@
 package org.needle4j.injection;
 
 public interface InjectionVerifier {
-
   /**
    * Verifies the injection target.
    *

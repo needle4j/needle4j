@@ -14,7 +14,6 @@ import javax.persistence.EntityManagerFactory;
 import java.util.Map;
 
 final class DatabaseTestcaseConfiguration {
-
   private static final Logger LOG = LoggerFactory.getLogger(DatabaseTestcaseConfiguration.class);
 
   /**
@@ -47,9 +46,7 @@ final class DatabaseTestcaseConfiguration {
   private static final String OVERIDE_PASSWORD_KEY = "needle4j.jdbc.password";
 
   private final DBOperation dbOperation;
-
   private final PersistenceConfigurationFactory configuration;
-
   private final NeedleConfiguration needleConfiguration;
 
   private DatabaseTestcaseConfiguration(final NeedleConfiguration needleConfiguration,
@@ -81,10 +78,9 @@ final class DatabaseTestcaseConfiguration {
   }
 
   AbstractDBOperation createDBOperation(final Class<? extends AbstractDBOperation> dbOperationClass) {
-
     if (dbOperationClass != null) {
       try {
-        return ReflectionUtil.createInstance(dbOperationClass, getJdbcComfiguration());
+        return ReflectionUtil.createInstance(dbOperationClass, getJdbcConfiguration());
       } catch (final Exception e) {
         LOG.warn("could not create a new instance of configured db operation {}, {}", dbOperationClass,
             e.getMessage());
@@ -97,21 +93,20 @@ final class DatabaseTestcaseConfiguration {
     return null;
   }
 
-  private JdbcConfiguration getJdbcComfiguration() throws Exception {
+  private JdbcConfiguration getJdbcConfiguration() throws Exception {
     if (needleConfiguration.getJdbcDriver() != null && needleConfiguration.getJdbcUrl() != null) {
       return new JdbcConfiguration(needleConfiguration.getJdbcUrl(), needleConfiguration.getJdbcDriver(),
           needleConfiguration.getJdbcUser(), needleConfiguration.getJdbcPassword());
     }
 
     return getEntityManagerFactoryProperties();
-
   }
 
   private JdbcConfiguration getEntityManagerFactoryProperties() throws Exception {
     try {
       final Map<String, Object> properties = getEntityManagerFactory().getProperties();
-
       final String password;
+
       if (properties.containsKey(OVERIDE_PASSWORD_KEY)) {
         password = (String) properties.get(OVERIDE_PASSWORD_KEY);
       } else {
@@ -119,8 +114,7 @@ final class DatabaseTestcaseConfiguration {
       }
 
       return new JdbcConfiguration((String) properties.get(JDBC_URL_KEY),
-          (String) properties.get(JDBC_DRIVER_KEY), (String) properties.get(JDBC_USER_KEY),
-          password);
+          (String) properties.get(JDBC_DRIVER_KEY), (String) properties.get(JDBC_USER_KEY), password);
     } catch (final Exception e) {
       throw new Exception("error while loading jdbc configuration properties form EntityManagerFactory", e);
     }
@@ -128,9 +122,7 @@ final class DatabaseTestcaseConfiguration {
 
   static Class<? extends AbstractDBOperation> lookupDBOperationClass(final String dbOperation) {
     try {
-
       return ReflectionUtil.lookupClass(AbstractDBOperation.class, dbOperation);
-
     } catch (final Exception e) {
       LOG.warn("error while loading db operation class {}, {}", dbOperation, e.getMessage());
     }

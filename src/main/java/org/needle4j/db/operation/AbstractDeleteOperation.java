@@ -1,7 +1,5 @@
-package org.needle4j.db.operation.hsql;
+package org.needle4j.db.operation;
 
-import org.needle4j.db.operation.AbstractDBOperation;
-import org.needle4j.db.operation.JdbcConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,7 +62,7 @@ public abstract class AbstractDeleteOperation extends AbstractDBOperation {
    *
    * @throws SQLException - if a database access error occurs
    */
-  protected void disableReferentialIntegrity(final Statement statement) throws SQLException {
+  public void disableReferentialIntegrity(final Statement statement) throws SQLException {
     setReferentialIntegrity(false, statement);
   }
 
@@ -73,7 +71,7 @@ public abstract class AbstractDeleteOperation extends AbstractDBOperation {
    *
    * @throws SQLException - if a database access error occurs
    */
-  protected void enableReferentialIntegrity(final Statement statement) throws SQLException {
+  public void enableReferentialIntegrity(final Statement statement) throws SQLException {
     setReferentialIntegrity(true, statement);
   }
 

@@ -9,7 +9,6 @@ import static java.lang.String.format;
  * @author Jan Galinski, Holisticon AG
  */
 public final class Preconditions {
-
   private Preconditions() {
     // avoid instantiation.
   }

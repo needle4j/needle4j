@@ -25,16 +25,14 @@ public class MockAnnotationProcessor extends AbstractNeedleProcessor {
   public void process(final NeedleContext context) {
     final List<Field> fields = context.getAnnotatedTestcaseFields(Mock.class);
 
-    for (Field field : fields) {
-      Object mock = mockProvider.createMockComponent(field.getType());
+    for (final Field field : fields) {
+      final Object mock = mockProvider.createMockComponent(field.getType());
 
       try {
         ReflectionUtil.setField(field, context.getTest(), mock);
-      } catch (Exception e) {
+      } catch (final Exception e) {
         LOG.warn("could not assign mock obejct " + mock, e);
       }
     }
-
   }
-
 }

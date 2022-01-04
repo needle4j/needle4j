@@ -1,7 +1,6 @@
 package org.needle4j.common;
 
 public class MapEntry<K, V> implements java.util.Map.Entry<K, V> {
-
   private final K key;
   private final V value;
 
@@ -24,5 +23,4 @@ public class MapEntry<K, V> implements java.util.Map.Entry<K, V> {
   public V setValue(final Object value) {
     throw new UnsupportedOperationException();
   }
-
 }

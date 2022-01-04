@@ -8,7 +8,6 @@ import org.needle4j.annotation.ObjectUnderTest;
  * abstract, a primitive type or an interface.
  */
 public class ObjectUnderTestInstantiationException extends Exception {
-
   private static final long serialVersionUID = 1L;
 
   public ObjectUnderTestInstantiationException() {
@@ -26,5 +25,4 @@ public class ObjectUnderTestInstantiationException extends Exception {
   public ObjectUnderTestInstantiationException(Throwable cause) {
     super(cause);
   }
-
 }

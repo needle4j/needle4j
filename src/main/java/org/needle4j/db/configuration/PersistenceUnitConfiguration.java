@@ -38,5 +38,4 @@ class PersistenceUnitConfiguration implements PersistenceConfiguration {
   public EntityManagerFactory getEntityManagerFactory() {
     return factory;
   }
-
 }

@@ -26,7 +26,7 @@ public abstract class AbstractNeedleRuleBuilder<B, R extends NeedleTestcase> ext
 
   private Class<? extends MockProvider> mockProviderClass;
   private Class<?>[] withAnnotations = {};
-  private final Set<InjectionProvider<?>> providers = new HashSet<InjectionProvider<?>>();
+  private final Set<InjectionProvider<?>> providers = new HashSet<>();
 
   public B withMockProvider(final Class<? extends MockProvider> mockProviderClass) {
     this.mockProviderClass = mockProviderClass;
@@ -49,7 +49,7 @@ public abstract class AbstractNeedleRuleBuilder<B, R extends NeedleTestcase> ext
   }
 
   private Set<Class<Annotation>> getCustomInjectionAnnotations() {
-    final Set<Class<Annotation>> annotations = new HashSet<Class<Annotation>>();
+    final Set<Class<Annotation>> annotations = new HashSet<>();
     for (final Class<?> annotationClass : withAnnotations) {
       if (annotationClass.isAnnotation()) {
         annotations.add((Class<Annotation>) annotationClass);
@@ -60,7 +60,6 @@ public abstract class AbstractNeedleRuleBuilder<B, R extends NeedleTestcase> ext
 
     return annotations;
   }
-
 
   @Override
   protected final R build(final NeedleConfiguration needleConfiguration) {
@@ -75,7 +74,5 @@ public abstract class AbstractNeedleRuleBuilder<B, R extends NeedleTestcase> ext
     return build(injectionConfiguration, providersToArray(providers));
   }
 
-  protected abstract R build(final InjectionConfiguration injectionConfiguration,
-                             final InjectionProvider<?>... injectionProvider);
-
+  protected abstract R build(final InjectionConfiguration injectionConfiguration, final InjectionProvider<?>... injectionProvider);
 }

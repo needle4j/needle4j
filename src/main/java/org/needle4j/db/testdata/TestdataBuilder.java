@@ -6,7 +6,6 @@ package org.needle4j.db.testdata;
  * @param <T> the type to build
  */
 public interface TestdataBuilder<T> {
-
   /**
    * Creates a new instance of generic type.
    *
@@ -20,5 +19,4 @@ public interface TestdataBuilder<T> {
    * @return a new persisted instance of generic type
    */
   T buildAndSave();
-
 }

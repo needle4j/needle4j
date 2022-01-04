@@ -6,11 +6,9 @@ import org.needle4j.injection.InjectionTargetInformation;
 import javax.persistence.EntityTransaction;
 
 class EntityTransactionProvider implements InjectionProvider<EntityTransaction> {
-
   private final DatabaseTestcase databaseTestcase;
 
   public EntityTransactionProvider(DatabaseTestcase databaseTestcase) {
-    super();
     this.databaseTestcase = databaseTestcase;
   }
 

@@ -12,7 +12,6 @@ import org.needle4j.mock.MockitoProvider;
  * Allows static factory method access to selected needle components.
  */
 public final class NeedleBuilders {
-
   /**
    * @return a new builder for {@link NeedleRule}.
    */

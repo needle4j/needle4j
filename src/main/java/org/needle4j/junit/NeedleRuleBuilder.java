@@ -3,16 +3,11 @@ package org.needle4j.junit;
 import org.junit.rules.MethodRule;
 import org.needle4j.injection.InjectionConfiguration;
 import org.needle4j.injection.InjectionProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NeedleRuleBuilder extends AbstractNeedleRuleBuilder<NeedleRuleBuilder, NeedleRule> {
-
-  static final Logger LOG = LoggerFactory.getLogger(NeedleRuleBuilder.class);
-
   private final List<MethodRule> methodRuleChain = new ArrayList<MethodRule>();
 
   public AbstractNeedleRuleBuilder<NeedleRuleBuilder, NeedleRule> withOuter(final MethodRule rule) {
@@ -28,6 +23,7 @@ public class NeedleRuleBuilder extends AbstractNeedleRuleBuilder<NeedleRuleBuild
     for (final MethodRule rule : methodRuleChain) {
       needleRule.withOuter(rule);
     }
+    
     return needleRule;
   }
 }

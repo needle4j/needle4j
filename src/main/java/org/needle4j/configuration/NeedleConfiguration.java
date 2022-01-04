@@ -7,7 +7,6 @@ import java.lang.annotation.Annotation;
 import java.util.Set;
 
 public final class NeedleConfiguration implements Cloneable {
-
   private Set<Class<Annotation>> customInjectionAnnotations;
   private Set<Class<InjectionProvider<?>>> customInjectionProviderClasses;
   private Set<Class<InjectionProviderInstancesSupplier>> customInjectionProviderInstancesSupplierClasses;
@@ -151,18 +150,14 @@ public final class NeedleConfiguration implements Cloneable {
 
   @Override
   public String toString() {
-    final StringBuilder builder = new StringBuilder();
-    builder.append("\nPU_NAME=").append(getPersistenceunitName());
-    builder.append("\nCFG_FILE=").append(getHibernateCfgFilename());
-    builder.append("\nDB_OPERATION=").append(getDBOperationClassName());
-    builder.append("\nMOCK_PROVIDER=").append(getMockProviderClassName());
-
-    return builder.toString();
+    return "\nPU_NAME=" + getPersistenceunitName() +
+        "\nCFG_FILE=" + getHibernateCfgFilename() +
+        "\nDB_OPERATION=" + getDBOperationClassName() +
+        "\nMOCK_PROVIDER=" + getMockProviderClassName();
   }
 
   @Override
   public NeedleConfiguration clone() throws CloneNotSupportedException {
     return (NeedleConfiguration) super.clone();
   }
-
 }

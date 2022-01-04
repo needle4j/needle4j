@@ -29,7 +29,6 @@ import org.needle4j.db.operation.DBOperation;
  * @see DBOperation
  */
 public class DatabaseRule extends DatabaseTestcase implements MethodRule {
-
   /**
    * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase()
    */

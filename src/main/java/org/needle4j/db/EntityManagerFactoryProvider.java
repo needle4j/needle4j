@@ -7,21 +7,12 @@ import org.needle4j.injection.InjectionVerifier;
 import javax.persistence.EntityManagerFactory;
 
 class EntityManagerFactoryProvider implements InjectionProvider<EntityManagerFactory> {
-
   private final DatabaseTestcase databaseTestcase;
   private final InjectionVerifier verifier;
 
   EntityManagerFactoryProvider(final DatabaseTestcase databaseTestcase) {
-    super();
     this.databaseTestcase = databaseTestcase;
-    verifier = new InjectionVerifier() {
-
-      @Override
-      public boolean verify(final InjectionTargetInformation information) {
-        return information.getType() == EntityManagerFactory.class;
-      }
-    };
-
+    verifier = information -> information.getType() == EntityManagerFactory.class;
   }
 
   @Override

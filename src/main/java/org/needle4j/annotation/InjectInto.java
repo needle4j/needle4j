@@ -7,8 +7,7 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Is used to inject an instance into a specific {@link ObjectUnderTest}
- * instance.
+ * Used to inject an instance into a specific {@link ObjectUnderTest} instance.
  */
 @Target({FIELD})
 @Retention(RUNTIME)

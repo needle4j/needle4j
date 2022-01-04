@@ -3,7 +3,6 @@ package org.needle4j.injection;
 import java.lang.annotation.Annotation;
 
 public class DefaultMockInjectionProvider implements InjectionProvider<Object> {
-
   private final Class<?> annotationClass;
   private final InjectionConfiguration injectionConfiguration;
 
@@ -42,5 +41,4 @@ public class DefaultMockInjectionProvider implements InjectionProvider<Object> {
   protected InjectionConfiguration getInjectionConfiguration() {
     return injectionConfiguration;
   }
-
 }

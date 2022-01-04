@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
  * @see org.needle4j.db.DatabaseTestcase
  */
 public class DatabaseTestcase extends org.needle4j.db.DatabaseTestcase {
-
   /**
    * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase()
    */
@@ -55,5 +54,4 @@ public class DatabaseTestcase extends org.needle4j.db.DatabaseTestcase {
   public void before() throws Exception {
     super.before();
   }
-
 }

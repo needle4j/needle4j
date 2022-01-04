@@ -31,7 +31,6 @@ import org.needle4j.NeedleTestcase;
  *            </pre>
  */
 public interface InjectionProvider<T> extends InjectionVerifier {
-
   /**
    * Provides an instance of {@code T}.
    *

@@ -6,7 +6,6 @@ import java.sql.SQLException;
  * Database operations before and after test execution.
  */
 public interface DBOperation {
-
   /**
    * Execute the database operation in test setup.
    *
@@ -20,5 +19,4 @@ public interface DBOperation {
    * @throws SQLException if a database access error occurs
    */
   void tearDownOperation() throws SQLException;
-
 }

@@ -1,7 +1,7 @@
 package org.needle4j.db.operation.h2;
 
+import org.needle4j.db.operation.AbstractDeleteOperation;
 import org.needle4j.db.operation.JdbcConfiguration;
-import org.needle4j.db.operation.hsql.AbstractDeleteOperation;
 
 import java.sql.SQLException;
 import java.sql.Statement;

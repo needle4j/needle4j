@@ -23,12 +23,7 @@ public class TransactionHelper {
    * @throws Exception save objects failed
    */
   public final <T> T saveObject(final T obj) throws Exception {
-    return executeInTransaction(new Runnable<T>() {
-      @Override
-      public T run(final EntityManager entityManager) {
-        return persist(obj, entityManager);
-      }
-    });
+    return executeInTransaction(entityManager -> persist(obj, entityManager));
   }
 
   /**
@@ -41,12 +36,7 @@ public class TransactionHelper {
    * @throws Exception finding object failed
    */
   public final <T> T loadObject(final Class<T> clazz, final Object id) throws Exception {
-    return executeInTransaction(new Runnable<T>() {
-      @Override
-      public T run(final EntityManager entityManager) {
-        return loadObject(entityManager, clazz, id);
-      }
-    });
+    return executeInTransaction(entityManager -> loadObject(entityManager, clazz, id));
   }
 
   /**
@@ -58,24 +48,22 @@ public class TransactionHelper {
    * @throws IllegalArgumentException if the instance is not an entity
    * @throws Exception                selecting objects failed
    */
+  @SuppressWarnings("unchecked")
   public final <T> List<T> loadAllObjects(final Class<T> clazz) throws Exception {
     final Entity entityAnnotation = clazz.getAnnotation(Entity.class);
+
     if (entityAnnotation == null) {
       throw new IllegalArgumentException("Unknown entity: " + clazz.getName());
     }
 
-    return executeInTransaction(new Runnable<List<T>>() {
-      @Override
-      @SuppressWarnings("unchecked")
-      public List<T> run(final EntityManager entityManager) {
+    return executeInTransaction((Runnable<List<T>>) entityManager -> {
+      final String fromEntity = entityAnnotation.name().isEmpty() ? clazz.getSimpleName() : entityAnnotation
+          .name();
+      final String alias = fromEntity.toLowerCase();
 
-        final String fromEntity = entityAnnotation.name().isEmpty() ? clazz.getSimpleName() : entityAnnotation
-            .name();
-        final String alias = fromEntity.toLowerCase();
-
-        return entityManager.createQuery("SELECT " + alias + " FROM " + fromEntity + " " + alias)
-            .getResultList();
-      }
+      //noinspection unchecked
+      return entityManager.createQuery("SELECT " + alias + " FROM " + fromEntity + " " + alias)
+          .getResultList();
     });
   }
 

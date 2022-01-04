@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
  * @see NeedleTestcase
  */
 public abstract class AbstractNeedleTestcase extends NeedleTestcase {
-
   private DatabaseTestcase databaseTestcase;
 
   /**
@@ -24,7 +23,7 @@ public abstract class AbstractNeedleTestcase extends NeedleTestcase {
   public AbstractNeedleTestcase(InjectionProvider<?>... injectionProvider) {
     super(injectionProvider);
 
-    for (InjectionProvider<?> provider : injectionProvider) {
+    for (final InjectionProvider<?> provider : injectionProvider) {
       if (provider instanceof DatabaseTestcase) {
         databaseTestcase = (DatabaseTestcase) provider;
       }
@@ -60,5 +59,4 @@ public abstract class AbstractNeedleTestcase extends NeedleTestcase {
 
     return null;
   }
-
 }

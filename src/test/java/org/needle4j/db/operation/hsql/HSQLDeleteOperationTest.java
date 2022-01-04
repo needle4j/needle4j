@@ -26,16 +26,15 @@ public class HSQLDeleteOperationTest {
   public DatabaseRule databaseRule = new DatabaseRule();
 
   private HSQLDeleteOperationForTest hsqlDeleteOperation = new HSQLDeleteOperationForTest(HSQL_DB_CONFIGURATION) {
+    @Override
     public java.sql.Connection getConnection() throws SQLException {
       return super.getConnection();
     }
-
-    ;
   };
 
   @Test
   public void testDisableReferentialIntegrity() throws Exception {
-    Statement statement = hsqlDeleteOperation.getConnection().createStatement();
+    final Statement statement = hsqlDeleteOperation.getConnection().createStatement();
     hsqlDeleteOperation.disableReferentialIntegrity(statement);
     insertAddressWithInvalidFk();
 
@@ -61,7 +60,7 @@ public class HSQLDeleteOperationTest {
     try {
 
       statement = hsqlDeleteOperation.getConnection().createStatement();
-      List<String> table = new ArrayList<String>();
+      final List<String> table = new ArrayList<>();
       table.add(Address.TABLE_NAME);
       final Address address = new Address();
 
@@ -76,8 +75,8 @@ public class HSQLDeleteOperationTest {
       });
       hsqlDeleteOperation.commit();
 
-      Statement st = hsqlDeleteOperation.getConnection().createStatement();
-      int executeUpdate = st.executeUpdate("update " + Address.TABLE_NAME + " set person_id = 2");
+      final Statement st = hsqlDeleteOperation.getConnection().createStatement();
+      final int executeUpdate = st.executeUpdate("update " + Address.TABLE_NAME + " set person_id = 2");
       Assert.assertEquals(1, executeUpdate);
       st.close();
       hsqlDeleteOperation.commit();
@@ -101,10 +100,10 @@ public class HSQLDeleteOperationTest {
       });
 
       Statement st = hsqlDeleteOperation.getConnection().createStatement();
-      ResultSet rs = st.executeQuery("select * from " + Address.TABLE_NAME);
+      final ResultSet rs = st.executeQuery("select * from " + Address.TABLE_NAME);
       Assert.assertTrue(rs.next());
 
-      List<String> tableNames = new ArrayList<String>();
+      final List<String> tableNames = new ArrayList<>();
       tableNames.add(Address.TABLE_NAME);
       hsqlDeleteOperation.deleteContent(tableNames, statement);
 
@@ -136,6 +135,11 @@ class HSQLDeleteOperationForTest extends HSQLDeleteOperation {
   @Override
   protected Connection getConnection() throws SQLException {
     return super.getConnection();
+  }
+
+  @Override
+  protected void deleteContent(List<String> tables, Statement statement) throws SQLException {
+    super.deleteContent(tables, statement);
   }
 
   @Override

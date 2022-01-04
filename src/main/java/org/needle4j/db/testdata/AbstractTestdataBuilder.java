@@ -56,7 +56,6 @@ public abstract class AbstractTestdataBuilder<T> implements TestdataBuilder<T> {
   private static int count = 0;
 
   private EntityManager entityManager;
-
   private TransactionHelper transactionHelper;
 
   /**
@@ -119,7 +118,7 @@ public abstract class AbstractTestdataBuilder<T> implements TestdataBuilder<T> {
     ensureEntityManager();
     try {
       return transactionHelper.saveObject(build());
-    } catch (Exception e) {
+    } catch (final Exception e) {
       throw new RuntimeException(e);
     }
   }

@@ -10,7 +10,6 @@ import org.needle4j.configuration.PropertyBasedConfigurationFactory;
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractRuleBuilder<B, R> implements Builder<R> {
-
   protected String configurationResourceName;
 
   /**
@@ -26,7 +25,7 @@ public abstract class AbstractRuleBuilder<B, R> implements Builder<R> {
     try {
       return configurationResourceName == null ? PropertyBasedConfigurationFactory.get().clone()
           : PropertyBasedConfigurationFactory.get(configurationResourceName);
-    } catch (CloneNotSupportedException e) {
+    } catch (final CloneNotSupportedException e) {
       throw new RuntimeException("could not create needle configuration", e);
     }
   }
@@ -34,10 +33,10 @@ public abstract class AbstractRuleBuilder<B, R> implements Builder<R> {
   /**
    * @return new Rule instance
    */
+  @Override
   public final R build() {
     return build(getNeedleConfiguration());
   }
 
   protected abstract R build(final NeedleConfiguration needleConfiguration);
-
 }

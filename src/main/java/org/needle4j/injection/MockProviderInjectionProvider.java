@@ -3,7 +3,6 @@ package org.needle4j.injection;
 import org.needle4j.mock.MockProvider;
 
 public class MockProviderInjectionProvider implements InjectionProvider<MockProvider> {
-
   private final MockProvider mockProvider;
 
   public MockProviderInjectionProvider(MockProvider mockProvider) {
@@ -26,5 +25,4 @@ public class MockProviderInjectionProvider implements InjectionProvider<MockProv
   public Object getKey(InjectionTargetInformation injectionTargetInformation) {
     return MockProvider.class;
   }
-
 }

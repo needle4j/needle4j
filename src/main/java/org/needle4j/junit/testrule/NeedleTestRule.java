@@ -46,7 +46,6 @@ import org.needle4j.junit.NeedleRule;
  * @see NeedleTestcase
  */
 public class NeedleTestRule extends NeedleTestcase implements TestRule {
-
   private final Object testInstance;
 
   /**

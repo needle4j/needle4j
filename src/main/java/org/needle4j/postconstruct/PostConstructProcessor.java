@@ -27,11 +27,10 @@ import static org.needle4j.configuration.PostConstructExecuteStrategy.*;
  * @author Heinz Wilming, akquinet AG (heinz.wilming@akquinet.de)
  */
 public class PostConstructProcessor implements NeedleProcessor {
-
   /**
    * Internal Container of all Annotations that trigger invocation.
    */
-  private final Set<Class<? extends Annotation>> postConstructAnnotations = new HashSet<Class<? extends Annotation>>();
+  private final Set<Class<? extends Annotation>> postConstructAnnotations = new HashSet<>();
   private final PostConstructExecuteStrategy postConstructExecuteStrategy;
 
   public PostConstructProcessor(final Set<Class<?>> postConstructAnnotations) {
@@ -56,19 +55,19 @@ public class PostConstructProcessor implements NeedleProcessor {
    */
   @Override
   public void process(final NeedleContext context) {
-    if (this.postConstructExecuteStrategy == NEVER) {
-      return;
-    }
+    if (this.postConstructExecuteStrategy != NEVER) {
+      final Set<String> objectsUnderTestIds = context.getObjectsUnderTestIds();
 
-    final Set<String> objectsUnderTestIds = context.getObjectsUnderTestIds();
-    for (String objectUnderTestId : objectsUnderTestIds) {
-      final ObjectUnderTest objectUnderTestAnnotation = context.getObjectUnderTestAnnotation(objectUnderTestId);
-      if (this.postConstructExecuteStrategy == ALWAYS ||
-          objectUnderTestAnnotation != null && objectUnderTestAnnotation.postConstruct()) {
-        try {
-          process(context.getObjectUnderTest(objectUnderTestId));
-        } catch (ObjectUnderTestInstantiationException e) {
-          throw new RuntimeException(e);
+      for (final String objectUnderTestId : objectsUnderTestIds) {
+        final ObjectUnderTest objectUnderTestAnnotation = context.getObjectUnderTestAnnotation(objectUnderTestId);
+
+        if (this.postConstructExecuteStrategy == ALWAYS ||
+            objectUnderTestAnnotation != null && objectUnderTestAnnotation.postConstruct()) {
+          try {
+            process(context.getObjectUnderTest(objectUnderTestId));
+          } catch (final ObjectUnderTestInstantiationException e) {
+            throw new RuntimeException(e);
+          }
         }
       }
     }
@@ -81,7 +80,6 @@ public class PostConstructProcessor implements NeedleProcessor {
    * @throws ObjectUnderTestInstantiationException
    */
   private void process(final Object instance) throws ObjectUnderTestInstantiationException {
-
     final Set<Method> postConstructMethods = getPostConstructMethods(instance.getClass());
 
     for (final Method method : postConstructMethods) {
@@ -91,7 +89,6 @@ public class PostConstructProcessor implements NeedleProcessor {
         throw new ObjectUnderTestInstantiationException("error executing postConstruction method '"
             + method.getName() + "'", e);
       }
-
     }
   }
 
@@ -100,7 +97,7 @@ public class PostConstructProcessor implements NeedleProcessor {
    * @return all instance methods that are marked as postConstruction methods
    */
   Set<Method> getPostConstructMethods(final Class<?> type) {
-    final Set<Method> postConstructMethods = new LinkedHashSet<Method>();
+    final Set<Method> postConstructMethods = new LinkedHashSet<>();
 
     for (final Class<? extends Annotation> postConstructAnnotation : postConstructAnnotations) {
       postConstructMethods.addAll(ReflectionUtil.getAllMethodsWithAnnotation(type, postConstructAnnotation));

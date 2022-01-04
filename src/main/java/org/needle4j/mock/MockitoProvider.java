@@ -16,12 +16,11 @@ import static org.needle4j.common.Preconditions.checkArgument;
  * the Mockito documentation.
  */
 public class MockitoProvider implements MockProvider, SpyProvider {
-
   static {
     // fail fast if Mockito is not available.
     try {
       Class.forName("org.mockito.Mockito");
-    } catch (ClassNotFoundException e) {
+    } catch (final ClassNotFoundException e) {
       throw new RuntimeException(e);
     }
   }

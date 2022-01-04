@@ -8,7 +8,6 @@ import org.needle4j.db.DatabaseTestcase;
 import org.needle4j.db.operation.DBOperation;
 
 public class DatabaseTestRule extends DatabaseTestcase implements TestRule {
-
   /**
    * @see org.needle4j.db.DatabaseTestcase#DatabaseTestcase()
    */
@@ -56,5 +55,4 @@ public class DatabaseTestRule extends DatabaseTestcase implements TestRule {
       }
     };
   }
-
 }

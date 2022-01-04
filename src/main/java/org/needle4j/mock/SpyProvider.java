@@ -10,7 +10,6 @@ import java.lang.reflect.Field;
  * @author Jan Galinski, Holisticon AG
  */
 public interface SpyProvider {
-
   /**
    * Just return the given instance. Use this as default provider when the
    * mockProvider does not support spies.
