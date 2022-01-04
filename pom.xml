@@ -13,7 +13,7 @@
     <url>https://www.needle4j.org</url>
     <inceptionYear>2014</inceptionYear>
 
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.0</version>
     <packaging>jar</packaging>
 
     <description>
@@ -45,7 +45,7 @@
         <connection>scm:git:git@github.com:needle4j/needle4j.git</connection>
         <url>git@github.com:needle4j/needle4j.git</url>
         <developerConnection>scm:git:git@github.com:needle4j/needle4j.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>needle4j-3.0.0.Final</tag>
     </scm>
 
     <developers>
