@@ -23,6 +23,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *  })
  *  private User user = new User();
  * </pre>
+ *
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 @Target({FIELD})
 @Retention(RUNTIME)

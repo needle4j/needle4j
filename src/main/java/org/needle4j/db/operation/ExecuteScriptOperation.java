@@ -9,6 +9,9 @@ import java.sql.Statement;
 
 /**
  * Execute before and after sql scripts in test setup and tear down.
+ *
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 public class ExecuteScriptOperation extends AbstractDBOperation {
   private static final Logger LOG = LoggerFactory.getLogger(ExecuteScriptOperation.class);
@@ -21,7 +24,7 @@ public class ExecuteScriptOperation extends AbstractDBOperation {
   private static final String AFTER_SCRIPT_NAME = "after.sql";
 
   /**
-   * Execute <tt>before.sql</tt> script in test setup.
+   * Execute <pre>before.sql</pre> script in test setup.
    *
    * @throws SQLException if a database access error occurs
    */
@@ -31,7 +34,7 @@ public class ExecuteScriptOperation extends AbstractDBOperation {
   }
 
   /**
-   * Execute <tt>after.sql</tt> script in test tear down.
+   * Execute <pre>after.sql</pre> script in test tear down.
    *
    * @throws SQLException if a database access error occurs
    */

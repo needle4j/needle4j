@@ -10,6 +10,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Used to specify an object under test. The annotated fields will be initialized by the {@link NeedleTestcase}.
+ *
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 @Target({FIELD})
 @Retention(RUNTIME)

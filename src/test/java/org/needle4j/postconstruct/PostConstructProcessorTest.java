@@ -18,6 +18,8 @@ import static org.needle4j.configuration.PostConstructExecuteStrategy.ALWAYS;
 import static org.needle4j.configuration.PostConstructExecuteStrategy.NEVER;
 
 /**
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
  * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 public class PostConstructProcessorTest {

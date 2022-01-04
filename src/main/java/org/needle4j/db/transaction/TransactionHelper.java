@@ -6,6 +6,9 @@ import java.util.List;
 
 /**
  * Utility class to manage transactions conveniently.
+ *
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 public class TransactionHelper {
   private final EntityManager entityManager;
@@ -72,7 +75,7 @@ public class TransactionHelper {
    *
    * @param <T>              result type of runnable.run()
    * @param runnable         algorithm to execute
-   * @param clearAfterCommit <tt>true</tt> triggers entityManager.clear() after transaction
+   * @param clearAfterCommit <pre>true</pre> triggers entityManager.clear() after transaction
    *                         commit
    * @return return value of runnable.run()
    * @throws Exception execution failed

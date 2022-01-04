@@ -11,15 +11,17 @@ import org.needle4j.injection.InjectionProvider;
 import org.needle4j.junit.NeedleRule;
 
 /**
- * JUnit {@link TestRule} for the initialization of the test. The Rule processes
+ * <p>JUnit {@link TestRule} for the initialization of the test. The Rule processes
  * and initializes all fields annotated with {@link ObjectUnderTest}.
- * <p/>
- * This is an updated Rule to reflect the API change (MethodRule vs. TestRule)
+ * </p>
+ *
+ * <p>This is an updated Rule to reflect the API change (MethodRule vs. TestRule)
  * in junit. Using this TestRule implementation has the drawback that the
  * calling test-instance has to be passed when the Rule is created, since the
- * new junit api does not pass the caller to the statement execution.<br/>
+ * new junit api does not pass the caller to the statement execution.
+ * <p>
  * Using this Rule enables the {@link RuleChain}s feature of junit >= 4.10.
- *
+ * </p>
  * <pre>
  * Example:
  *
@@ -41,7 +43,8 @@ import org.needle4j.junit.NeedleRule;
  *
  * </pre>
  *
- * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm - Akquinet AG
+ * @author Jan Galinski - Holisticon AG (jan.galinski@holisticon.de)
  * @see NeedleRule
  * @see NeedleTestcase
  */

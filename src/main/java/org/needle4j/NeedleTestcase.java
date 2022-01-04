@@ -40,6 +40,9 @@ import java.util.Map.Entry;
  * @see InjectInto
  * @see InjectIntoMany
  * @see InjectionProvider
+ *
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 public abstract class NeedleTestcase {
   private static final Logger LOG = LoggerFactory.getLogger(NeedleTestcase.class);

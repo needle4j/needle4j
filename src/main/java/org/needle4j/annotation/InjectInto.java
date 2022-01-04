@@ -8,6 +8,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Used to inject an instance into a specific {@link ObjectUnderTest} instance.
+ *
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 @Target({FIELD})
 @Retention(RUNTIME)
@@ -25,7 +28,7 @@ public @interface InjectInto {
    * (Optional) fieldName of the injection target
    *
    * <p>
-   * Default is the assignable type
+   * Default is the assignable type</p>
    */
   String fieldName() default "";
 }

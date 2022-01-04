@@ -7,11 +7,10 @@ import org.needle4j.NeedleTestcase;
  *
  * @param <T> - The type of the provided object.
  *
- *
  *            <pre>
  *            Example for javax.inject.Qualifier:
  *
- *            public class InjectionProvider<User>() {
+ *            public class InjectionProvider&lt;User&gt;() {
  *            	&#064;Override
  *            	public boolean verify(final InjectionTargetInformation information) {
  *            	 return information.getAnnotation(CurrentUser.class) != null;
@@ -23,19 +22,22 @@ import org.needle4j.NeedleTestcase;
  *              }
  *
  *            	&#064;Override
- *            	public User getInjectedObject(final Class<?> type) {
+ *            	public User getInjectedObject(final Class&lt;?&gt; type) {
  *            	 return new User();
  *              }
  *            }
  *
  *            </pre>
+ *
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 public interface InjectionProvider<T> extends InjectionVerifier {
   /**
    * Provides an instance of {@code T}.
    *
    * @param injectionPointType the type of the injection target.
-   * @return <T> instance of {@code T}
+   * @return instance of {@code T}
    */
   T getInjectedObject(Class<?> injectionPointType);
 

@@ -23,6 +23,8 @@ import static org.needle4j.configuration.PostConstructExecuteStrategy.*;
  * annotations specification
  * </p>
  *
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
  * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  * @author Heinz Wilming, akquinet AG (heinz.wilming@akquinet.de)
  */

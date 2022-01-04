@@ -11,20 +11,20 @@ import static org.needle4j.common.Annotations.assertIsQualifier;
 import static org.needle4j.common.Preconditions.checkArgument;
 
 /**
- * Utility class for creating {@link InjectionProvider}s with default behavior.
- * <p/>
- * Usage:<br/>
+ * <p>Utility class for creating {@link InjectionProvider}s with default behavior.
+ * </p>
+ * Usage:
  *
  * <pre>
  * import static org.needle4j.injection.InjectionProviders.*;
  * </pre>
- * <p/>
+ * <p>
  * then call static factory methods to create providers.
  *
- * @author Jan Galinski, Holisticon AG
+ * @author Heinz Wilming, Alphonse Bendt, Markus Dahm Akquinet AG
+ * @author Jan Galinski, Holisticon AG (jan.galinski@holisticon.de)
  */
 public final class InjectionProviders {
-
   /**
    * InjectionProvider that provides a singleton instance of type T whenever
    * injection is required.
@@ -33,7 +33,7 @@ public final class InjectionProviders {
    * @return InjectionProvider for instance
    */
   public static <T> InjectionProvider<T> providerForInstance(final T instance) {
-    return new DefaultInstanceInjectionProvider<T>(instance);
+    return new DefaultInstanceInjectionProvider<>(instance);
   }
 
   /**
@@ -46,7 +46,7 @@ public final class InjectionProviders {
    * @return InjectionProvider for instance
    */
   public static <T> InjectionProvider<T> providerForNamedInstance(final String name, final T instance) {
-    return new NamedInstanceInjectionProvider<T>(name, instance);
+    return new NamedInstanceInjectionProvider<>(name, instance);
   }
 
   /**
@@ -59,7 +59,7 @@ public final class InjectionProviders {
    */
   public static <T> InjectionProvider<T> providerForQualifiedInstance(final Class<? extends Annotation> qualifier,
                                                                       final T instance) {
-    return new QualifiedInstanceInjectionProvider<T>(qualifier, instance);
+    return new QualifiedInstanceInjectionProvider<>(qualifier, instance);
   }
 
   /**
@@ -69,7 +69,7 @@ public final class InjectionProviders {
    * @return set containing providers
    */
   private static Set<InjectionProvider<?>> newProviderSet(final InjectionProvider<?>... providers) {
-    final Set<InjectionProvider<?>> result = new LinkedHashSet<InjectionProvider<?>>();
+    final Set<InjectionProvider<?>> result = new LinkedHashSet<>();
 
     if (providers != null && providers.length > 0) {
 
@@ -111,7 +111,7 @@ public final class InjectionProviders {
    */
   private static InjectionProviderInstancesSupplier mergeSuppliers(
       final InjectionProviderInstancesSupplier... suppliers) {
-    final Set<InjectionProvider<?>> result = new LinkedHashSet<InjectionProvider<?>>();
+    final Set<InjectionProvider<?>> result = new LinkedHashSet<>();
 
     if (suppliers != null && suppliers.length > 0) {
 
@@ -144,9 +144,9 @@ public final class InjectionProviders {
 
   @SuppressWarnings("serial")
   public static Set<InjectionProvider<?>> providersToSet(final InjectionProvider<?>... providers) {
-    return new HashSet<InjectionProvider<?>>() {
+    return new HashSet<>() {
       {
-        for (InjectionProvider<?> provider : providers) {
+        for (final InjectionProvider<?> provider : providers) {
           add(provider);
         }
       }
