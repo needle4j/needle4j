@@ -10,7 +10,7 @@
 analysing dependencies and automatic injection of mock objects. It will thus maximize the speed of development as well as the execution of unit
 tests.**
 
-![Needle Coffee Cups](http://needle.spree.de/images/needle-coffeecups-380px.jpg)
+![Needle Coffee Cups](https://needle.spree.de/images/needle-coffeecups-380px.jpg)
 
 ## Core Features:
 
