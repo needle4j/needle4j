@@ -29,6 +29,11 @@
         </license>
     </licenses>
 
+    <!-- 
+    https://blog.frankel.ch/github-actions-maven-releases/
+    -->
+    <!-- mvn -B release:prepare release:perform -->
+
     <distributionManagement>
         <repository>
             <id>github</id>
