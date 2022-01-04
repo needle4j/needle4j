@@ -32,7 +32,7 @@
     <!-- 
     https://blog.frankel.ch/github-actions-maven-releases/
     -->
-    <!-- mvn -Prelease release:prepare release:perform -->
+    <!-- mvn -Prelease release:prepare release:perform -Darguments=-Dgpg.passphrase=thephrase -Dgpg.passphrase=thephrase -->
 
     <distributionManagement>
         <repository>
