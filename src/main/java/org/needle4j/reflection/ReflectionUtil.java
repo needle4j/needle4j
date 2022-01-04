@@ -141,19 +141,8 @@ public final class ReflectionUtil {
 
   }
 
-  /**
-   * @see #getAllFieldsAssignableFrom(Class, Class)
-   * @deprecated typo
-   */
-  @Deprecated
-  public static List<Field> getAllFieldsAssinableFrom(final Class<?> assinableType, final Class<?> clazz) {
-    return getAllFieldsAssignableFrom(assinableType, clazz);
-  }
-
-  public static List<Field> getAllFieldsWithAnnotation(final Object instance,
-                                                       final Class<? extends Annotation> annotation) {
+  public static List<Field> getAllFieldsWithAnnotation(final Object instance, final Class<? extends Annotation> annotation) {
     return getAllFieldsWithAnnotation(instance.getClass(), annotation);
-
   }
 
   public static List<Field> getAllFields(final Class<?> clazz) {
@@ -264,7 +253,7 @@ public final class ReflectionUtil {
    */
   public static Object getFieldValue(final Object object, final Field field) {
     try {
-      if (!field.isAccessible()) {
+      if (!field.canAccess(object)) {
         field.setAccessible(true);
       }
 
@@ -282,6 +271,7 @@ public final class ReflectionUtil {
    * @return -- the value of the represented field in object; primitive values
    * are wrapped in an appropriate object before being returned
    */
+  @SuppressWarnings("unused")
   public static Object getFieldValue(final Object object, final String fieldName) {
     return getFieldValue(object, object.getClass(), fieldName);
   }
@@ -319,10 +309,9 @@ public final class ReflectionUtil {
     throw new IllegalArgumentException("Method " + methodName + ":" + Arrays.toString(arguments) + " not found");
   }
 
-  public static Object invokeMethod(final Method method, final Object instance, final Object... arguments)
-      throws Exception {
+  public static Object invokeMethod(final Method method, final Object instance, final Object... arguments) throws Exception {
     try {
-      if (!method.isAccessible()) {
+      if (!method.canAccess(instance)) {
         method.setAccessible(true);
       }
 
@@ -330,9 +319,11 @@ public final class ReflectionUtil {
     } catch (final Exception exc) {
       LOG.warn("Error invoking method: " + method.getName(), exc);
       final Throwable cause = exc.getCause();
+
       if (cause instanceof Exception) {
         throw (Exception) cause;
       }
+
       throw exc;
     }
   }
@@ -397,7 +388,7 @@ public final class ReflectionUtil {
    * @param methodName -- name of method to be invoked
    * @param arguments  -- arguments for method invocation
    * @return -- method object to which invocation is actually dispatched
-   * @throws Exception
+   * @throws Exception - exception
    */
   public static Object invokeMethod(final Object object, final String methodName, final Object... arguments)
       throws Exception {
@@ -432,24 +423,21 @@ public final class ReflectionUtil {
   }
 
   public static void setField(final Field field, final Object target, final Object value) throws Exception {
-    if (!field.isAccessible()) {
+    if (!field.canAccess(target)) {
       field.setAccessible(true);
     }
 
     field.set(target, value);
-
   }
 
   public static void setField(final String fieldName, final Object target, final Object value) throws Exception {
-
     final Field field = ReflectionUtil.getField(target.getClass(), fieldName);
 
-    if (!field.isAccessible()) {
+    if (!field.canAccess(target)) {
       field.setAccessible(true);
     }
 
     field.set(target, value);
-
   }
 
   public static Field getField(final Class<?> clazz, final String fieldName) {
@@ -463,7 +451,6 @@ public final class ReflectionUtil {
     }
 
     return field;
-
   }
 
   private static Field getFieldByName(final Class<?> clazz, final String fieldName) {
@@ -476,7 +463,6 @@ public final class ReflectionUtil {
   }
 
   public static <T> T createInstance(final Class<T> clazz, final Object... parameter) throws Exception {
-
     final Class<?>[] parameterTypes = new Class<?>[parameter.length];
 
     for (int i = 0; i < parameter.length; i++) {
@@ -492,12 +478,10 @@ public final class ReflectionUtil {
    * @param type      - base class
    * @param className - fully qualified class name
    * @return class object
-   * @throws ClassNotFoundException
+   * @throws ClassNotFoundException - ClassNotFoundException
    */
   @SuppressWarnings("unchecked")
   public static <T> Class<T> lookupClass(final Class<T> type, final String className) throws ClassNotFoundException {
     return (Class<T>) Class.forName(className);
-
   }
-
 }

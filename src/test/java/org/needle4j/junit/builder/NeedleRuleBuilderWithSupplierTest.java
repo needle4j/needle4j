@@ -15,41 +15,34 @@ import java.util.Set;
 import static org.needle4j.junit.NeedleBuilders.needleRule;
 
 public class NeedleRuleBuilderWithSupplierTest {
-
   private final Runnable runnable = new RunnableImpl();
 
+  @SuppressWarnings("unchecked")
   @Rule
-  public NeedleRule needleRule = needleRule().addAnnotation(TestBuilderQualifier.class)
-      .addSupplier(new SupplierImpl()).build();
+  public final NeedleRule needleRule = needleRule().addAnnotation(TestBuilderQualifier.class).addSupplier(new SupplierImpl()).build();
 
   @ObjectUnderTest
   private ClassToTest objectUnderTest = new ClassToTest();
 
   @Test
-  public void testInjection() throws Exception {
+  public void testInjection() {
     Assert.assertNotNull(objectUnderTest.runnable);
     Assert.assertSame(runnable, runnable);
   }
 
-  class ClassToTest {
-
+  static class ClassToTest {
     @TestBuilderQualifier
     Runnable runnable;
-
   }
 
-  class RunnableImpl implements Runnable {
-
+  static class RunnableImpl implements Runnable {
     @Override
     public void run() {
-
     }
-
   }
 
   class SupplierImpl implements InjectionProviderInstancesSupplier {
-
-    private Set<InjectionProvider<?>> provider = new HashSet<InjectionProvider<?>>();
+    private final Set<InjectionProvider<?>> provider = new HashSet<>();
 
     public SupplierImpl() {
       provider.add(InjectionProviders.providerForQualifiedInstance(TestBuilderQualifier.class, runnable));
@@ -60,5 +53,4 @@ public class NeedleRuleBuilderWithSupplierTest {
       return provider;
     }
   }
-
 }

@@ -14,19 +14,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class ReflectionUtilTest {
-
   @Test
   public void testCanLookupPrivateFieldFromSuperclass() {
     final DerivedClass sample = new DerivedClass();
 
     final List<Field> result = ReflectionUtil.getAllFieldsWithAnnotation(sample, MyAnnotation.class);
 
-    assertThat(result.size(), equalTo(1));
+    assertEquals(result.size(), 1);
   }
 
   @Test
@@ -35,18 +32,18 @@ public class ReflectionUtilTest {
 
     ReflectionUtil.setFieldValue(sample, "aPrivateField", "aValue");
 
-    assertThat(sample.getPrivateField(), equalTo("aValue"));
+    assertEquals(sample.getPrivateField(), "aValue");
   }
 
   @Test
-  public void testGetAllFields() throws Exception {
+  public void testGetAllFields() {
     final List<Field> allFields = ReflectionUtil.getAllFields(DerivedClass.class);
 
-    assertThat(allFields.size(), equalTo(5));
+    assertEquals(allFields.size(), 5);
   }
 
   @Test
-  public void testAllAnnotatedFields() throws Exception {
+  public void testAllAnnotatedFields() {
     final Map<Class<? extends Annotation>, List<Field>> allAnnotatedFields = ReflectionUtil
         .getAllAnnotatedFields(MyComponentBean.class);
     assertEquals(4, allAnnotatedFields.size());
@@ -63,7 +60,7 @@ public class ReflectionUtilTest {
   }
 
   @Test
-  public void testGetFieldValue() throws Exception {
+  public void testGetFieldValue() {
     final Address address = new Address();
     address.setId(1L);
 
@@ -71,25 +68,24 @@ public class ReflectionUtilTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testGetFieldValue_Exception() throws Exception {
+  public void testGetFieldValue_Exception() {
     final Address address = new Address();
 
     assertEquals(1L, ReflectionUtil.getFieldValue(address, Address.class, "notexisting"));
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testGetFieldValue_ByField_Exception() throws Exception {
-
+  public void testGetFieldValue_ByField_Exception() {
     assertEquals(1L, ReflectionUtil.getFieldValue(null, ReflectionUtil.getField(Address.class, "id")));
   }
 
   @Test
-  public void testGetField_NoSuchField() throws Exception {
+  public void testGetField_NoSuchField() {
     assertNull(ReflectionUtil.getField(String.class, "fieldName"));
   }
 
   @Test
-  public void testGetField_DerivedClass() throws Exception {
+  public void testGetField_DerivedClass() {
     assertNotNull(ReflectionUtil.getField(DerivedClass.class, "aPrivateField"));
   }
 
@@ -101,15 +97,13 @@ public class ReflectionUtilTest {
 
     final Object result = ReflectionUtil.invokeMethod(method, new DerivedClass(), "Hello", 1, "");
     assertEquals("Hello", result.toString());
-
   }
 
   @Test
-  public void testGetMethod() throws Exception {
+  public void testGetMethod() {
     final List<Method> methods = ReflectionUtil.getMethods(DerivedClass.class);
 
     assertEquals(13, methods.size());
-
   }
 
   @Test(expected = UnsupportedOperationException.class)
@@ -118,21 +112,17 @@ public class ReflectionUtilTest {
   }
 
   @Test
-  public void testGetAllFieldsAssinableFrom() throws Exception {
-    final List<Field> allFieldsAssinableFromBoolean = ReflectionUtil.getAllFieldsAssinableFrom(Boolean.class,
-        DerivedClass.class);
+  public void testGetAllFieldsAssignableFrom() {
+    final List<Field> allFieldsAssinableFromBoolean = ReflectionUtil.getAllFieldsAssignableFrom(Boolean.class, DerivedClass.class);
     assertEquals(1, allFieldsAssinableFromBoolean.size());
 
-    final List<Field> allFieldsAssinableFromList = ReflectionUtil.getAllFieldsAssinableFrom(List.class,
-        DerivedClass.class);
+    final List<Field> allFieldsAssinableFromList = ReflectionUtil.getAllFieldsAssignableFrom(List.class, DerivedClass.class);
     assertEquals(2, allFieldsAssinableFromList.size());
 
-    final List<Field> allFieldsAssinableFromCollection = ReflectionUtil.getAllFieldsAssinableFrom(Collection.class,
-        DerivedClass.class);
+    final List<Field> allFieldsAssinableFromCollection = ReflectionUtil.getAllFieldsAssignableFrom(Collection.class, DerivedClass.class);
     assertEquals(2, allFieldsAssinableFromCollection.size());
 
-    final List<Field> allFieldsAssinableFromString = ReflectionUtil.getAllFieldsAssinableFrom(String.class,
-        DerivedClass.class);
+    final List<Field> allFieldsAssinableFromString = ReflectionUtil.getAllFieldsAssignableFrom(String.class, DerivedClass.class);
     assertEquals(2, allFieldsAssinableFromString.size());
   }
 
@@ -173,7 +163,6 @@ public class ReflectionUtilTest {
   @Test
   public void testInvokeMethod_checkArgumentsWithObjects() throws Exception {
     final DerivedClass derivedClass = new DerivedClass();
-
     final Integer intValue = 1;
     final Float floatValue = 0F;
     final Character charValue = 'c';
@@ -202,13 +191,14 @@ public class ReflectionUtilTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testInvokeMethod_WithWrongParameter() throws Exception {
-    ReflectionUtil.invokeMethod(this, "test", new Double(1.));
+    ReflectionUtil.invokeMethod(this, "test", 1.);
   }
 
   @Test
-  public void shouldFindAllMethodsWithMyAnnotation() throws Exception {
+  public void shouldFindAllMethodsWithMyAnnotation() {
     final List<Method> result = ReflectionUtil.getAllMethodsWithAnnotation(DerivedClass.class, MyAnnotation.class);
-    assertThat(result.size(), is(2));
+
+    assertEquals(result.size(), 2);
   }
 
   @SuppressWarnings("unused")
@@ -225,5 +215,4 @@ public class ReflectionUtilTest {
   private void testException() throws UnsupportedOperationException {
     throw new UnsupportedOperationException();
   }
-
 }

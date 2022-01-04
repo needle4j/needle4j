@@ -78,7 +78,7 @@ public class InjectionAnnotationProcessor implements NeedleProcessor {
   }
 
   private void injectByType(final Object objectUnderTest, final Object sourceObject, final Class<?> type) {
-    final List<Field> fields = ReflectionUtil.getAllFieldsAssinableFrom(type, objectUnderTest.getClass());
+    final List<Field> fields = ReflectionUtil.getAllFieldsAssignableFrom(type, objectUnderTest.getClass());
 
     for (final Field field : fields) {
       // skip injection when the field is not annotated with at least one
