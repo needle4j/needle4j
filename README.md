@@ -6,12 +6,11 @@
 
 [@NeedleProject](https://twitter.com/NeedleProject)
 
-**Needle4j is a lightweight framework for testing Java EE components outside of the
-container in isolation. It reduces the test setup code by analysing dependencies and
-automatic injection of mock objects. It will thus maximize the speed of development
-as well as the execution of unit tests.**
+**Needle4j is a lightweight framework for testing Java EE components outside of the container in isolation. It reduces the test setup code by
+analysing dependencies and automatic injection of mock objects. It will thus maximize the speed of development as well as the execution of unit
+tests.**
 
-![Needle Coffee Cups](http://needle.spree.de/public/images/needle-coffeecups-380px.jpg)
+![Needle Coffee Cups](http://needle.spree.de/images/needle-coffeecups-380px.jpg)
 
 ## Core Features:
 
@@ -87,12 +86,9 @@ Needle is licensed under GNU Lesser General Public License (LGPL) version 2.1 or
 * [needle4j@ohloh.net](https://www.ohloh.net/p/needle4j)
 * [Gitter chat](https://gitter.im/needle4j)
 
-
-<script type="text/javascript" src="http://www.ohloh.net/p/714248/widgets/project_thin_badge.js">
-</script>
-
-
 ## Release Nodes
+
+Version 3.0 - Upgrade to JDK 11 and Hibernate 5.6, Removal of deprecated code, cleanup code
 
 Version 2.2 - https://github.com/akquinet/needle/issues?milestone=1&state=closed
 
