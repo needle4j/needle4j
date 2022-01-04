@@ -9,7 +9,7 @@ import org.needle4j.junit.NeedleRule;
 import static org.needle4j.junit.NeedleBuilders.needleRule;
 
 public class NeedleRuleBuilderWithCustomAnnotationTest {
-
+  @SuppressWarnings("unchecked")
   @Rule
   public NeedleRule needleRule = needleRule().addAnnotation(TestBuilderQualifier.class).build();
 
@@ -17,15 +17,12 @@ public class NeedleRuleBuilderWithCustomAnnotationTest {
   private ClassToTest objectUnderTest = new ClassToTest();
 
   @Test
-  public void testInjection() throws Exception {
+  public void testInjection() {
     Assert.assertNotNull(objectUnderTest.runnable);
   }
 
-  class ClassToTest {
-
+  static class ClassToTest {
     @TestBuilderQualifier
     Runnable runnable;
-
   }
-
 }

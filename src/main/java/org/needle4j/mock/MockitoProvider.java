@@ -29,6 +29,7 @@ public class MockitoProvider implements MockProvider, SpyProvider {
 
   public static final String SPY_ANNOTATION_FQN = "org.mockito.Spy";
 
+  @SuppressWarnings("unchecked")
   private final Class<? extends Annotation> spyAnnotation = (Class<? extends Annotation>) ReflectionUtil.forName(SPY_ANNOTATION_FQN);
 
   /**

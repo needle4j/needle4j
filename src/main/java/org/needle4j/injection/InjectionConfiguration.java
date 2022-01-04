@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 
 import static org.needle4j.reflection.ReflectionUtil.forName;
 
+@SuppressWarnings("unused")
 public final class InjectionConfiguration {
   private static final Logger LOG = LoggerFactory.getLogger(InjectionConfiguration.class);
 
@@ -64,7 +65,6 @@ public final class InjectionConfiguration {
     this(PropertyBasedConfigurationFactory.get());
   }
 
-  @SuppressWarnings("unchecked")
   public InjectionConfiguration(final NeedleConfiguration needleConfiguration) {
     this.needleConfiguration = needleConfiguration;
     this.mockProvider = createMockProvider(lookupMockProviderClass(needleConfiguration.getMockProviderClassName()));
@@ -155,7 +155,7 @@ public final class InjectionConfiguration {
     return chainedNeedleProcessor;
   }
 
-  public final void addInjectionProvider(final InjectionProvider<?>... injectionProvider) {
+  public void addInjectionProvider(final InjectionProvider<?>... injectionProvider) {
     for (final InjectionProvider<?> provider : injectionProvider) {
       testInjectionProvider.add(0, provider);
     }
@@ -233,19 +233,15 @@ public final class InjectionConfiguration {
     return null;
   }
 
-  // TODO extract
   public static Class<? extends MockProvider> lookupMockProviderClass(final String mockProviderClassName) {
-
     if (mockProviderClassName == null) {
       return autoDetectMockProviderClass();
-    }
-
-    try {
-      final Class<MockProvider> mockProviderClass = ReflectionUtil.lookupClass(MockProvider.class,
-          mockProviderClassName);
-      return mockProviderClass;
-    } catch (final Exception e) {
-      throw new RuntimeException("could not load mock provider class: '" + mockProviderClassName + "'", e);
+    } else {
+      try {
+        return ReflectionUtil.lookupClass(MockProvider.class, mockProviderClassName);
+      } catch (final Exception e) {
+        throw new RuntimeException("could not load mock provider class: '" + mockProviderClassName + "'", e);
+      }
     }
   }
 
@@ -266,7 +262,7 @@ public final class InjectionConfiguration {
   @SuppressWarnings("unchecked")
   <T extends MockProvider> T createMockProvider(final Class<? extends MockProvider> mockProviderClass) {
     try {
-      return (T) mockProviderClass.newInstance();
+      return (T) mockProviderClass.getDeclaredConstructor().newInstance();
     } catch (final Exception e) {
       throw new RuntimeException("could not create a new instance of mock provider " + mockProviderClass, e);
     }
