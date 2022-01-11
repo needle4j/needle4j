@@ -14,7 +14,7 @@
     <inceptionYear>2014</inceptionYear>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <version>3.0.1-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <description>
@@ -30,15 +30,20 @@
     </licenses>
 
     <!-- 
+    https://central.sonatype.org/publish/publish-maven/
     https://blog.frankel.ch/github-actions-maven-releases/
     -->
     <!-- mvn -Prelease release:prepare release:perform -Darguments=-Dgpg.passphrase=thephrase -Dgpg.passphrase=thephrase -->
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+
         <repository>
-            <id>github</id>
-            <name>GitHub</name>
-            <url>https://maven.pkg.github.com/needle4j/needle4j</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 
@@ -91,6 +96,8 @@
         <maven.compiler.target>11</maven.compiler.target>
         <slf4j.version>1.7.2</slf4j.version>
         <hibernate.version>5.6.3.Final</hibernate.version>
+
+        <gpg.keyname>CD001E27</gpg.keyname>
     </properties>
 
     <dependencies>
@@ -309,10 +316,23 @@
             </plugin>
 
             <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
                 <configuration>
-                    <releaseProfiles>release</releaseProfiles>
+                    <releaseProfiles>release,ossrh</releaseProfiles>
                 </configuration>
             </plugin>
         </plugins>
@@ -332,7 +352,10 @@
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
                             </gpgArguments>
+                            <keyname>${gpg.keyname}</keyname>
+                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
                         </configuration>
+
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
