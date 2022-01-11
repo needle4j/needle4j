@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
@@ -14,7 +15,7 @@
     <inceptionYear>2014</inceptionYear>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <description>
@@ -30,10 +31,12 @@
     </licenses>
 
     <!-- 
-    https://central.sonatype.org/publish/publish-maven/
-    https://blog.frankel.ch/github-actions-maven-releases/
-    -->
-    <!-- mvn -Prelease release:prepare release:perform -Darguments=-Dgpg.passphrase=thephrase -Dgpg.passphrase=thephrase -->
+        https://central.sonatype.org/publish/publish-maven/
+        https://blog.frankel.ch/github-actions-maven-releases/
+  
+        mvn clean deploy -Prelease
+
+   -->
 
     <distributionManagement>
         <snapshotRepository>
@@ -96,8 +99,6 @@
         <maven.compiler.target>11</maven.compiler.target>
         <slf4j.version>1.7.2</slf4j.version>
         <hibernate.version>5.6.3.Final</hibernate.version>
-
-        <gpg.keyname>CD001E27</gpg.keyname>
     </properties>
 
     <dependencies>
@@ -328,32 +329,40 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <releaseProfiles>release,ossrh</releaseProfiles>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
     <profiles>
         <profile>
             <id>release</id>
+
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.3.0</version>
+
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>3.0.1</version>
+
                         <configuration>
                             <gpgArguments>
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
                             </gpgArguments>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
                         </configuration>
 
                         <executions>
