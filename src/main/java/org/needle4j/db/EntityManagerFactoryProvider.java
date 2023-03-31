@@ -4,7 +4,7 @@ import org.needle4j.injection.InjectionProvider;
 import org.needle4j.injection.InjectionTargetInformation;
 import org.needle4j.injection.InjectionVerifier;
 
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManagerFactory;
 
 class EntityManagerFactoryProvider implements InjectionProvider<EntityManagerFactory> {
   private final DatabaseTestcase databaseTestcase;

@@ -4,8 +4,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.needle4j.junit.NeedleRule;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -25,7 +25,6 @@ public class InjectionProvidersNamedInstanceInjectionProviderTest {
   @Inject
   private SomeType mockInstance;
 
-  @SuppressWarnings("CdiInjectionPointsInspection")
   @Inject
   @Named(FOO)
   private SomeType namedInstance;

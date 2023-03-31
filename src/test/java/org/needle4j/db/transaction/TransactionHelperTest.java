@@ -9,7 +9,7 @@ import org.needle4j.db.PersonTestdataBuilder;
 import org.needle4j.db.User;
 import org.needle4j.db.configuration.PersistenceConfigurationFactory;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.util.List;
 
 public class TransactionHelperTest {

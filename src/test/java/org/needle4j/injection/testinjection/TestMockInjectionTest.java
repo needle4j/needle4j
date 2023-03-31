@@ -7,8 +7,8 @@ import org.needle4j.MyEjbComponent;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.junit.NeedleRule;
 
-import javax.ejb.EJB;
-import javax.inject.Inject;
+import jakarta.ejb.EJB;
+import jakarta.inject.Inject;
 import java.net.Authenticator;
 
 public class TestMockInjectionTest {

@@ -2,7 +2,7 @@ package org.needle4j.injection.inheritance;
 
 import org.needle4j.MyComponent;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class ConstructorInjectionBaseComponent {
 

@@ -4,8 +4,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.needle4j.annotation.Mock;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
 import static org.junit.Assert.assertNotNull;
 

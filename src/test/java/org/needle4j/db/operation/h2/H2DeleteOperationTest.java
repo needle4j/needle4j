@@ -10,7 +10,7 @@ import org.needle4j.db.operation.JdbcConfiguration;
 import org.needle4j.db.transaction.VoidRunnable;
 import org.needle4j.junit.DatabaseRule;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

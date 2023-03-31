@@ -5,7 +5,7 @@ import org.needle4j.injection.InjectionProvider;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 /**
  * @see NeedleTestcase

@@ -1,7 +1,7 @@
 package org.needle4j.postconstruct.injection;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
 
 public class ComponentWithPrivatePostConstruct {
 

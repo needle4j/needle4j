@@ -7,7 +7,7 @@ import org.needle4j.NeedleContext;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.reflection.ReflectionUtil;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;

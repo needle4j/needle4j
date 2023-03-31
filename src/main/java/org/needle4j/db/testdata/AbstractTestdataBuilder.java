@@ -2,7 +2,7 @@ package org.needle4j.db.testdata;
 
 import org.needle4j.db.transaction.TransactionHelper;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 /**
  * An abstract implementation of {@link TestdataBuilder}.

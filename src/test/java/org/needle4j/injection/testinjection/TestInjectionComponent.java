@@ -2,8 +2,8 @@ package org.needle4j.injection.testinjection;
 
 import org.needle4j.MyEjbComponent;
 
-import javax.ejb.EJB;
-import javax.inject.Inject;
+import jakarta.ejb.EJB;
+import jakarta.inject.Inject;
 import java.net.Authenticator;
 
 public class TestInjectionComponent {

@@ -1,7 +1,7 @@
 package org.needle4j.db.transaction;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityManager;
 import java.util.List;
 
 /**

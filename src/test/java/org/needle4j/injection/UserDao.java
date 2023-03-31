@@ -2,7 +2,7 @@ package org.needle4j.injection;
 
 import org.needle4j.db.User;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.Queue;
 
 public class UserDao {

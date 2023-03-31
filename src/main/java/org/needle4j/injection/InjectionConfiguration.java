@@ -24,14 +24,14 @@ public final class InjectionConfiguration {
   private static final Logger LOG = LoggerFactory.getLogger(InjectionConfiguration.class);
 
   private static final Set<Class<?>> POSTCONSTRUCT_CLASSES = ReflectionUtil
-      .getClasses("javax.annotation.PostConstruct");
+      .getClasses("jakarta.annotation.PostConstruct");
 
-  private static final Class<?> RESOURCE_CLASS = forName("javax.annotation.Resource");
-  private static final Class<?> INJECT_CLASS = forName("javax.inject.Inject");
-  private static final Class<?> CDI_INSTANCE_CLASS = forName("javax.enterprise.inject.Instance");
-  private static final Class<?> EJB_CLASS = forName("javax.ejb.EJB");
-  private static final Class<?> PERSISTENCE_CONTEXT_CLASS = forName("javax.persistence.PersistenceContext");
-  private static final Class<?> PERSISTENCE_UNIT_CLASS = forName("javax.persistence.PersistenceUnit");
+  private static final Class<?> RESOURCE_CLASS = forName("jakarta.annotation.Resource");
+  private static final Class<?> INJECT_CLASS = forName("jakarta.inject.Inject");
+  private static final Class<?> CDI_INSTANCE_CLASS = forName("jakarta.enterprise.inject.Instance");
+  private static final Class<?> EJB_CLASS = forName("jakarta.ejb.EJB");
+  private static final Class<?> PERSISTENCE_CONTEXT_CLASS = forName("jakarta.persistence.PersistenceContext");
+  private static final Class<?> PERSISTENCE_UNIT_CLASS = forName("jakarta.persistence.PersistenceUnit");
 
   private final NeedleConfiguration needleConfiguration;
 

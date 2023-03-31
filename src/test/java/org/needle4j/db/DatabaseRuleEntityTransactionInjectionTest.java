@@ -5,9 +5,9 @@ import org.junit.Test;
 import org.needle4j.junit.DatabaseRule;
 import org.needle4j.junit.NeedleRule;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

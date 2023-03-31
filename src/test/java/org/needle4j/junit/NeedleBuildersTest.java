@@ -7,9 +7,9 @@ import org.junit.rules.TestRule;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.mock.MockitoProvider;
 
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
 import static org.needle4j.junit.NeedleBuilders.*;
 

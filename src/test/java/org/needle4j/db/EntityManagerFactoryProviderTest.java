@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.needle4j.injection.InjectionTargetInformation;
 import org.needle4j.reflection.ReflectionUtil;
 
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManagerFactory;
 
 public class EntityManagerFactoryProviderTest {
   private EntityManagerFactoryProvider entityManagerFactoryProvider = new EntityManagerFactoryProvider(

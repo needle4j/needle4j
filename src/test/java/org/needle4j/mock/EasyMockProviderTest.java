@@ -11,7 +11,7 @@ import org.needle4j.db.User;
 import org.needle4j.injection.constuctor.UserDao;
 import org.needle4j.junit.NeedleRule;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import static org.junit.Assert.*;
 

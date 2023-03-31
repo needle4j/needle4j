@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.needle4j.db.transaction.TransactionHelper;
 import org.needle4j.junit.DatabaseRule;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 import static org.junit.Assert.*;
 

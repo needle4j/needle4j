@@ -7,7 +7,7 @@ import org.needle4j.annotation.InjectInto;
 import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.junit.NeedleRule;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.lang.reflect.Field;
 
 import static org.junit.Assert.assertEquals;

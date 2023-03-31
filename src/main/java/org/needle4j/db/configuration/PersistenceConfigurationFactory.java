@@ -1,7 +1,7 @@
 package org.needle4j.db.configuration;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

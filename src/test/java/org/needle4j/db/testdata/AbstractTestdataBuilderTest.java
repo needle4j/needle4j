@@ -6,7 +6,7 @@ import org.needle4j.db.Address;
 import org.needle4j.db.Person;
 import org.needle4j.junit.DatabaseRule;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.util.List;
 
 import static org.junit.Assert.*;

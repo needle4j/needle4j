@@ -3,8 +3,8 @@ package org.needle4j.injection;
 import org.junit.Test;
 import org.needle4j.annotation.ObjectUnderTest;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 @SuppressWarnings("unused")
 public class InjectionInstanceProvider {

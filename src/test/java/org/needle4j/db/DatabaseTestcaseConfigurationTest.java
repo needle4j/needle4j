@@ -8,7 +8,7 @@ import org.needle4j.db.operation.JdbcConfiguration;
 import org.needle4j.db.operation.hsql.HSQLDeleteOperation;
 import org.needle4j.reflection.ReflectionUtil;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 import static org.junit.Assert.*;
 

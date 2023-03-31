@@ -6,7 +6,7 @@ import org.needle4j.db.Address;
 import org.needle4j.injection.InjectionTargetInformation;
 import org.needle4j.mock.MockitoProvider;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

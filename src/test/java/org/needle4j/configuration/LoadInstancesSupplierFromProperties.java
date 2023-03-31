@@ -6,7 +6,7 @@ import org.needle4j.MyComponent;
 import org.needle4j.injection.CustomMyComponentInjectionProviderInstancesSupplier;
 import org.needle4j.junit.NeedleRule;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 import static org.needle4j.junit.NeedleBuilders.needleRule;

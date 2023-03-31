@@ -1,6 +1,6 @@
 package org.needle4j.db;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity(name = "personEntity")
 @Table(name = Person.TABLE_NAME)

@@ -2,7 +2,7 @@ package org.needle4j.db;
 
 import org.needle4j.db.testdata.AbstractTestdataBuilder;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 public class PersonTestdataBuilder extends AbstractTestdataBuilder<Person> {
 

@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.needle4j.junit.NeedleRule;
 import org.needle4j.mock.EasyMockProvider;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class MockProviderInjectionTest {
 

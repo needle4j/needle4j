@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.needle4j.annotation.Mock;
 import org.needle4j.junit.NeedleRule;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 public class MockAnnotationTest {
 

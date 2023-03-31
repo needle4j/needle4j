@@ -1,6 +1,6 @@
 package org.needle4j.injection;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.HashSet;

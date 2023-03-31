@@ -1,7 +1,7 @@
 package org.needle4j.db.configuration;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 
 /**
  * Abstraction for bootstrapping {@link EntityManagerFactory} and
