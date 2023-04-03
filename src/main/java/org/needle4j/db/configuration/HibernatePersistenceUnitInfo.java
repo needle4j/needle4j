@@ -2,19 +2,19 @@ package org.needle4j.db.configuration;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
-import javax.persistence.SharedCacheMode;
-import javax.persistence.ValidationMode;
-import javax.persistence.spi.ClassTransformer;
-import javax.persistence.spi.PersistenceUnitInfo;
-import javax.persistence.spi.PersistenceUnitTransactionType;
+import jakarta.persistence.SharedCacheMode;
+import jakarta.persistence.ValidationMode;
+import jakarta.persistence.spi.ClassTransformer;
+import jakarta.persistence.spi.PersistenceUnitInfo;
+import jakarta.persistence.spi.PersistenceUnitTransactionType;
 import javax.sql.DataSource;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-import static javax.persistence.SharedCacheMode.DISABLE_SELECTIVE;
-import static javax.persistence.ValidationMode.AUTO;
+import static jakarta.persistence.SharedCacheMode.DISABLE_SELECTIVE;
+import static jakarta.persistence.ValidationMode.AUTO;
 
 public class HibernatePersistenceUnitInfo implements PersistenceUnitInfo {
   public static String JPA_VERSION = "2.1";

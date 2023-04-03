@@ -1,6 +1,6 @@
 package org.needle4j.common;
 
-import javax.inject.Qualifier;
+import jakarta.inject.Qualifier;
 import java.lang.annotation.Annotation;
 
 import static org.needle4j.common.Preconditions.checkArgument;

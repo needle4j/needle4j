@@ -1,6 +1,6 @@
 package org.needle4j.injection;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class InjectionFinalClass {
 

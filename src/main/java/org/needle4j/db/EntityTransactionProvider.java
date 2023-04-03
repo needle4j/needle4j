@@ -3,7 +3,7 @@ package org.needle4j.db;
 import org.needle4j.injection.InjectionProvider;
 import org.needle4j.injection.InjectionTargetInformation;
 
-import javax.persistence.EntityTransaction;
+import jakarta.persistence.EntityTransaction;
 
 class EntityTransactionProvider implements InjectionProvider<EntityTransaction> {
   private final DatabaseTestcase databaseTestcase;

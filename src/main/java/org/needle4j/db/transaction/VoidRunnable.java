@@ -1,6 +1,6 @@
 package org.needle4j.db.transaction;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 /**
  * Default implementation of {@link Runnable}. Does nothing.

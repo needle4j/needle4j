@@ -7,8 +7,8 @@ import org.needle4j.junit.NeedleRule;
 import org.needle4j.junit.NeedleRuleBuilder;
 import org.testng.Assert;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
 public class NeedleBuilderWithOuterRulesTest {
 

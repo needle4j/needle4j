@@ -8,10 +8,10 @@ import org.needle4j.annotation.ObjectUnderTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.ejb.SessionContext;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import jakarta.ejb.SessionContext;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
 public class NeedleTestNGTest extends AbstractNeedleTestcase {
 

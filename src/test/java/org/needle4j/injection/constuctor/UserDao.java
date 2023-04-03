@@ -3,7 +3,7 @@ package org.needle4j.injection.constuctor;
 import org.needle4j.db.User;
 import org.needle4j.injection.CurrentUser;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class UserDao {
 

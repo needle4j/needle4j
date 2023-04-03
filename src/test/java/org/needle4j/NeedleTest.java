@@ -7,8 +7,8 @@ import org.needle4j.annotation.ObjectUnderTest;
 import org.needle4j.junit.DatabaseRule;
 import org.needle4j.junit.NeedleRule;
 
-import javax.ejb.SessionContext;
-import javax.persistence.EntityManagerFactory;
+import jakarta.ejb.SessionContext;
+import jakarta.persistence.EntityManagerFactory;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

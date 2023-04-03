@@ -8,7 +8,7 @@ import org.needle4j.NeedleTestcase;
  * @param <T> - The type of the provided object.
  *
  *            <pre>
- *            Example for javax.inject.Qualifier:
+ *            Example for jakarta.inject.Qualifier:
  *
  *            public class InjectionProvider&lt;User&gt;() {
  *            	&#064;Override

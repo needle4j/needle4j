@@ -1,6 +1,6 @@
 package org.needle4j.db.configuration;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 

@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.needle4j.MyConcreteComponent;
 import org.needle4j.junit.NeedleRule;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

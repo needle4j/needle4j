@@ -3,7 +3,7 @@ package org.needle4j.common;
 import org.junit.Test;
 import org.needle4j.injection.CurrentUser;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

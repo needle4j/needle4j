@@ -1,6 +1,6 @@
 package org.needle4j;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.Queue;
 
 public class MyEjbComponentBean implements MyEjbComponent {
